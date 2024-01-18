@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import styles from "./Header.module.scss";
 
 const Header = () => {
@@ -7,12 +8,12 @@ const Header = () => {
         <img className={styles.header__logo__img} src="" alt="logo" />
       </div>
       <div className={styles.header__nav}>
-        <a className={styles.header__nav__link} href="">Главная</a>
-        <a className={styles.header__nav__link} href="">О нас</a>
-        <a className={styles.header__nav__link} href="">Контакты</a>
-        <a className={styles.header__nav__link} href="">Вопрос & Ответы</a>
+        <a  className={styles.header__nav__link} href="main">Главная</a>
+        <a className={styles.header__nav__link} href="aboutUs">О нас</a>
+        <a className={styles.header__nav__link} href="contact">Контакты</a>
+        <a className={styles.header__nav__link} href="faq">Вопрос & Ответы</a>
       </div>
-      <button className={styles.header__button}>Войти</button>
+      <NavLink className={styles.header__button}>Заказать сайт</NavLink>
     </div>
   );
 };

@@ -1,0 +1,20 @@
+.faq {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  padding: 16px;
+  // width: 1920px;
+  background: rgba($color: white, $alpha: 0.1);
+  border-radius: 64px 64px 0 0;
+  // height: 600px;
+  padding-top: 64px;
+  padding-bottom: 64px;
+  overflow: hidden;
+
+  &__title {
+    font-size: 32px;
+    font-weight: 700;
+    text-align: center;
+  }
+}

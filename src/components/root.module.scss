@@ -1,0 +1,26 @@
+/* Main Root */
+
+:root {
+  --w: 1440px; // width header
+  --m-w: 1440px; // max width header
+  --h: 64px; // height header
+  --m-h: 64px; // max height header
+
+  // Padding
+  --p_4: 4px;
+  --p_8: 8px;
+  --p_16: 16px;
+  --p_32: 32px;
+
+  // Gap
+  --g_4: 4px;
+  --g_8: 8px;
+  --g_16: 16px;
+  --g_32: 32px;
+
+  // Border Radius
+  --r_4: 4px;
+  --r_8: 8px;
+  --r_16: 16px;
+  --r_32: 32px;
+}

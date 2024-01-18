@@ -1,0 +1,41 @@
+.footer {
+  padding: 16px 0;
+  display: flex;
+  &__info {
+    &__left {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    &__right {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 16px;
+      &__text {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+        opacity: 0.5;
+      }
+    }
+    &__text {
+    }
+    &__social {
+      display: flex;
+      gap: 16px;
+      &__img {
+        display: flex;
+        height: 96px;
+        width: 96px;
+        justify-content: center;
+        align-items: center;
+
+        border-radius: var(--r_16, 16px);
+        background: #1d1d1d;
+      }
+    }
+  }
+}

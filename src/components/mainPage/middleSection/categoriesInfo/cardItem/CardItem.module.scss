@@ -1,0 +1,38 @@
+.card {
+  display: flex;
+  width: 348px;
+  flex-direction: column;
+  gap: var(--g_16, 16px);
+  flex: 1 0 0;
+
+  border-radius: var(--r_16, 16px);
+  background: #1d1d1d;
+
+  &__image {
+    height: 256px;
+    flex-shrink: 0;
+    align-self: stretch;
+    object-fit: cover;
+
+    border-radius: var(--r_16, 16px);
+    background: rgba($color: white, $alpha: 0.1);
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 0 16px 16px 16px;
+  }
+
+  &__title {
+    font-weight: 700;
+  }
+
+  &__subtitle {
+  }
+
+  &__description {
+    color: #555;
+  }
+}

@@ -1,0 +1,57 @@
+.contact {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  &__title {
+    font-size: 32px;
+    font-weight: 700;
+  }
+  &__wrapper {
+    display: flex;
+    height: 128px;
+    padding: var(--p_16, 16px);
+    align-items: center;
+    gap: var(--g_16, 16px);
+    flex-shrink: 0;
+
+    border-radius: var(--r_16, 16px);
+    border: 2px solid var(--stroke-16, rgba(255, 255, 255, 0.16));
+    &__gif {
+      width: 704px;
+      flex-shrink: 0;
+      align-self: stretch;
+
+      border-radius: var(--r_16, 16px);
+      background: rgba($color: white, $alpha: 0.1);
+      &__img {
+      }
+    }
+
+    &__text {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+    }
+
+    &__title {
+    }
+    &__subtitle {
+      opacity: 0.5;
+    }
+    &__social {
+      display: flex;
+      height: 96px;
+      width: 96px;
+      padding: var(--p_16, 16px);
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+
+      border-radius: var(--r_16, 16px);
+      background: #1d1d1d;
+      &__img {
+      }
+    }
+  }
+}

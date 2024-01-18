@@ -1,0 +1,14 @@
+.categories {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  &__title {
+    font-size: 32px;
+    font-weight: 700;
+  }
+
+  &__card {
+    display: flex;
+    gap: 16px;
+  }
+}

@@ -1,8 +1,19 @@
+// @font-face {
+//   font-family: "Zuume", sans-serif;
+//   src: local("Zuume"),
+//     url("../../assets/fonts/raleway/Raleway-Regular.woff2") format("woff2"),
+//     url("../../assets/fonts/raleway/Raleway-Regular.woff") format("woff"),
+//     url("../../assets/fonts/raleway/Raleway-Regular.ttf") format("truetype");
+//   font-weight: 900;
+//   font-style: normal;
+//   font-display: swap;
+// }
+
 #root {
   max-width: 1920px;
   margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  // padding: 2rem;
+  // text-align: center;
 }
 
 .logo {
