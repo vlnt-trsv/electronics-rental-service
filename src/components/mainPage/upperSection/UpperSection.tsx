@@ -1,12 +1,13 @@
-import Header from "../header/Header";
 import styles from "./UpperSection.module.scss";
-import ps5 from "../../../assets/imgs/ps5.png";
+import head from "../../../assets/imgs/Headphone-1.svg";
 
 const UpperSection = () => {
   return (
     <div className={styles.upper}>
       <div className={`${styles.upper__wrapper} container`}>
-        <div className={styles.upper__gif}><img src={ps5} alt="gif" /></div>
+        <div className={styles.upper__gif}>
+          <img className={styles.upper__gif__img} src={head} alt="gif" />
+        </div>
         <div className={styles.upper__cta}>
           <span className={styles.upper__cta__title}>
             Rent it. <br /> Use it. <br /> Repeat it.
