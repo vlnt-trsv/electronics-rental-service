@@ -17,7 +17,17 @@
   }
 
   &__gif {
-    width: 512px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    height: 510px;
+    box-sizing: border-box;
+    overflow: hidden;
+    &__img {
+      // height: 512px;
+      max-width: 180%;
+    }
   }
 
   &__cta {

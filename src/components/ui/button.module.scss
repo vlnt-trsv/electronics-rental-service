@@ -1,0 +1,54 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  padding: 16px;
+}
+
+.variant {
+  &__default {
+    border-radius: 8px;
+    background: #1a1a1a;
+    color: #fff;
+  }
+  &__primary {
+    border-radius: 8px;
+    background: #f77f00;
+    color: #fff;
+  }
+  &__outline {
+    border-radius: 8px;
+    background: none;
+    color: #fff;
+    border: 1px solid #f77f00;
+  }
+  &__secondary {
+  }
+  &__ghost {
+  }
+  &__link {
+  }
+  &__disabled {
+    border-radius: 8px;
+    background: #f77f00;
+    color: #fff;
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.size {
+  &__default {
+    padding: 16px;
+  }
+  &__sm {
+    padding: 4px;
+  }
+  &__lg {
+    padding: 8px;
+  }
+  &__icon {
+    padding: 2px;
+  }
+}
