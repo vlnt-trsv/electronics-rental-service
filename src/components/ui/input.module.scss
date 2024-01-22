@@ -1,0 +1,13 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 100%;
+}
+.error {
+    color: rgb(255, 121, 121);
+}
+
+.warning {
+    color: green;
+}

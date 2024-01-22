@@ -1,12 +1,13 @@
 import styles from "./UpperSection.module.scss";
 import head from "../../../assets/imgs/Headphone-1.svg";
+import macbook from "../../../assets/imgs/macbook.png";
 
 const UpperSection = () => {
   return (
     <div className={styles.upper}>
       <div className={`${styles.upper__wrapper} container`}>
         <div className={styles.upper__gif}>
-          <img className={styles.upper__gif__img} src={head} alt="gif" />
+          <img className={styles.upper__gif__img} src={macbook} alt="gif" />
         </div>
         <div className={styles.upper__cta}>
           <span className={styles.upper__cta__title}>

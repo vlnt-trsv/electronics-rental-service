@@ -25,7 +25,8 @@
     box-sizing: border-box;
     overflow: hidden;
     &__img {
-      height: 512px;
+      // height: 512px;
+      max-width: 180%;
     }
   }
 

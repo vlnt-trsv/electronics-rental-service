@@ -1,0 +1,55 @@
+.enter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 350px;
+
+  &__title {
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  &__number {
+    display: flex;
+    padding: 16px;
+    align-items: center;
+    align-self: stretch;
+
+    border-radius: 8px;
+    border: 1px solid rgba($color: white, $alpha: 0.5);
+  }
+
+  &__form {
+    display: flex;
+    gap: 16px;
+
+    &__complete {
+      width: 55px;
+      height: 55px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      background: #3b3b3b;
+      border: 1px solid rgba($color: white, $alpha: 0.5);
+      gap: 16px;
+    }
+
+    &.complete {
+      width: 100%;
+      height: 100%;
+      border: 1px solid rgba($color: white, $alpha: 0.5);
+    }
+  }
+
+  &__input {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 16px;
+    border: 1px solid rgba($color: white, $alpha: 0.5);
+    border-radius: 8px;
+  }
+}

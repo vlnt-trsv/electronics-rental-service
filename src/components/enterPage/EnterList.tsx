@@ -1,7 +1,8 @@
 import styles from "./EnterList.module.scss";
 import whiteLogo from "@/assets/imgs/white-logo.svg";
-import blackLogo from "@/assets/imgs/white-logo.svg";
+// import blackLogo from "@/assets/imgs/white-logo.svg";
 import { Outlet } from "react-router-dom";
+
 
 const EnterList = () => {
   return (

@@ -1,23 +1,30 @@
-import { Link } from "react-router-dom";
-import { Input } from "@/components/ui/input";
-
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./EnterItem.module.scss";
-import { Button } from "@/components/ui/button";
+import EnterHookForm from "../enterHookForm/EnterHookForm";
+
+
 
 const EnterItem = () => {
+  const navigate = useNavigate();
+
+  const handleGetCode = (data) => {
+    if (data.tel && /^[78]\d{10}$/.test(data.tel)) {
+      console.log(`Sending SMS to ${data.tel}`);
+      navigate(`/enterPage/enterClient/${data.tel}`);
+    } else {
+      console.log(`ERROR: sending SMS to ${data.tel}`);
+    }
+  };
+
   return (
     <div className={styles.enter}>
       <div className={`${styles.enter__content} content`}>
         <span className={styles.enter__title}>Вход в личный кабинет</span>
-        {/* <Link to={"enterClient"}></Link> */}
-        <Input
-          ref={undefined}
-          type="tel"
-          placeholder="Телефон"
-          className={styles.enter__input}
+        <EnterHookForm
+          handleGetCode={handleGetCode}
+          formClassName={styles.enter__form}
         />
-        <Button className={styles.enter__button} variant="default" size="lg">Войти</Button>
-        <Link to={"/"} className={styles.enter__link}>
+        <Link to={"/"} className={styles.enter__back}>
           Вернуться на главную
         </Link>
       </div>
