@@ -13,7 +13,7 @@ const Header = () => {
         <a className={styles.header__nav__link} href="contact">Контакты</a>
         <a className={styles.header__nav__link} href="faq">Вопрос & Ответы</a>
       </div>
-      <NavLink to={'/enterPage'} className={styles.header__button}>Заказать сайт</NavLink>
+      <NavLink to={'/enterPage'} className={styles.header__button}>Арендовать</NavLink>
     </div>
   );
 };
