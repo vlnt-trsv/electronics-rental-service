@@ -62,7 +62,7 @@ const EnterHookForm = ({ formClassName, handleGetCode }) => {
         maxLength="32"
         // pattern=""
       />
-      <Button onClick={notify} variant="primary" size="default" type="submit">
+      <Button variant="primary" size="default" type="submit">
         Получить код
       </Button>
     </form>
