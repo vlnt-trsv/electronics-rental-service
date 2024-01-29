@@ -1,0 +1,14 @@
+.subs {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  &__title {
+  }
+  &__filter {
+    display: flex;
+    gap: 16px;
+  }
+  &__card {
+    width: 100%;
+  }
+}

@@ -1,6 +1,8 @@
 import Checkbox from "@/components/ui/checkbox/checkbox";
 import style from "./NotificationInfo.module.scss";
 import { useState } from "react";
+import { Switch } from "@radix-ui/react-switch";
+import { Label } from "@radix-ui/react-label";
 
 const NotificationInfo = () => {
   const [isOrderStatusChecked, setIsOrderStatusChecked] = useState(true);

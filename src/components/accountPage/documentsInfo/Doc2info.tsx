@@ -1,7 +1,8 @@
+import styles from "./docs.module.scss";
 
 const Doc2info = () => {
   return (
-    <div>doc2info</div>
+    <div className={styles.doc}>Политика конфиденциальности</div>
   )
 }
 

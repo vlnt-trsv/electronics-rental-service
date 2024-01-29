@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 
 import axios from "axios";
@@ -39,7 +39,7 @@ const EnterClient = () => {
 
       setTimeout(() => {
         setIsLoading(false);
-        navigate("/accountPage");
+        navigate("/accountPage/personalDataInfo");
       }, 2000);
     }
 

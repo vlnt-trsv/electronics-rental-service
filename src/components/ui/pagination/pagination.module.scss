@@ -1,0 +1,73 @@
+/* Новые названия стилей */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pagination__content {
+  list-style: none;
+  display: flex;
+  padding: 0;
+  margin: 0;
+}
+
+.pagination__item {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &.active {
+    background-color: #007bff; /* Цвет фона активной страницы */
+    color: white; /* Цвет текста активной страницы */
+  }
+
+  &__link {
+    display: inline-block;
+    padding: 8px 12px; /* Регулируйте размеры как вам угодно */
+    text-decoration: none;
+    color: #007bff; /* Цвет текста неактивных страниц */
+    transition: background-color 0.2s ease, color 0.2s ease;
+
+    &:hover {
+      background-color: #f8f9fa; /* Цвет фона при наведении на неактивную страницу */
+    }
+  }
+}
+
+.pagination__previous,
+.pagination__next {
+  &__link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 12px; /* Регулируйте размеры как вам угодно */
+    text-decoration: none;
+    color: #007bff; /* Цвет текста кнопок Previous и Next */
+    transition: background-color 0.2s ease, color 0.2s ease;
+
+    svg {
+      margin-right: 4px; /* Отступ между иконкой и текстом */
+    }
+
+    &:hover {
+      background-color: #f8f9fa; /* Цвет фона при наведении на кнопки Previous и Next */
+    }
+  }
+}
+
+.pagination__ellipsis {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 4px; /* Регулируйте отступ между многоточием и другими элементами */
+  color: #6c757d; /* Цвет многоточия */
+}
+
+.pagination__link_disabled {
+  pointer-events: none; // Отключаем события мыши
+  opacity: 0.5; // Уменьшаем непрозрачность для обозначения отключенной ссылки
+  // Другие стили для отключенных ссылок
+}

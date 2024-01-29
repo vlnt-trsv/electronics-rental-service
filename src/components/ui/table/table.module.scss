@@ -1,0 +1,51 @@
+.table {
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 8px;
+
+  &__table {
+    overflow: hidden;
+    width: 100%;
+  }
+  &__header,
+  &__body,
+  &__footer {
+    border-radius: 4px;
+  }
+
+  &__header {
+    background: none;
+  }
+
+  &__footer {
+    background-color: rgba(255, 255, 255, 0.16);
+  }
+
+  &__row {
+    text-align: left;
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.16);
+    }
+  }
+  &__head {
+    padding: 8px;
+    border-radius: 4px;
+    border-collapse: collapse;
+    opacity: 0.5;
+  }
+  &__cell {
+    padding: 8px;
+    display: table-cell;
+    text-align: left;
+    vertical-align: top;  
+  }
+  &__row,
+  &__cell {
+    cursor: default;
+    transition: background-color 0.1s ease-out;
+    border-radius: 4px;
+  }
+
+  &__caption {
+  }
+}

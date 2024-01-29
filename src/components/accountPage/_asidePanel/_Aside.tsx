@@ -2,7 +2,12 @@ import { useCallback, useState } from "react";
 import styles from "./_Aside.module.scss";
 import { Link, NavLink } from "react-router-dom";
 
+import { useContext } from "react";
+import { ApiContext } from "@/context/ApiProvider.jsx";
+
 const _Aside = () => {
+  const data = useContext(ApiContext);
+  console.log(data);
   const [moreInfo, setMoreInfo] = useState(false);
 
   const pen = (
@@ -67,10 +72,14 @@ const _Aside = () => {
           </div>
           <div className={styles["aside__user-info"]}>
             <div className={styles["username"]}>
-              <span className={styles["name"]}>Валентин Тарасов</span>
-              <span className={styles["nickname"]}>@nickname</span>
+              <span className={styles["name"]}>{data?.name || "null"}</span>
+              <span className={styles["nickname"]}>
+                @{data?.username || "null"}
+              </span>
             </div>
-            <span className={styles["status"]}>Ваш статус: Новичок</span>
+            <span className={styles["status"]}>
+              Ваш статус: {data?.status || "null"}
+            </span>
           </div>
         </div>
         <button onClick={toggleMoreInfo} className={styles["aside__dropdown"]}>
@@ -82,9 +91,11 @@ const _Aside = () => {
           }`}
         >
           <div className={styles["aside__info"]}>
-            <div className={styles["aside__info-item"]}>Подписки: 2</div>
             <div className={styles["aside__info-item"]}>
-              Бонусный счёт: 360 ₽
+              Подписки: {data?.subs || "null"}
+            </div>
+            <div className={styles["aside__info-item"]}>
+              Бонусный счёт: {data?.bonus || "null"} ₽
             </div>
           </div>
           <Link
