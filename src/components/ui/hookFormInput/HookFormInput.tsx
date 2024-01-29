@@ -7,7 +7,7 @@ const HookFormInput = ({ register, errors, formInput, input, type, ...props }) =
         autoComplete="none"
         className={cn(input)}
         {...register(type, {
-          required: "Обязательно к заполнению!",
+          // required: "Обязательно к заполнению!",
           pattern: {
             value: new RegExp(props.pattern),
             message: "Пожалуйста, введите корректные данные!",

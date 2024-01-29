@@ -1,0 +1,38 @@
+.card {
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 8px;
+  padding: 8px;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  cursor: pointer;
+  transition: filter 0.1s ease-out;
+  color: #fff;
+  min-width: 550px;
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  &__title {
+    font-size: 16px;
+    font-weight: 700;
+  }
+  &__subtitle {
+  }
+  &__description {
+    opacity: 0.5;
+  }
+  &__wrapper {
+    z-index: 1;
+    width: 50%;
+    background: rgba($color: #fff, $alpha: 0.3);
+  }
+  &__img {
+  }
+
+  &:hover {
+    filter: blur(2px);
+  }
+}

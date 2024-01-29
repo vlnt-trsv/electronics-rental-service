@@ -1,8 +1,9 @@
+import styles from "./docs.module.scss";
 
 const Doc3Info = () => {
   return (
-    <div>doc3Info</div>
-  )
-}
+    <div className={styles.doc}>Согласие на обработку персональных данных</div>
+  );
+};
 
-export default Doc3Info
+export default Doc3Info;

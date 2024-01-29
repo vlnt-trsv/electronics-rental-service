@@ -2,8 +2,6 @@ import { Link, useNavigate } from "react-router-dom";
 import styles from "./EnterItem.module.scss";
 import EnterHookForm from "../enterHookForm/EnterHookForm";
 
-
-
 const EnterItem = () => {
   const navigate = useNavigate();
 

@@ -4,9 +4,9 @@ import styles from "./_Main.module.scss";
 const _Main = () => {
   return (
     <div className={styles.main}>
-        <Outlet />
+      <Outlet />
     </div>
-  )
-}
+  );
+};
 
-export default _Main
+export default _Main;

@@ -1,7 +1,8 @@
+import styles from "./docs.module.scss";
 
 const Doc1Info = () => {
   return (
-    <div>doc1Info</div>
+    <div className={styles.doc}>Договор на использование сервиса</div>
   )
 }
 
