@@ -1,5 +1,5 @@
 import styles from "./UpperSection.module.scss";
-import head from "../../../assets/imgs/Headphone-1.svg";
+// import headphone from "../../../assets/imgs/Headphone-1.svg";
 import macbook from "../../../assets/imgs/macbook.png";
 
 const UpperSection = () => {

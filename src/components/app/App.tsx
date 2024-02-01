@@ -21,8 +21,12 @@ import DevicesInfo from "../accountPage/devicesInfo/DevicesInfo.tsx";
 import SubsInfo from "../accountPage/subsInfo/SubsInfo.tsx";
 import ContactInfo from "../accountPage/contatsInfo/ContactInfo.tsx";
 import FaqInfo from "../accountPage/faqInfo/FaqInfo.tsx";
-import ProductInfo from "../accountPage/devicesInfo/chooseDevicesInfo/productInfo/ProductInfo.tsx";
-import ProductRegistrationInfo from "../accountPage/devicesInfo/chooseDevicesInfo/productInfo/productRegistrationInfo/ProductRegistrationInfo.tsx";
+import ProductInfo from "../accountPage/devicesInfo/productInfo/ProductInfo.tsx";
+import ProductRegistrationInfo from "../accountPage/devicesInfo/productRegistrationInfo/ProductRegistrationInfo.tsx";
+import ProductDetailsInfo from "../accountPage/devicesInfo/productDetailsInfo/ProductDetailsInfo.tsx";
+import GetPayment from "../accountPage/devicesInfo/GetPayment/GetPayment.tsx";
+import CategoriesInfo from "../accountPage/devicesInfo/categoriesInfo/CategoriesInfo.tsx";
+
 
 function App() {
   return (
@@ -43,14 +47,23 @@ function App() {
           <Route path="doc3" element={<Doc3Info />} />
           {/* Далее навигационные кнопки - основные */}
           <Route path="devices" element={<DevicesInfo />}>
+            <Route index element={<CategoriesInfo />} />
             <Route path=":categoryId" element={<ProductInfo />} />
-            <Route path="registration" element={<ProductRegistrationInfo />} />
+            <Route
+              path=":categoryId/:productId"
+              element={<ProductDetailsInfo />}
+            />
+            <Route
+              path=":categoryId/:productId/registration"
+              element={<ProductRegistrationInfo />}
+            />
           </Route>
           <Route path="subs" element={<SubsInfo />} />
           <Route path="payments" element={<PaymentsInfo />} />
           <Route path="contacts" element={<ContactInfo />} />
           <Route path="faq" element={<FaqInfo />} />
         </Route>
+        <Route path="/success" element={<GetPayment />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </ApiProvider>
