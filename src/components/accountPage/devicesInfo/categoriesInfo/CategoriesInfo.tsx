@@ -8,7 +8,13 @@ const CategoriesInfo = () => {
   const categories = useSelector((state) => state.categories.categories);
   const dispatch = useDispatch();
   const handleCategoryClick = (category) => {
-    dispatch(setSelectedCategory({ name: category.name, id: category.id }));
+    dispatch(
+      setSelectedCategory({
+        id: category.id,
+        name: category.name,
+        title: category.title,
+      })
+    );
   };
 
   return (

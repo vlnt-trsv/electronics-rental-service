@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styles from "./_Header.module.scss";
 
 import whiteLogo from "@/assets/imgs/white-logo.svg";
@@ -9,6 +10,7 @@ const _Header = () => {
         {/* <img src={whiteLogo} alt="logo" /> */}
         <span className={styles.header__logo__span}>two2buddy</span>
       </div>
+      <Link to={"/accountPage"}>Личный кабинет</Link>
       <div className={styles.header__user}>
         <img src="" alt="user" />
       </div>

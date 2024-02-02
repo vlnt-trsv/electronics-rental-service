@@ -13,8 +13,15 @@ const ProductInfo = () => {
 
   const dispatch = useDispatch();
   const handleProductClick = (product) => {
-    navigate(`${product.id}`);
-    dispatch(setSelectedProduct({ name: product.name, id: product.id, price: product.price }));
+    navigate(`${product.name}`);
+    dispatch(
+      setSelectedProduct({
+        id: product.id,
+        name: product.name,
+        title: product.title,
+        price: product.price,
+      })
+    );
   };
 
   return (

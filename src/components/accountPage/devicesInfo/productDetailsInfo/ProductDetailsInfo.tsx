@@ -26,12 +26,6 @@ const ProductDetailsInfo = () => {
     console.log(option);
   };
 
-  // const categories = useSelector((state) => state.categories.categories);
-  // const dispatch = useDispatch();
-  // const handleCategoryClick = (category) => {
-  //   dispatch(setSelectedCategory({ name: category.name, id: category.id }));
-  // };
-
   return (
     <div className={styles.productDetails}>
       <div className={styles.productDetails__image}>
@@ -48,7 +42,7 @@ const ProductDetailsInfo = () => {
             onClick={() => handleOptionSelect(option)}
           >
             <span>{option.duration}</span>
-            <span>{option.price}</span>
+            <span>{option.price} ₽</span>
           </Button>
         ))}
         <span className={styles.productDetails__description}>

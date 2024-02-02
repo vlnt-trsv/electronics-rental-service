@@ -11,7 +11,7 @@ const Breadcrumbs = () => {
       {showBreadcrumbs ? (
         <>
           {pathnames.map((name, index) => {
-            const decodedName = decodeURIComponent(name); // Декодируем имя
+            const decodedName = decodeURIComponent(pathnames[index]); // Декодируем имя
             const breadcrumbPath = `/${pathnames
               .slice(0, index + 1)
               .join("/")}`;
@@ -22,7 +22,7 @@ const Breadcrumbs = () => {
             ) : (
               <span key={breadcrumbPath}>
                 <Link to={breadcrumbPath}>{decodedName}</Link>
-                {" / "}
+                {" > "}
               </span>
             );
           })}

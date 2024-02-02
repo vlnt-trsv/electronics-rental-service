@@ -1,11 +1,18 @@
 import { Button } from "@/components/ui/button";
-import styles from "./CardItem.module.scss";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { memo, useCallback, useState } from "react";
+import { useSelector } from "react-redux";
+import styles from "./CardItem.module.scss";
 // import SuccesfullyPayment from "../GetPayment/GetPayment";
 
-const CardUp = () => {
-  return (
+const CardUp = memo(
+  ({
+    visible,
+    selectedProduct,
+    selectedCategory,
+    selectedSubscription,
+    calculateTotalPrice,
+  }) => (
     <div className={styles.cardUp}>
       <span className={styles.title}>Аренда приставки</span>
       <hr className={styles.hr} />
@@ -15,12 +22,16 @@ const CardUp = () => {
         </div>
         <div className={styles.cardUp__text__title}>
           <div className={styles.cardUp__text}>
-            <span className={styles.cardUp__subtitle}>Приставки</span>
-            <span className={styles.cardUp__title}>Playstation 5 </span>
+            <span className={styles.cardUp__subtitle}>
+              {selectedCategory?.title}
+            </span>
+            <span className={styles.cardUp__title}>
+              {selectedProduct?.title}
+            </span>
           </div>
           <div className={styles.cardUp__text}>
-            <span>Подписка на 2 дня</span>
-            <span>990 ₽</span>
+            <span>Подписка на {selectedSubscription?.duration}</span>
+            <span>{selectedSubscription?.price}</span>
           </div>
         </div>
       </div>
@@ -35,27 +46,22 @@ const CardUp = () => {
       </div> */}
       <div className={styles.cardUp__text}>
         <span>Доставка</span>
-        <span>240 ₽</span>
+        {visible ? "240 ₽" : "Нет"}
       </div>
       <div className={styles.cardUp__text}>
         <span>К оплате</span>
-        <span>1230 ₽</span>
+        <span>{calculateTotalPrice()} ₽</span>
       </div>
     </div>
-  );
-};
-const CardDown = ({
-  deliveryMethod,
-  calculateTotalPrice,
-  onDeliveryMethodChange,
-}) => {
-  const navigate = useNavigate();
+  )
+);
 
-  // Функция для обработки оплаты и перехода к следующему шагу
-  const handlePayment = () => {
+const CardDown = memo(({ deliveryMethod, onDeliveryMethodChange }) => {
+  const navigate = useNavigate();
+  const handlePayment = useCallback(() => {
     console.log("Оплата прошла");
-    navigate("/success"); // Перенаправляем на страницу успешной оплаты
-  };
+    navigate("/success");
+  }, [navigate]);
 
   return (
     <div className={styles.cardDown}>
@@ -95,10 +101,6 @@ const CardDown = ({
             </span>
           </div>
         ) : null}
-        <div className={styles.cardUp__text}>
-          <span>К оплате</span>
-          <span>{calculateTotalPrice()} ₽</span>
-        </div>
       </div>
       {/* Реализовать оплату */}
       <Link className={styles.cardDown__link} to="/success">
@@ -106,30 +108,41 @@ const CardDown = ({
       </Link>
     </div>
   );
-};
+});
 
 const CardItem = () => {
   const [deliveryMethod, setDeliveryMethod] = useState("Доставка"); // Состояние для выбора способа получения
-  const [selectedProduct, setSelectedProduct] = useState(null);
+  const selectedProduct = useSelector(
+    (state) => state.products.selectedProduct
+  );
+  const selectedCategory = useSelector(
+    (state) => state.categories.selectedCategory
+  );
+  const selectedSubscription = useSelector(
+    (state) => state.subscriptionOptions.selectedSubscription
+  );
 
-  // Обработчик изменения способа получения
-  const handleDeliveryMethodChange = (method) => {
+  const handleDeliveryMethodChange = useCallback((method) => {
     setDeliveryMethod(method);
-  };
+  }, []);
 
-  const calculateTotalPrice = () => {
-    const productPrice = selectedProduct ? selectedProduct.price : 0;
-    const deliveryPrice = deliveryMethod === "" ? 460 : 0;
+  const calculateTotalPrice = useCallback(() => {
+    const productPrice = selectedSubscription?.price || 0;
+    const deliveryPrice = deliveryMethod === "Доставка" ? 460 : 0;
     return productPrice + deliveryPrice;
-  };
+  }, [selectedSubscription, deliveryMethod]);
 
   return (
     <div className={styles.cardItem}>
-      <CardUp />
-      <CardDown
+      <CardUp
+        visible={deliveryMethod === "Доставка"}
         selectedProduct={selectedProduct}
-        deliveryMethod={deliveryMethod}
+        selectedCategory={selectedCategory}
+        selectedSubscription={selectedSubscription}
         calculateTotalPrice={calculateTotalPrice}
+      />
+      <CardDown
+        deliveryMethod={deliveryMethod}
         onDeliveryMethodChange={handleDeliveryMethodChange}
       />
       {/* <SuccesfullyPayment /> */}
