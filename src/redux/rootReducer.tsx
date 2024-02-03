@@ -1,8 +1,9 @@
 import { combineReducers } from "redux";
 
-import categoriesReducer from "./action/categoriesSlice";
-import productsReducer from "./action/productsSlice";
-import subscriptionOptionsReducer from "./action/subscriptionOptionSlice";
+import categoriesReducer from "./slices/categoriesSlice";
+import productsReducer from "./slices/productsSlice";
+import subscriptionOptionsReducer from "./slices/subscriptionOptionSlice";
+import subsSliceReducer from "./slices/subsSlice";
 // import deliveryReducer from "./action/deliverySlice";
 // import paymentReducer from "./action/paymentSlice";
 
@@ -10,6 +11,7 @@ const rootReducer = combineReducers({
   categories: categoriesReducer,
   products: productsReducer,
   subscriptionOptions: subscriptionOptionsReducer,
+  subs: subsSliceReducer,
   // delivery: deliveryReducer,
   // payment: paymentReducer,
 });
