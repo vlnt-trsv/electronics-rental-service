@@ -17,6 +17,7 @@ const subsSlice = createSlice({
   name: "subs",
   initialState,
   reducers: {
+    // Добавление подписки
     addSubscription: (state, action) => {
       const newSubscription = {
         id: v4(),
@@ -28,20 +29,22 @@ const subsSlice = createSlice({
       };
       state.subscriptions.unshift(newSubscription);
     },
+
+    // Выбор фильтрации
     setSelectedFilter: (state, action) => {
       state.selectedFilter = action.payload;
     },
-
-    // // Действие для установки статуса подписки
-    // setSubscriptionStatus: (state, action) => {
-    //   const { id, status } = action.payload;
-    //   const subscription = state.subscriptions.find((sub) => sub.id === id);
-    //   if (subscription) {
-    //     subscription.status = status;
-    //   }
-    // },
+    
+    // Действие для установки статуса подписки
+    setSubscriptionStatus: (state, action) => {
+      const { id, status } = action.payload;
+      const subscription = state.subscriptions.find((sub) => sub.id === id);
+      if (subscription) {
+        subscription.status = status;
+      }
+    },
   },
 });
 
-export const { addSubscription, setSelectedFilter } = subsSlice.actions;
+export const { addSubscription, setSelectedFilter, setSubscriptionStatus } = subsSlice.actions;
 export default subsSlice.reducer;
