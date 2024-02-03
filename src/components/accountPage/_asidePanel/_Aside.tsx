@@ -7,7 +7,7 @@ import { ApiContext } from "@/context/ApiProvider.jsx";
 
 const _Aside = () => {
   const data = useContext(ApiContext);
-  console.log(data);
+  // console.log(data);
   const [moreInfo, setMoreInfo] = useState(false);
 
   const pen = (

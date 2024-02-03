@@ -1,13 +1,13 @@
 import { Button } from "@/components/ui/button";
 import styles from "./SubsCard.module.scss";
 
-const SubsCard = () => {
+const SubsCard = ({ data }) => {
   return (
     <div className={styles.subsCard}>
       <div className={styles.subsCard__head}>
         <span className={`${styles.subsCard__status} ${styles.titleHead}`}>
           Статус:{" "}
-          <span className={styles.subsCard__status__text}>Не оплачен</span>
+          <span className={styles.subsCard__status__text}>{data?.status}</span>
         </span>
         <span className={`${styles.subsCard__order} ${styles.titleHead}`}>
           Дата оформления заказа:{" "}
@@ -23,8 +23,12 @@ const SubsCard = () => {
         </div>
         <div className={styles.subsCard__info}>
           <div className={styles.subsCard__info__item}>
-            <span className={styles.subsCard__subtitle}>Приставка</span>
-            <span className={styles.subsCard__title}>Playstation 5</span>
+            <span className={styles.subsCard__subtitle}>
+              {data?.categories?.title}
+            </span>
+            <span className={styles.subsCard__title}>
+              {data?.product?.title}
+            </span>
           </div>
           <div className={styles.subsCard__info__item}>
             <span className={styles.subsCard__subtitle}>Доставка</span>
@@ -39,15 +43,24 @@ const SubsCard = () => {
         <div className={styles.subsCard__payment}>
           <span className={styles.subsCard__subtitle}>Сумма</span>
           <span className={styles.subsCard__text}>
-            Подписка на 14 дней{" "}
-            <span className={styles.subsCard__price}>3 999 ₽</span>
+            Подписка на {data?.subscriptionOption?.duration}{" "}
+            <span className={styles.subsCard__price}>
+              {data?.subscriptionOption?.price} ₽
+            </span>
           </span>
+          {data?.deliveryMethod === "Доставка" ? (
+            <span className={styles.subsCard__text}>
+              Доставка (опционально){" "}
+              <span className={styles.subsCard__price}>
+                {data?.deliveryMethod === "Доставка" ? "240 ₽" : "null"}
+              </span>
+            </span>
+          ) : (
+            ""
+          )}
           <span className={styles.subsCard__text}>
-            Доставка (опционально){" "}
-            <span className={styles.subsCard__price}>399 ₽</span>
-          </span>
-          <span className={styles.subsCard__text}>
-            К оплате <span className={styles.subsCard__price}>4 398 ₽</span>
+            К оплате{" "}
+            <span className={styles.subsCard__price}>{data?.totalPrice} ₽</span>
           </span>
           <Button variant="primary" size="lg">
             Оплатить

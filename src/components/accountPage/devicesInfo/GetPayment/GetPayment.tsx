@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styles from "./GetPayment.module.scss";
 
 const GetPayment = () => {
@@ -11,6 +12,11 @@ const GetPayment = () => {
           {/* <div className={styles.getPayment__subtitle}>
             Ваша подписка активирована
           </div> */}
+          <Link to="/accountPage/subs">
+            <div className={styles.getPayment__goToSubs}>
+              Перейти в подписки
+            </div>
+          </Link>
         </div>
       </div>
     </div>

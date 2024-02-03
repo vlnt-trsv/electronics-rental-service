@@ -1,6 +1,5 @@
 import { Routes, Route } from "react-router-dom";
 import "./App.scss";
-import ApiProvider from "@/context/ApiProvider.jsx";
 
 import Layout from "@/pages/Layout.tsx";
 import NotFound from "../notFound/NotFound.tsx";
@@ -30,7 +29,6 @@ import CategoriesInfo from "../accountPage/devicesInfo/categoriesInfo/Categories
 
 function App() {
   return (
-    <ApiProvider>
       <Routes>
         <Route index element={<Layout />} />
         <Route path="/enterPage" element={<EnterPage />}>
@@ -66,7 +64,6 @@ function App() {
         <Route path="/success" element={<GetPayment />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-    </ApiProvider>
   );
 }
 

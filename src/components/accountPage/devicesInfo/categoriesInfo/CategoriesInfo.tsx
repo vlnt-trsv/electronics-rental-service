@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import styles from "./CategoriesInfo.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import CardItem from "../CardItem.tsx";
-import { setSelectedCategory } from "@/redux/action/categoriesSlice.tsx";
+import { setSelectedCategory } from "@/redux/slices/categoriesSlice.tsx";
 
 const CategoriesInfo = () => {
   const categories = useSelector((state) => state.categories.categories);

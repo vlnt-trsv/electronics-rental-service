@@ -2,7 +2,7 @@ import styles from "./ProductInfo.module.scss";
 import CardDeviceItem from "./CardDeviceItem";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { setSelectedProduct } from "@/redux/action/productsSlice";
+import { setSelectedProduct } from "@/redux/slices/productsSlice";
 
 const ProductInfo = () => {
   const navigate = useNavigate();
