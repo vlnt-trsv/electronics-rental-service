@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import styles from "./ProductDetailtInfo.module.scss";
 import { Link } from "react-router-dom";
-// import { useState } from "react";
+import { toast } from "react-toastify";
 
 import { useSelector, useDispatch } from "react-redux";
 import { setSelectedSubscriptionOption } from "@/redux/slices/subscriptionOptionSlice";
@@ -26,6 +26,8 @@ const ProductDetailsInfo = () => {
     console.log(option);
   };
 
+  const notify = () => toast.warn("Сначала выберите подписку!");
+
   return (
     <div className={styles.productDetails}>
       <div className={styles.productDetails__image}>
@@ -48,11 +50,20 @@ const ProductDetailsInfo = () => {
         <span className={styles.productDetails__description}>
           Оплата проходит в начале периода
         </span>
-        <Link to="registration">
-          <Button className={styles.productDetails__button}>
+        {selectedSubscription ? (
+          <Link to="registration">
+            <Button className={styles.productDetails__button}>
+              Оформить подписку
+            </Button>
+          </Link>
+        ) : (
+          <Button
+            onClick={notify}
+            className={styles.productDetails__button}
+          >
             Оформить подписку
           </Button>
-        </Link>
+        )}
       </div>
     </div>
   );

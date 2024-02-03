@@ -44,17 +44,17 @@ const SubsInfo = () => {
         </div>
       ) : (
         <>
-          {subscriptions
-            .filter((subscription) =>
-              selectedFilter === "Все"
-                ? true
-                : subscription.status === selectedFilter
-            )
-            .map((subscription) => (
-              <div key={subscription.id} className={styles.subs__card}>
+          <div className={styles.subs__cards}>
+            {subscriptions
+              .filter((subscription) =>
+                selectedFilter === "Все"
+                  ? true
+                  : subscription.status === selectedFilter
+              )
+              .map((subscription) => (
                 <SubsCard data={subscription} />
-              </div>
-            ))}
+              ))}
+          </div>
         </>
       )}
     </div>
