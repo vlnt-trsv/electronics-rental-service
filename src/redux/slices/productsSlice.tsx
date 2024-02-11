@@ -1,7 +1,23 @@
-// productsSlice.js
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
+interface Product {
+  id: number;
+  name: string;
+  title: string;
+  price: string;
+  imageUrl: string;
+  altText: string;
+}
+
+interface ProductsState {
+  selectedProduct: Product | null;
+  console: Product[];
+  projector: Product[];
+  laptop: Product[];
+  speaker: Product[];
+}
+
+const initialState: ProductsState = {
   selectedProduct: null,
   console: [
     {
@@ -78,7 +94,7 @@ const initialState = {
     {
       id: 1,
       name: "speaker",
-      title: "jbl",
+      title: "JBL [#011]",
       price: "от 990 ₽",
       imageUrl: "jbl.jpg",
       altText: "jbl",
@@ -90,7 +106,7 @@ const productsSlice = createSlice({
   name: "products",
   initialState,
   reducers: {
-    setSelectedProduct: (state, action) => {
+    setSelectedProduct: (state, action: PayloadAction<Product | null>) => {
       state.selectedProduct = action.payload;
     },
   },

@@ -1,10 +1,20 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+
+interface DeliveryState {
+  method: string;
+}
+
+const initialState: DeliveryState = {
+  method: "Доставка",
+};
 
 const deliverySlice = createSlice({
   name: "delivery",
-  initialState: "Доставка",
+  initialState,
   reducers: {
-    selectDeliveryMethod: (state, action) => action.payload,
+    selectDeliveryMethod: (state, action: PayloadAction<string>) => {
+      state.method = action.payload;
+    },
   },
 });
 

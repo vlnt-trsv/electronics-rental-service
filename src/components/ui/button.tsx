@@ -18,6 +18,7 @@ const buttonVariants = cva(
         ghost: styles.variant__ghost,
         link: styles.variant__link,
         disabled: styles.variant__disabled,
+        danger: styles.variant__danger,
       },
       size: {
         default: styles.size__default,

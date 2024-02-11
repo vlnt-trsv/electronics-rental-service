@@ -36,6 +36,11 @@
     opacity: 0.5;
     cursor: not-allowed;
   }
+  &__danger {
+    border-radius: 8px;
+    background: #ff36368f;
+    color: #fff;
+  }
 }
 
 .size {

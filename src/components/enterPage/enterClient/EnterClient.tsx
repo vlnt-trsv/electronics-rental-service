@@ -1,50 +1,53 @@
 import { useState } from "react";
-import { useParams, useNavigate, Link } from "react-router-dom";
-
-import axios from "axios";
-
+import { useNavigate, Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./EnterClient.module.scss";
 import { Input } from "@/components/ui/input";
+import { login } from "@/redux/slices/auth/authSlice";
+import axiosInstance from "@/redux/slices/axiosInstance";
 
 const EnterClient = () => {
-  const { phoneNumber } = useParams();
+  const email = useSelector((state: any) => state.auth.user.email);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [codeInputs, setCodeInputs] = useState(["", "", "", ""]);
   const [isLoading, setIsLoading] = useState(false);
+
+  const verifyCode = async (email: string, code: string) => {
+    try {
+      const numericCode = parseInt(code, 10);
+      const response = await axiosInstance.post(
+        "/user/login/verify",
+        // Примечание: email и code передаются как данные в теле запроса
+        {
+          email,
+          code: numericCode,
+        }
+      );
+      const { _id, token } = response.data;
+      localStorage.setItem("authToken", token);
+      dispatch(login({ _id, email, token }));
+      navigate(`/accountPage/personalDataInfo`);
+    } catch (error) {
+      // Обработка ошибки, например, вывод сообщения об ошибке
+      console.error("Ошибка при верификации кода:", error);
+    }
+  };
 
   const handleInputChange = (index, value) => {
     const newCodeInputs = [...codeInputs];
     newCodeInputs[index] = value;
     setCodeInputs(newCodeInputs);
 
-    if (index === 3 && value !== "") {
-      const enteredCode = newCodeInputs.join("");
-      console.log("Entered Code:", enteredCode);
-
-      setIsLoading(true);
-
-      //   axios
-      //     .post("/api/send-sms", { phoneNumber, code: enteredCode })
-      //     .then((response) => {
-      //       console.log("SMS sent successfully:", response.data);
-      //       setIsLoading(false);
-      //       navigate("/nextPage");
-      //     })
-      //     .catch((error) => {
-      //       console.error("Failed to send SMS:", error);
-      //       setIsLoading(false);
-      //     });
-      // }
-
-      setTimeout(() => {
-        setIsLoading(false);
-        navigate("/accountPage/personalDataInfo");
-      }, 2000);
-    }
-
-    if (index < 3 && value !== "") {
-      document.getElementById(`codeInput${index + 1}`).focus();
+    if (value !== "" && /^[0-9]$/.test(value)) {
+      if (index < 3) {
+        document.getElementById(`codeInput${index + 1}`).focus();
+      } else {
+        const enteredCode = newCodeInputs.join("");
+        setIsLoading(true);
+        verifyCode(email, enteredCode);
+      }
     }
   };
 
@@ -62,25 +65,11 @@ const EnterClient = () => {
   return (
     <div className={styles.enter}>
       <span className={styles.enter__title}>Введите код</span>
-      <Input
-        placeholder={phoneNumber}
-        disabled
-        className={styles.enter__number}
-      />
+      <Input placeholder={email} disabled className={styles.enter__number} />
       {isLoading ? (
-        // <div className={styles.loader}>Loading...</div>
-        <>
-          <form className={styles.enter__form__complete}>
-            {/* <Input
-              className={styles.enter__input}
-              autoComplete="none"
-              type="text"
-            /> */}
-            <div className={`${styles.enter__form__complete} complete`}>
-              L
-            </div>
-          </form>
-        </>
+        <div className={`${styles.enter__form__complete} complete`}>
+          Отправка кода...
+        </div>
       ) : (
         <form className={styles.enter__form}>
           {codeInputs.map((value, index) => (

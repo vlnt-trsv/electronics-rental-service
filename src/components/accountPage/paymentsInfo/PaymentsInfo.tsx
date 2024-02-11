@@ -1,86 +1,52 @@
-// PaymentsInfo.tsx
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 import styles from "./PaymentsInfo.module.scss";
-import Pagination from "./paginationItem/PaginationItem"; // Импортируем компонент Pagination
-import Table from "./tableItem/TableItem"; // Импортируем компонент Table
+import Pagination from "./paginationItem/PaginationItem";
+import Table from "./tableItem/TableItem";
 
 const PaymentsInfo = () => {
-  const [vision, setVision] = useState(false);
-  const [isCardExists] = useState(true);
+  const subscriptions = useSelector((state) => state.subs.subscriptions);
 
-  const invoices = [
-    {
-      invoice: "INV001",
-      paymentStatus: "Paid",
-      totalAmount: "$250.00",
-      paymentMethod: "Credit Card",
-    },
-    {
-      invoice: "INV002",
-      paymentStatus: "Pending",
-      totalAmount: "$150.00",
-      paymentMethod: "PayPal",
-    },
-    {
-      invoice: "INV003",
-      paymentStatus: "Unpaid",
-      totalAmount: "$350.00",
-      paymentMethod: "Bank Transfer",
-    },
-    {
-      invoice: "INV004",
-      paymentStatus: "Paid",
-      totalAmount: "$450.00",
-      paymentMethod: "Credit Card",
-    },
-    {
-      invoice: "INV005",
-      paymentStatus: "Paid",
-      totalAmount: "$550.00",
-      paymentMethod: "PayPal",
-    },
-    {
-      invoice: "INV006",
-      paymentStatus: "Paid",
-      totalAmount: "$550.00",
-      paymentMethod: "PayPal",
-    },
-  ];
+  // Функция для получения оплаченных подписок
+  const getPaidSubscriptions = (subscriptions) => {
+    return subscriptions.filter(
+      (sub) =>
+        sub.status === "Оплачено" ||
+        sub.status === "Завершено" ||
+        sub.status === "В аренде"
+    );
+  };
 
-  useEffect(() => {
-    if (isCardExists) {
-      setVision(false);
-    } else {
-      setVision(true);
-    }
-  }, []);
+  const paidSubscriptions = getPaidSubscriptions(subscriptions);
 
-  const itemsPerPage = 5; // Количество элементов на одной странице
+  const itemsPerPage = 5;
   const [currentPage, setCurrentPage] = useState(1);
 
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
   };
 
-  const totalPages = Math.ceil(invoices.length / itemsPerPage);
-  const paginatedInvoices = invoices.slice(
+  const totalPages = Math.ceil(paidSubscriptions.length / itemsPerPage);
+  const paginatedSubscriptions = paidSubscriptions.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
 
+  console.log(paginatedSubscriptions);
+
   return (
     <div className={styles.payments}>
       <div className={styles.payments__title}>Платежи</div>
-      {invoices.length === 0 ? (
+      {paidSubscriptions.length === 0 ? (
         <div className={styles.payments__wrapper}>
           <div className={styles.payments__noPayments}>
-            У тебя пока нет совершенных платежей
+            Нет совершенных платежей
           </div>
         </div>
       ) : (
         <>
           <div className={styles.payments__table}>
-            <Table data={paginatedInvoices} />
+            <Table data={paginatedSubscriptions} />
           </div>
           <div className={styles.payments__pagination}>
             <Pagination

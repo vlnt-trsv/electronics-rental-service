@@ -2,7 +2,10 @@ import { Button } from "@/components/ui/button";
 import styles from "./SubsInfo.module.scss";
 import SubsCard from "./SubsCard";
 import { useDispatch, useSelector } from "react-redux";
-import { setSelectedFilter } from "@/redux/slices/subsSlice";
+import {
+  setSelectedFilter,
+  setSubscriptionStatus,
+} from "@/redux/slices/subsSlice";
 
 const SubsInfo = () => {
   const dispatch = useDispatch();
@@ -20,9 +23,20 @@ const SubsInfo = () => {
     return selectedFilter === status ? "primary" : "";
   };
 
+  const subscriptionId = subscriptions[0]?.id;
+  const handleStatusChange = () => {
+    // Вызов dispatch при нажатии на кнопку или другое событие
+    dispatch(setSubscriptionStatus({ id: subscriptionId, status: "Завершено" }));
+  };
+
   return (
     <div className={styles.subs}>
       <span className={styles.subs__title}>Подписки</span>
+      <div>
+        <Button variant={"outline"} size={"lg"} onClick={handleStatusChange}>
+          Изменить статус
+        </Button>
+      </div>
       <div className={styles.subs__filter}>
         {areSubscriptionsAvailable &&
           subscriptionFilter.map((status) => (
@@ -52,7 +66,7 @@ const SubsInfo = () => {
                   : subscription.status === selectedFilter
               )
               .map((subscription) => (
-                <SubsCard data={subscription} />
+                <SubsCard key={subscription.id} data={subscription} />
               ))}
           </div>
         </>

@@ -23,18 +23,23 @@ import FaqInfo from "../accountPage/faqInfo/FaqInfo.tsx";
 import ProductInfo from "../accountPage/devicesInfo/productInfo/ProductInfo.tsx";
 import ProductRegistrationInfo from "../accountPage/devicesInfo/productRegistrationInfo/ProductRegistrationInfo.tsx";
 import ProductDetailsInfo from "../accountPage/devicesInfo/productDetailsInfo/ProductDetailsInfo.tsx";
-import GetPayment from "../accountPage/devicesInfo/GetPayment/GetPayment.tsx";
+import PaymentPage from "../accountPage/devicesInfo/GetPayment/PaymentPage.tsx";
 import CategoriesInfo from "../accountPage/devicesInfo/categoriesInfo/CategoriesInfo.tsx";
 
+// Secure Routes
+import Admin from "../admin/Admin.tsx";
+import Auth from "../admin/auth/Auth.tsx";
+import PrivateRoute from "@/routes/PrivateRoute.tsx";
 
 function App() {
   return (
-      <Routes>
-        <Route index element={<Layout />} />
-        <Route path="/enterPage" element={<EnterPage />}>
-          <Route index element={<EnterItem />} />
-          <Route path="enterClient/:phoneNumber" element={<EnterClient />} />
-        </Route>
+    <Routes>
+      <Route index element={<Layout />} />
+      <Route path="/enterPage" element={<EnterPage />}>
+        <Route index element={<EnterItem />} />
+        <Route path="enterClient" element={<EnterClient />} />
+      </Route>
+      <Route element={<PrivateRoute />}>
         <Route path="/accountPage" element={<AccountPage />}>
           {/* Далее Персональная навигация - данные пользователя */}
           <Route path="personalDataInfo" element={<PersonalDataInfo />} />
@@ -61,9 +66,13 @@ function App() {
           <Route path="contacts" element={<ContactInfo />} />
           <Route path="faq" element={<FaqInfo />} />
         </Route>
-        <Route path="/success" element={<GetPayment />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+      </Route>
+      {/* <Route path="/getPayments" element={<PaymentPage />} /> */}
+      <Route path="*" element={<NotFound />} />
+      <Route path="/admin" element={<Admin />}>
+        <Route path="auth" element={<Auth />}></Route>
+      </Route>
+    </Routes>
   );
 }
 

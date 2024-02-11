@@ -4,11 +4,17 @@ import { Link, NavLink } from "react-router-dom";
 
 import { useContext } from "react";
 import { ApiContext } from "@/context/ApiProvider.jsx";
+import { useSelector } from "react-redux";
+import { IoMdExit } from "react-icons/io";
 
 const _Aside = () => {
   const data = useContext(ApiContext);
   // console.log(data);
   const [moreInfo, setMoreInfo] = useState(false);
+
+  const { subscriptions, subscriptionFilter } = useSelector(
+    (state) => state.subs
+  );
 
   const pen = (
     <div className={styles.svg}>
@@ -58,6 +64,7 @@ const _Aside = () => {
       </svg>
     </div>
   );
+  const exit = <IoMdExit />;
 
   const toggleMoreInfo = useCallback(() => {
     setMoreInfo((prevMoreInfo) => !prevMoreInfo);
@@ -92,7 +99,7 @@ const _Aside = () => {
         >
           <div className={styles["aside__info"]}>
             <div className={styles["aside__info-item"]}>
-              Подписки: {data?.subs || "null"}
+              Подписки: {subscriptions.length || "null"}
             </div>
             <div className={styles["aside__info-item"]}>
               Бонусный счёт: {data?.bonus || "null"} ₽
@@ -144,9 +151,9 @@ const _Aside = () => {
           ?
         </NavLink>
       </nav>
-      {/* <div className={styles["aside__exit"]}>
-        <img className={styles["aside__exit-img"]} src="" alt="" />
-      </div> */}
+      <div className={styles["aside__exit"]}>
+        <img className={styles["aside__exit-img"]} src={exit} alt="" />
+      </div>
     </aside>
   );
 };

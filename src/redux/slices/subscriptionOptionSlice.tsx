@@ -1,7 +1,17 @@
-// subscriptionOptionsSlice.js
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
+interface SubscriptionOption {
+  id: number;
+  duration: string;
+  price: number;
+}
+
+interface SubscriptionOptionsState {
+  selectedSubscription: SubscriptionOption | null;
+  subscriptionOptions: SubscriptionOption[];
+}
+
+const initialState: SubscriptionOptionsState = {
   selectedSubscription: null,
   subscriptionOptions: [
     { id: 1, duration: "14 дней", price: 990 },
@@ -15,7 +25,10 @@ const subscriptionOptionsSlice = createSlice({
   name: "subscriptionOptions",
   initialState,
   reducers: {
-    setSelectedSubscriptionOption: (state, action) => {
+    setSelectedSubscriptionOption: (
+      state,
+      action: PayloadAction<SubscriptionOption | null>
+    ) => {
       state.selectedSubscription = action.payload;
     },
   },

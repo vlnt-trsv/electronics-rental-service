@@ -1,16 +1,32 @@
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./EnterItem.module.scss";
 import EnterHookForm from "../enterHookForm/EnterHookForm";
+import { useDispatch } from "react-redux";
+import { setUser } from "@/redux/slices/auth/authSlice";
+import axiosInstance from "@/redux/slices/axiosInstance";
 
 const EnterItem = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const handleGetCode = (data) => {
-    if (data.tel && /^[78]\d{10}$/.test(data.tel)) {
-      console.log(`Sending SMS to ${data.tel}`);
-      navigate(`/enterPage/enterClient/${data.tel}`);
-    } else {
-      console.log(`ERROR: sending SMS to ${data.tel}`);
+  const handleGetCode = async (data: { email: any; }) => {
+    try {
+      // Используйте ваш настроенный экземпляр Axios (axiosInstance) для запроса
+      await axiosInstance.post("/user/login", {
+        // Примечание: email передаётся как данные в теле запроса
+        email: data.email,
+      });
+
+      // Обновление Redux state после успешного запроса
+      dispatch(setUser(data.email));
+
+      // Переход на страницу ввода кода
+      navigate(`/enterPage/enterClient`);
+
+      console.log("Код отправлен!");
+    } catch (error) {
+      // Обработка ошибок при запросе
+      console.error("Ошибка при отправке кода:", error.message);
     }
   };
 

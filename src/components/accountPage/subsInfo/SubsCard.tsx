@@ -1,18 +1,16 @@
-import { Button } from "@/components/ui/button";
 import styles from "./SubsCard.module.scss";
-import { useDispatch } from "react-redux";
-import { setSubscriptionStatus } from "@/redux/slices/subsSlice";
+import renderButtons from "./renderButtons";
+import getStatusClassName from "./getStatusClassName";
 
 const SubsCard = ({ data }) => {
-  const dispatch = useDispatch();
-  const subscriptionId = data?.id;
-  dispatch(setSubscriptionStatus({ id: subscriptionId, status: "Не оплачено" }));
-
   return (
     <div className={styles.subsCard}>
       <div className={styles.subsCard__head}>
         <span className={`${styles.subsCard__titleHead}`}>
-          Статус: {data?.status}
+          Статус:{" "}
+          <span className={`${getStatusClassName(data?.status)}`}>
+            {data?.status}
+          </span>
         </span>
         <span className={`${styles.subsCard__titleHead}`}>
           Дата оформления заказа: 14.09.2023
@@ -26,30 +24,48 @@ const SubsCard = ({ data }) => {
           </div>
           <div className={styles.subsCard__info__item}>
             <span className={styles.subsCard__subtitle}>
-              {data?.categories?.title}{" "}
+              {data?.categories?.title}
+              {":"}
               <span className={styles.subsCard__title}>
                 {data?.product?.title}
               </span>
             </span>
-            <span className={styles.subsCard__title}>
-              Дата достака: 15.09.2023
-            </span>
+            <hr className="hr" />
             <span className={styles.subsCard__text}>
               Подписка на {data?.subscriptionOption?.duration}{" "}
               <span className={styles.subsCard__price}>
                 {data?.subscriptionOption?.price} ₽
               </span>
             </span>
-            {data?.deliveryMethod === "Доставка" ? (
+            {data?.status === "Не оплачено" ? (
               <span className={styles.subsCard__text}>
-                Доставка (опционально){" "}
-                <span className={styles.subsCard__price}>
-                  {data?.deliveryMethod === "Доставка" ? "240 ₽" : "null"}
-                </span>
+                Оплатить товар до{":"}
+                <span className={styles.subsCard__title}>12.12.2024</span>
+              </span>
+            ) : data?.status === "Завершено" ? (
+              <span className={styles.subsCard__text}>
+                Вернуть товар до{":"}
+                <span className={styles.subsCard__title}>12.12.2024</span>
+              </span>
+            ) : data?.status === "В аренде" ? (
+              <span className={styles.subsCard__text}>
+                Подписка действует до
+                <span className={styles.subsCard__title}>12.12.2024</span>
+              </span>
+            ) : data?.deliveryMethod === "Доставка" ? (
+              <span className={styles.subsCard__text}>
+                Доставка (опционально)
+                <span className={styles.subsCard__price}>240 ₽</span>
               </span>
             ) : (
-              ""
+              <span className={styles.subsCard__text}>
+                Забрать товар до{":"}
+                <span className={styles.subsCard__title}>
+                  {data?.deliveryMethod === "Самовывоз" ? "12.12.2024" : "null"}
+                </span>
+              </span>
             )}
+            <hr className="hr" />
             <span className={styles.subsCard__text}>
               К оплате{" "}
               <span className={styles.subsCard__price}>
@@ -61,9 +77,7 @@ const SubsCard = ({ data }) => {
             </span>
           </div>
         </div>
-        <Button variant="primary" size="lg">
-          Оплатить
-        </Button>
+        {renderButtons(data?.status)}
       </div>
     </div>
   );
