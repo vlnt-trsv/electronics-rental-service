@@ -1,4 +1,4 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 interface Product {
   id: number;
@@ -11,106 +11,26 @@ interface Product {
 
 interface ProductsState {
   selectedProduct: Product | null;
-  console: Product[];
-  projector: Product[];
-  laptop: Product[];
-  speaker: Product[];
+  categoryProducts: any;
 }
 
 const initialState: ProductsState = {
   selectedProduct: null,
-  console: [
-    {
-      id: 1,
-      name: "ps5",
-      title: "Playstation 5",
-      price: "от 990 ₽",
-      imageUrl: "ps5.jpg",
-      altText: "Playstation 5",
-    },
-    {
-      id: 2,
-      name: "ps5",
-      title: "Playstation 5",
-      price: "от 990 ₽",
-      imageUrl: "ps5.jpg",
-      altText: "Playstation 5",
-    },
-    {
-      id: 3,
-      name: "ps4",
-      title: "Playstation 4",
-      price: "от 990 ₽",
-      imageUrl: "ps4.jpg",
-      altText: "Playstation 4",
-    },
-    {
-      id: 4,
-      name: "ps4",
-      title: "Playstation 4",
-      price: "от 990 ₽",
-      imageUrl: "ps4.jpg",
-      altText: "Playstation 4",
-    },
-    {
-      id: 5,
-      name: "ps4",
-      title: "Playstation 4",
-      price: "от 990 ₽",
-      imageUrl: "ps4.jpg",
-      altText: "Playstation 4",
-    },
-    // Другие продукты
-  ],
-  projector: [
-    {
-      id: 1,
-      name: "projector",
-      title: "Dell",
-      price: "от 990 ₽",
-      imageUrl: "dell.jpg",
-      altText: "Dell",
-    },
-    {
-      id: 2,
-      name: "projector",
-      title: "Dell",
-      price: "от 990 ₽",
-      imageUrl: "dell.jpg",
-      altText: "Dell",
-    },
-  ],
-  laptop: [
-    {
-      id: 1,
-      name: "Omen",
-      title: "Omen",
-      price: "от 990 ₽",
-      imageUrl: "Omen.jpg",
-      altText: "Omen",
-    },
-  ],
-  speaker: [
-    {
-      id: 1,
-      name: "speaker",
-      title: "JBL [#011]",
-      price: "от 990 ₽",
-      imageUrl: "jbl.jpg",
-      altText: "jbl",
-    },
-  ],
+  categoryProducts: {},
 };
 
 const productsSlice = createSlice({
   name: "products",
   initialState,
   reducers: {
-    setSelectedProduct: (state, action: PayloadAction<Product | null>) => {
+    setSelectedProduct: (state, action) => {
       state.selectedProduct = action.payload;
+    },
+    setProducts: (state, action) => {
+      state.categoryProducts = action.payload;
     },
   },
 });
 
-export const { setSelectedProduct } = productsSlice.actions;
+export const { setSelectedProduct, setProducts } = productsSlice.actions;
 export default productsSlice.reducer;

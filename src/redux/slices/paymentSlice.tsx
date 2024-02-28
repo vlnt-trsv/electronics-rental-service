@@ -14,9 +14,9 @@ const paymentSlice = createSlice({
   name: "payment",
   initialState,
   reducers: {
-    addSubscription: (state, action: PayloadAction<any>) => {
-      state.subscriptions.push(action.payload);
-    },
+    // addSubscription: (state, action: PayloadAction<any>) => {
+    //   state.subscriptions.push(action.payload);
+    // },
     updateSubscription: (
       state,
       action: PayloadAction<{ id: string; updatedData: any }>

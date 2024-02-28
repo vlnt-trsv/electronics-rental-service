@@ -1,67 +1,92 @@
-import { createSlice } from "@reduxjs/toolkit";
-// import { ROLE } from "./role";
-import { loginUser, sendCode } from "../api";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axiosInstance from "@/utils/axiosInstance";
+import Cookies from "js-cookie";
 
-interface AuthState {
-  isAuthenticated: boolean;
-  user: {
-    _id: null;
-    email: null;
-    token: string | null;
-  };
-  error: null | string;
-}
+export const sendCode = createAsyncThunk(
+  "auth/sendCode",
+  async (email, { rejectWithValue }) => {
+    try {
+      const response = await axiosInstance.post("/login", {
+        email: email,
+      });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
 
-const initialState: AuthState = {
-  isAuthenticated: false,
-  user: {
-    _id: null,
-    email: null,
-    token: null,
-  },
-  error: null,
-};
+export const verifyCode = createAsyncThunk(
+  "auth/verifyCode",
+  async ({ email, code }, { rejectWithValue }) => {
+    try {
+      // Получение sessionId из cookies
+      const sessionId = Cookies.get("connect.sid");
+      console.log("Auth",sessionId);
+      console.log("Doc",document.cookie)
+
+      // Добавление sessionId в headers запроса
+      const config = {
+        headers: {
+          "X-SESSION-ID": sessionId || "",
+        },
+        withCredentials: true,
+      };
+
+      const response = await axiosInstance.post(
+        "login/verify",
+        { email, code },
+        config
+      );
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
 
 export const authSlice = createSlice({
   name: "auth",
-  initialState,
+  initialState: {
+    isAuthenticated: false,
+    user: {},
+    email: "",
+    error: null,
+    loading: false,
+  },
   reducers: {
-    login: (state, action) => {
-      state.isAuthenticated = true;
-      const { _id, email, token } = action.payload;
-      state.user = { _id, email, token };
+    setEmail: (state, action) => {
+      state.email = action.payload;
     },
-    logout: (state) => {
-      state.isAuthenticated = false;
-      state.user = { _id: null, email: null, token: null };
-    },
-    setUser: (state, action) => {
-      state.user.email = action.payload;
-    },
-    // Дополнительные редьюсеры по мере необходимости
   },
   extraReducers: (builder) => {
-    // Обработка результата запроса входа
-    builder.addCase(loginUser.fulfilled, (state, action) => {
-      const { _id, email, token } = action.payload.user;
-      state.isAuthenticated = true;
-      state.user = { _id, email, token };
-      state.error = null;
-
-      localStorage.setItem("authToken", token);
-    });
-    builder.addCase(loginUser.rejected, (state, action) => {
-      state.error = action.error.message;
-    });
-    
-    builder.addCase(sendCode.fulfilled, (state, action) => {
-      // Обработка успешного отправления кода, если нужно
-    });
-    builder.addCase(sendCode.rejected, (state, action) => {
-      state.error = action.error.message;
-    });
+    builder
+      .addCase(sendCode.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(sendCode.fulfilled, (state, action) => {
+        state.loading = false;
+      })
+      .addCase(sendCode.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(verifyCode.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(verifyCode.fulfilled, (state, action) => {
+        state.loading = false;
+        state.isAuthenticated = true;
+        state.user = action.payload;
+        state.email = action.payload.email;
+      })
+      .addCase(verifyCode.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      });
   },
 });
 
-export const { setUser, login } = authSlice.actions;
+export const { setEmail } = authSlice.actions;
 export default authSlice.reducer;
