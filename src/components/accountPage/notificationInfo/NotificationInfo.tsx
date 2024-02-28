@@ -1,25 +1,23 @@
 import Checkbox from "@/components/ui/checkbox/checkbox";
 import style from "./NotificationInfo.module.scss";
 import { useState } from "react";
+import { Switch } from "@radix-ui/react-switch";
+import { Label } from "@radix-ui/react-label";
 
 const NotificationInfo = () => {
-  const [checkboxes, setCheckboxes] = useState([
-    { label: "Уведомления о статусе заказа", checked: false },
-    { label: "Уведомления о статусе аренды", checked: true },
-    { label: "Уведомления об новых акциях", checked: true },
-    { label: "Уведомления о новых поступлениях товаров", checked: true },
-  ]);
+  const [isOrderStatusChecked, setIsOrderStatusChecked] = useState(true);
+  const [isRentalStatusChecked, setIsRentalStatusChecked] = useState(true);
+  const [isNewPromotionsChecked, setIsNewPromotionsChecked] = useState(true);
+  const [isNewArrivalsChecked, setIsNewArrivalsChecked] = useState(true);
 
-  const toggleCheckbox = (index: any) => {
-    setCheckboxes(
-      checkboxes.map((checkbox, i) => {
-        if (i === index) {
-          return { ...checkbox, checked: !checkbox.checked };
-        }
-        return checkbox;
-      })
-    );
-  };
+  const toggleOrderStatus = () =>
+    setIsOrderStatusChecked(!isOrderStatusChecked);
+  const toggleRentalStatus = () =>
+    setIsRentalStatusChecked(!isRentalStatusChecked);
+  const toggleNewPromotions = () =>
+    setIsNewPromotionsChecked(!isNewPromotionsChecked);
+  const toggleNewArrivals = () =>
+    setIsNewArrivalsChecked(!isNewArrivalsChecked);
 
   return (
     <div className={style.notify}>
@@ -32,14 +30,26 @@ const NotificationInfo = () => {
           Отмеченные параметры будут отображаться в виде уведомлений
         </span>
       </div>
-      {checkboxes.map((checkbox, index) => (
-        <Checkbox
-          key={checkbox.label}
-          label={`${checkbox.label} ${checkbox.checked}`}
-          checked={checkbox.checked}
-          onChange={() => toggleCheckbox(index)}
-        />
-      ))}
+      <Checkbox
+        label="Уведомления о статусе заказа"
+        checked={isOrderStatusChecked}
+        onChange={toggleOrderStatus}
+      />
+      <Checkbox
+        label="Уведомления о статусе аренды"
+        checked={isRentalStatusChecked}
+        onChange={toggleRentalStatus}
+      />
+      <Checkbox
+        label="Уведомления об новых акциях"
+        checked={isNewPromotionsChecked}
+        onChange={toggleNewPromotions}
+      />
+      <Checkbox
+        label="Уведомления о новых поступлениях товаров"
+        checked={isNewArrivalsChecked}
+        onChange={toggleNewArrivals}
+      />
     </div>
   );
 };

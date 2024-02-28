@@ -6,4 +6,10 @@
     font-size: 24px;
     font-weight: 700;
   }
+  &__cards {
+    display: flex;
+    // flex-direction: column;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
 }

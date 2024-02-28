@@ -8,7 +8,7 @@ import { ToastContainer } from "react-toastify";
 const EnterList = () => {
   return (
     <div className={styles.enter}>
-      <div className={`${styles.enter__wrapper} container`}>
+      <div className={`${styles.enter__wrapper} container `}>
         <img className={styles.enter__logo} src={whiteLogo} alt="Лого" />
         <Outlet />
         <p className={styles.enter__copyright}>2023 © All rights reserved.</p>

@@ -16,16 +16,7 @@
   &__subtitle {
     font-weight: 700;
   }
-  &__description {
-    &__social {
-      display: flex;
-      gap: 4px;
-      align-items: center;
-      & svg {
-        width: 24px;
-        height: 24px;
-      }
-    }
+  &__disription {
   }
 
   &__link,

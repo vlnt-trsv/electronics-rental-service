@@ -3,26 +3,12 @@
   flex-direction: column;
   gap: 16px;
   &__title {
-    font-size: 24px;
-    font-weight: 700;
   }
   &__filter {
     display: flex;
     gap: 16px;
   }
-  &__cards {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-  }
-  &__noCardsWrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  &__noCardsMessage {
-    border: 1px solid rgba(255, 255, 255, 0.16);
-    border-radius: 8px;
-    padding: 16px;
+  &__card {
+    width: 100%;
   }
 }

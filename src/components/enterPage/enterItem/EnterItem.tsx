@@ -1,19 +1,16 @@
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./EnterItem.module.scss";
 import EnterHookForm from "../enterHookForm/EnterHookForm";
-import { useSendCodeMutation } from "@/redux/slices/api/api";
 
 const EnterItem = () => {
   const navigate = useNavigate();
-  const [sendCode] = useSendCodeMutation();
 
-  const handleGetCode = async (data: { email: string }) => {
-    try {
-      const result = await sendCode(data.email);
-      console.log(result);
-      navigate(`/enterPage/enterClient/${data.email}`);
-    } catch (error) {
-      console.error("Ошибка при отправке кода:", error);
+  const handleGetCode = (data) => {
+    if (data.tel && /^[78]\d{10}$/.test(data.tel)) {
+      console.log(`Sending SMS to ${data.tel}`);
+      navigate(`/enterPage/enterClient/${data.tel}`);
+    } else {
+      console.log(`ERROR: sending SMS to ${data.tel}`);
     }
   };
 

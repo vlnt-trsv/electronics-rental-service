@@ -7,15 +7,21 @@ interface CheckboxProps {
 }
 
 const Checkbox: React.FC<CheckboxProps> = ({ label, checked, onChange }) => {
+  const handleToggle = () => {
+    onChange(!checked);
+  };
+
   return (
     <label className={styles.checkbox}>
       <input
         type="checkbox"
         className={styles.checkbox__input}
         checked={checked}
-        onChange={() => onChange(!checked)}
+        onChange={handleToggle}
       />
-      <span className={styles.checkbox__control} />
+      <span className={styles.checkbox__control}>
+        {checked && <span className={styles.checkbox__control__indicator} />}
+      </span>
       <span className={styles.checkbox__label}>{label}</span>
     </label>
   );

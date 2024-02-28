@@ -1,7 +1,4 @@
 import styles from "./ContactInfo.module.scss";
-import { FaTelegram } from "react-icons/fa";
-import { IoLogoWhatsapp } from "react-icons/io";
-import { AiFillInstagram } from "react-icons/ai";
 
 const ContactInfo = () => {
   return (
@@ -10,8 +7,8 @@ const ContactInfo = () => {
       <div className={styles.contact__wrapper}>
         <div className={styles.contact__link}>
           <span className={styles.contact__subtitle}>Связаться</span>
-          <span className={styles.contact__description}>+7 (924) 883-12-43</span>
-          <span className={styles.contact__description}>two2buddy@mail.ru</span>
+          <span className={styles.contact__decription}>+7 (924) 883-12-43</span>
+          <span className={styles.contact__decription}>two2buddy@mail.ru</span>
         </div>
         <div className={styles.contact__address}>
           <span className={styles.contact__subtitle}>Адрес</span>
@@ -22,38 +19,38 @@ const ContactInfo = () => {
         <div className={styles.contact__social}>
           <span className={styles.contact__subtitle}>Социальные сети</span>
           <a
-            className={styles.contact__description__social}
+            className={styles.contact__decription}
             href="https://t.me/two2buddy"
             target="_blank"
           >
-            <FaTelegram /> Telegram
+            Telegram
           </a>
           <a
-            className={styles.contact__description__social}
+            className={styles.contact__decription}
             href="https://t.me/two2buddy"
             target="_blank"
           >
-            <IoLogoWhatsapp /> Whats'app
+            Whats'app
           </a>
           <a
-            className={styles.contact__description__social}
+            className={styles.contact__decription}
             href="https://t.me/two2buddy"
             target="_blank"
           >
-            <AiFillInstagram /> Instagram
+            Instagram
           </a>
         </div>
         <div className={styles.contact__info}>
           <span className={styles.contact__subtitle}>Иная информация</span>
           <div className={styles.contact__legal}>
-            <span className={styles.contact__description}>Наименоваение:</span>
-            <span className={styles.contact__description}>
+            <span className={styles.contact__decription}>Наименоваение:</span>
+            <span className={styles.contact__decription}>
               ООО “Рент-девайс”
             </span>
           </div>
           <div className={styles.contact__inn}>
-            <span className={styles.contact__description}>ИНН:</span>
-            <span className={styles.contact__description}>534895439</span>
+            <span className={styles.contact__decription}>ИНН:</span>
+            <span className={styles.contact__decription}>534895439</span>
           </div>
         </div>
       </div>

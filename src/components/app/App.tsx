@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import "./App.scss";
+import ApiProvider from "@/context/ApiProvider.jsx";
 
 import Layout from "@/pages/Layout.tsx";
 import NotFound from "../notFound/NotFound.tsx";
@@ -20,31 +21,18 @@ import DevicesInfo from "../accountPage/devicesInfo/DevicesInfo.tsx";
 import SubsInfo from "../accountPage/subsInfo/SubsInfo.tsx";
 import ContactInfo from "../accountPage/contatsInfo/ContactInfo.tsx";
 import FaqInfo from "../accountPage/faqInfo/FaqInfo.tsx";
-import ProductInfo from "../accountPage/devicesInfo/productInfo/ProductInfo.tsx";
-import ProductRegistrationInfo from "../accountPage/devicesInfo/productRegistrationInfo/ProductRegistrationInfo.tsx";
-import ProductDetailsInfo from "../accountPage/devicesInfo/productDetailsInfo/ProductDetailsInfo.tsx";
-import PaymentPage from "../accountPage/devicesInfo/GetPayment/PaymentPage.tsx";
-import CategoriesInfo from "../accountPage/devicesInfo/categoriesInfo/CategoriesInfo.tsx";
-
-// Secure Routes
-import Admin from "../admin/Admin.tsx";
-import Auth from "../admin/auth/Auth.tsx";
-import PrivateRoute from "@/routes/PrivateRoute.tsx";
-
+import ProductInfo from "../accountPage/devicesInfo/chooseDevicesInfo/productInfo/ProductInfo.tsx";
+import ProductRegistrationInfo from "../accountPage/devicesInfo/chooseDevicesInfo/productInfo/productRegistrationInfo/ProductRegistrationInfo.tsx";
 
 function App() {
   return (
-    <Routes>
-      {/* Public Route */}
-      <Route index element={<Layout />} />
-
-      <Route path="/enterPage" element={<EnterPage />}>
-        <Route index element={<EnterItem />} />
-        <Route path="enterClient/:email" element={<EnterClient />} />
-      </Route>
-
-      {/* Private Route */}
-      <Route element={<PrivateRoute />}>
+    <ApiProvider>
+      <Routes>
+        <Route index element={<Layout />} />
+        <Route path="/enterPage" element={<EnterPage />}>
+          <Route index element={<EnterItem />} />
+          <Route path="enterClient/:phoneNumber" element={<EnterClient />} />
+        </Route>
         <Route path="/accountPage" element={<AccountPage />}>
           {/* Далее Персональная навигация - данные пользователя */}
           <Route path="personalDataInfo" element={<PersonalDataInfo />} />
@@ -55,35 +43,17 @@ function App() {
           <Route path="doc3" element={<Doc3Info />} />
           {/* Далее навигационные кнопки - основные */}
           <Route path="devices" element={<DevicesInfo />}>
-            <Route index element={<CategoriesInfo />} />
             <Route path=":categoryId" element={<ProductInfo />} />
-            <Route
-              path=":categoryId/:productId"
-              element={<ProductDetailsInfo />}
-            />
-            <Route
-              path=":categoryId/:productId/registration"
-              element={<ProductRegistrationInfo />}
-            />
+            <Route path="registration" element={<ProductRegistrationInfo />} />
           </Route>
           <Route path="subs" element={<SubsInfo />} />
           <Route path="payments" element={<PaymentsInfo />} />
           <Route path="contacts" element={<ContactInfo />} />
           <Route path="faq" element={<FaqInfo />} />
         </Route>
-      </Route>
-
-      {/* Public Route */}
-      {/* <Route path="/getPayments" element={<PaymentPage />} /> */}
-      <Route path="*" element={<NotFound />} />
-
-      {/* Private Route */}
-      <Route element={<PrivateRoute />}>
-        <Route path="/admin" element={<Admin />}>
-          <Route path="auth" element={<Auth />}></Route>
-        </Route>
-      </Route>
-    </Routes>
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </ApiProvider>
   );
 }
 
