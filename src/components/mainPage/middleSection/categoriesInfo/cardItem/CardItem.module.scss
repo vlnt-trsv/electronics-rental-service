@@ -1,35 +1,70 @@
-.card {
-  display: flex;
-  width: 348px;
-  flex-direction: column;
-  gap: var(--g_16, 16px);
-  flex: 1 0 0;
+.card__wrapper {
+  overflow-y: visible;
+}
 
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  gap: var(--g_16, 16px);
   border-radius: var(--r_16, 16px);
-  background: #1d1d1d;
+  background: #fff;
+  justify-content: space-between;
+  color: #1e1a1a;
+  width: 315px;
+  height: 200px;
+  transition: all 0.2s ease-out;
+  overflow: hidden;
+  
+  // Изменения для активного состояния
+  &.active {
+    background: #ffdfbd;
+    width: 400px;
+    height: 200px;
+  }
+
+  // Стили для текста
+  &__title,
+  &__subtitle {
+    opacity: 0.5;
+  }
+
+  // Стили для активного текста
+  &.active &__title,
+  &.active &__subtitle {
+    opacity: 1;
+  }
 
   &__image {
-    height: 256px;
-    flex-shrink: 0;
-    align-self: stretch;
+    position: absolute;
     object-fit: cover;
-
-    border-radius: var(--r_16, 16px);
-    background: rgba($color: white, $alpha: 0.1);
+    right: 0;
+    transform: rotate(20deg);
+    z-index: 2;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: auto;
+    height: 100%;
   }
 
   &__content {
+    position: relative;
+    justify-content: space-between;
     display: flex;
     flex-direction: column;
     gap: 16px;
-    padding: 0 16px 16px 16px;
+    padding: 16px;
+    z-index: 1;
   }
 
   &__title {
+    font-size: 24px;
     font-weight: 700;
   }
 
   &__subtitle {
+    font-size: 24px;
   }
 
   &__description {

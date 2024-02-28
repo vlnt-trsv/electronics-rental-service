@@ -1,50 +1,43 @@
-import { useState } from "react";
-import { useParams, useNavigate, Link } from "react-router-dom";
-
-import axios from "axios";
-
+import { useEffect, useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import styles from "./EnterClient.module.scss";
 import { Input } from "@/components/ui/input";
+import { useVerifyCodeMutation } from "@/redux/slices/api/api";
+import { useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { loadUser, setUser } from "@/redux/slices/user/userSlice";
 
 const EnterClient = () => {
-  const { phoneNumber } = useParams();
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
+  const { email } = useParams();
   const [codeInputs, setCodeInputs] = useState(["", "", "", ""]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [verifyCode, { isLoading, isError }] = useVerifyCodeMutation();
 
   const handleInputChange = (index, value) => {
     const newCodeInputs = [...codeInputs];
     newCodeInputs[index] = value;
     setCodeInputs(newCodeInputs);
 
-    if (index === 3 && value !== "") {
-      const enteredCode = newCodeInputs.join("");
-      console.log("Entered Code:", enteredCode);
-
-      setIsLoading(true);
-
-      //   axios
-      //     .post("/api/send-sms", { phoneNumber, code: enteredCode })
-      //     .then((response) => {
-      //       console.log("SMS sent successfully:", response.data);
-      //       setIsLoading(false);
-      //       navigate("/nextPage");
-      //     })
-      //     .catch((error) => {
-      //       console.error("Failed to send SMS:", error);
-      //       setIsLoading(false);
-      //     });
-      // }
-
-      setTimeout(() => {
-        setIsLoading(false);
-        navigate("/accountPage/personalDataInfo");
-      }, 2000);
+    if (value !== "" && /^[0-9]$/.test(value)) {
+      if (index < 3) {
+        document.getElementById(`codeInput${index + 1}`).focus();
+      } else {
+        const enteredCode = parseInt(newCodeInputs.join(""), 10);
+        handleVerifyCode(email, enteredCode);
+      }
     }
+  };
 
-    if (index < 3 && value !== "") {
-      document.getElementById(`codeInput${index + 1}`).focus();
+  const handleVerifyCode = async (email: string, enteredCode: number) => {
+    try {
+      const result = await verifyCode({ email, code: enteredCode });
+      const user = result?.data?.user
+      dispatch(setUser(user));
+      console.log(user);
+      navigate("/accountPage");
+    } catch (error) {
+      console.error("Ошибка при отправке кода:", error);
     }
   };
 
@@ -62,41 +55,21 @@ const EnterClient = () => {
   return (
     <div className={styles.enter}>
       <span className={styles.enter__title}>Введите код</span>
-      <Input
-        placeholder={phoneNumber}
-        disabled
-        className={styles.enter__number}
-      />
-      {isLoading ? (
-        // <div className={styles.loader}>Loading...</div>
-        <>
-          <form className={styles.enter__form__complete}>
-            {/* <Input
-              className={styles.enter__input}
-              autoComplete="none"
-              type="text"
-            /> */}
-            <div className={`${styles.enter__form__complete} complete`}>
-              L
-            </div>
-          </form>
-        </>
-      ) : (
-        <form className={styles.enter__form}>
-          {codeInputs.map((value, index) => (
-            <Input
-              className={styles.enter__input}
-              autoComplete="none"
-              key={index}
-              id={`codeInput${index}`}
-              type="text"
-              value={value}
-              onChange={(e) => handleInputChange(index, e.target.value)}
-              onKeyDown={(e) => e.key === "Backspace" && handleBackspace(index)}
-            />
-          ))}
-        </form>
-      )}
+      <Input placeholder={email} disabled className={styles.enter__number} />
+      <form className={styles.enter__form}>
+        {codeInputs.map((value, index) => (
+          <Input
+            className={styles.enter__input}
+            autoComplete="none"
+            key={index}
+            id={`codeInput${index}`}
+            type="text"
+            value={value}
+            onChange={(e) => handleInputChange(index, e.target.value)}
+            onKeyDown={(e) => e.key === "Backspace" && handleBackspace(index)}
+          />
+        ))}
+      </form>
       <Link to={"/enterPage"} className={styles.enter__back}>
         Вернуться на страницу ввода телефона
       </Link>

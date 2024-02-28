@@ -1,89 +1,38 @@
 .upper {
-  padding: 16px;
-  // width: 1920px;
-  background: rgba($color: white, $alpha: 0.1);
-  border-radius: 0 0 64px 64px;
-  //   height: 600px;
-  padding-top: 160px;
-  padding-bottom: 80px;
-  overflow: hidden;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  min-height: 600px;
+  // background: #1e1a1a; // Вставить изображение
+  background: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(255, 255, 255, 0) 25%
+    ),
+    url("@/assets/imgs/xbox_8192_qhd.png");
+  background-origin: border-box;
+  background-repeat: no-repeat;
+  background-position: center 40%;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 32px;
   margin-bottom: 128px;
 
-  &__wrapper {
-    display: flex;
-    width: 100%;
-    align-items: center;
-    min-height: 500px;
-  }
-
-  &__gif {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 50%;
-    height: 510px;
-    box-sizing: border-box;
-    overflow: hidden;
-    &__img {
-      // height: 512px;
-      max-width: 180%;
-    }
-  }
-
   &__cta {
+    gap: 16px;
     display: flex;
     flex-direction: column;
-    padding: var(--p_16, 16px);
-    align-items: flex-start;
-    gap: 16px;
-
-    &__title {
-      width: 544px;
-      flex-shrink: 0;
-
-      font-family: "Zuume", sans-serif;
-      font-size: 96px;
-      line-height: 75%; /* 72px */
-
-      // background: url(../../../assets/imgs/6ee1f7e1b5e5809fc884730c5e127e49.gif),
-      //   white 100% / cover no-repeat;
-      // background-attachment: fixed;
-      // background-clip: text;
-      // -webkit-background-clip: text;
-      // color: transparent;
-    }
-    &__subtitle {
-      color: white;
-      width: 500px;
-    }
-    &__button {
-      display: flex;
-      gap: 16px;
-      &__rent,
-      &__trial {
-        display: flex;
-        min-width: 256px;
-        min-height: 64px;
-        padding: var(--p_8);
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-
-        border-radius: var(--r_8);
-        background: var(--bg-button);
-
-        color: var(--c-button-text);
-        font-weight: 700;
-        text-transform: uppercase;
-      }
-      &__rent {
-      }
-      &__trial {
-        &:disabled {
-          opacity: 0.5;
-          cursor: not-allowed;
-        }
-      }
-    }
+  }
+  &__title {
+    font-size: 32px;
+    font-weight: 700;
+  }
+  &__subtitle {
+    font-size: 96px;
+    font-weight: 700;
+    text-transform: uppercase;
   }
 }

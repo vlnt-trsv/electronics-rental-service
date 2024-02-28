@@ -1,0 +1,7 @@
+.product {
+    &__cards {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+    }
+}

@@ -16,7 +16,8 @@
       &__text {
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        justify-content: flex-end;
+        align-items: flex-end;
         height: 100%;
         opacity: 0.5;
       }
@@ -25,16 +26,22 @@
     }
     &__social {
       display: flex;
-      gap: 16px;
+      height: 64px;
+      width: 64px;
+      padding: var(--p_16, 16px);
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      border-radius: var(--r_16, 16px);
+      background: rgba(46, 47, 51, 0.5);
+      transition: background 0.1s ease-out;
+      cursor: pointer;
+      &:hover {
+        background: rgba(46, 47, 51, 0.8);
+      }
       &__img {
-        display: flex;
-        height: 96px;
-        width: 96px;
-        justify-content: center;
-        align-items: center;
-
-        border-radius: var(--r_16, 16px);
-        background: #1d1d1d;
+        width: 32px;
+        height: 32px;
       }
     }
   }

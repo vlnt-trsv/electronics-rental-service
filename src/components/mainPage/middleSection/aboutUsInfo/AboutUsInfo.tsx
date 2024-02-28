@@ -3,23 +3,30 @@ import styles from "./AboutUsInfo.module.scss";
 const AboutUsInfo = () => {
   return (
     <div id="aboutUs" className={styles.about}>
-      <span className={styles.about__title}>О нас</span>
+      <span className={styles.about__title}>В чём особенность?</span>
+      <span className={styles.about__subtitle}>Особенности то особенные</span>
       <div className={styles.about__wrapper}>
         <div className={styles.about__info}>
-          <span className={styles.about__info__title}>10 минут</span>
-          <span className={styles.about__info__subtitle}>Занимает оформление аренды</span>
+          <span className={styles.about__info__title}>
+            Краткосрочная аренда
+          </span>
+          <span className={styles.about__info__subtitle}>
+            Не нужно покупать за полную стоимость, чтобы ощущить новые ощущения
+          </span>
         </div>
         <div className={styles.about__info}>
-          <span className={styles.about__info__title}>25+</span>
-          <span className={styles.about__info__subtitle}>Активных арендаторов</span>
+          <span className={styles.about__info__title}>Низкий ценник</span>
+          <span className={styles.about__info__subtitle}>
+            Думаете это дорого? Забудьте про это, ведь у нас приятная ценновая
+            политика
+          </span>
         </div>
         <div className={styles.about__info}>
-          <span className={styles.about__info__title}>4</span>
-          <span className={styles.about__info__subtitle}>Категорий товаров</span>
-        </div>
-        <div className={styles.about__info}>
-          <span className={styles.about__info__title}>Более 50</span>
-          <span className={styles.about__info__subtitle}>Электроники, хватит всем</span>
+          <span className={styles.about__info__title}>Быстрое оформление </span>
+          <span className={styles.about__info__subtitle}>
+            Всё что от вас нужно, так это ваш паспорт или другой документ
+            личности
+          </span>
         </div>
       </div>
     </div>

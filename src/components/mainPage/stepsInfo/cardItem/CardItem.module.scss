@@ -1,0 +1,65 @@
+.card {
+  padding: 32px;
+  background: #fff;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 16px;
+  transition: all .5s ease-out;
+  &__inProgress {
+    opacity: 0.5;
+  }
+  &__end {
+    background: #73c344;
+  }
+
+  &__head {
+    display: flex;
+    justify-content: space-between;
+  }
+  &__title {
+    font-size: 32px;
+    font-weight: 400;
+    color: #000;
+    &__inProgress {
+      opacity: 0.5;
+    }
+    &__done {
+      color: #0059ff;
+    }
+    &__end {
+      color: #fff;
+    }
+  }
+  &__check {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #fff;
+    background: #000;
+    border-radius: 32px;
+    padding: 8px 16px;
+    &__inProgress {
+      opacity: 0.5;
+    }
+    &__done {
+      background: #0059ff;
+      color: #fff;
+    }
+    &__end {
+      background: rgba($color: #000000, $alpha: 0.5);
+      color: #fff;
+    }
+  }
+  &__description {
+    color: #000;
+    font-size: 24px;
+    font-weight: 400;
+    opacity: 0.5;
+    &__end {
+      opacity: 1;
+      color: #fff;
+    }
+  }
+}

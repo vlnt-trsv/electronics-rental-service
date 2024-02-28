@@ -21,13 +21,12 @@ const EnterHookForm = ({ formClassName, handleGetCode }) => {
   });
 
   const onSubmit: SubmitHandler<IShippingField> = (data) => {
-    handleGetCode(data);
-    console.log(data);
+    handleGetCode({ email: data.email });
   };
 
   return (
     <form className={cn(formClassName)} onSubmit={handleSubmit(onSubmit)}>
-      <HookFormInput
+      {/* <HookFormInput
         register={register}
         errors={errors}
         type="nickname"
@@ -38,23 +37,11 @@ const EnterHookForm = ({ formClassName, handleGetCode }) => {
         maxLength="12"
         minLength="4"
         // pattern=""
-      />
-      {/* ТЕЛЕФОН */}
-      {/* <HookFormInput
-        register={register}
-        errors={errors}
-        type="tel"
-        formInput={styles.form}
-        required
-        input={styles.form__input}
-        placeholder="Телефон"
-        maxLength="12"
-        // pattern=""
       /> */}
       <HookFormInput
         register={register}
         errors={errors}
-        type="tel"
+        type="email"
         formInput={styles.form}
         required
         input={styles.form__input}

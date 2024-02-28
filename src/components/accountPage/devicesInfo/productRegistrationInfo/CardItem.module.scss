@@ -1,0 +1,90 @@
+.cardUp {
+  display: flex;
+  padding: 16px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  width: 100%;
+
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 8px;
+  &__row {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    width: 100%;
+  }
+  &__column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+  }
+  &__justify {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  &__subtitle {
+    opacity: 0.5;
+  }
+  &__image {
+    min-width: 250px;
+    height: 250px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 8px;
+    overflow: hidden;
+    .img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+  }
+  &__text {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+}
+.hr {
+  border: none;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.16);
+  width: 100%;
+}
+
+.title {
+  font-weight: 700;
+}
+
+.cardDown {
+  display: flex;
+  padding: 16px;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  width: 500px;
+
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 8px;
+
+  &__upper {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  &__button,
+  &__link {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    width: 100%;
+  }
+}
+
+.cardItem {
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+}

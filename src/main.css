@@ -7,6 +7,7 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
 }
 
 * {
@@ -28,22 +29,38 @@
   justify-content: space-between;
 }
 
+.container2 {
+  max-width: 1920px;
+  margin-left: 16px;
+  margin-right: 16px;
+
+  justify-content: space-between;
+}
+
 .grid-container {
   display: grid;
   grid-template-columns: 500px 1fr;
   grid-template-rows: auto auto;
   grid-gap: 16px;
   max-width: 1920px;
-  margin: 16px 16px;
+  margin: 16px;
+  align-items: flex-start;
 }
 
 .grid-header {
   grid-column: span 2; /* Занимает обе колонки */
 }
 
+.grid-aside {
+  height: calc(100dvh - 146px);
+  /* min-height: calc(100dvh - 146px);  */
+}
+
 .grid-aside,
 .grid-main {
   grid-column: span 1; /* Занимают по одной колонке */
+  /* height: calc(100dvh - 146px);  */
+  /* min-height: calc(100dvh - 146px); */
 }
 
 a {
@@ -52,10 +69,16 @@ a {
 
 body {
   margin: 0;
-  /* display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh; */
+  height: 100%;
+  width: 100%;
+}
+
+hr {
+  border: none;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.16);
+  width: 100%;
+  margin: 0;
 }
 
 button {
@@ -74,6 +97,7 @@ button:hover {
   background: rgba(51, 213, 223, 0.3);
   outline: 2px solid rgba(255, 255, 255, 0.4);
 }
+
 
 /* @tailwind base;
 @tailwind components;
