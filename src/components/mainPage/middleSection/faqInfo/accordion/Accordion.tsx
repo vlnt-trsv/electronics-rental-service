@@ -4,36 +4,47 @@ import classNames from "classnames";
 import { ChevronDownIcon } from "@radix-ui/react-icons";
 import "./Accordion.scss";
 
-const AccordionDemo = () => (
+// const accordionData = [
+//   {
+//     id: "item-1",
+//     question: "Is it accessible?",
+//     answer: "Yes. It adheres to the WAI-ARIA design pattern."
+//   },
+//   {
+//     id: "item-2",
+//     question: "Is it unstyled?",
+//     answer: "Yes. It's unstyled by default, giving you freedom over the look and feel."
+//   },
+//   {
+//     id: "item-3",
+//     question: "Can it be animated?",
+//     answer: "Yes! You can animate the Accordion with CSS or JavaScript."
+//   }
+// ];
+
+type AccordionItem = {
+  id: string;
+  question: string;
+  answer: string;
+};
+
+type AccordionProps = {
+  accordionData: AccordionItem[];
+};
+
+const AccordionDemo = ({ accordionData }: AccordionProps) => (
   <Accordion.Root
     className="AccordionRoot"
     type="single"
     defaultValue="item-1"
     collapsible
   >
-    <Accordion.Item className="AccordionItem" value="item-1">
-      <AccordionTrigger>Is it accessible?</AccordionTrigger>
-      <AccordionContent>
-        Yes. It adheres to the WAI-ARIA design pattern.
-      </AccordionContent>
-    </Accordion.Item>
-
-    <Accordion.Item className="AccordionItem" value="item-2">
-      <AccordionTrigger>Is it unstyled?</AccordionTrigger>
-      <AccordionContent>
-        Yes. It's unstyled by default, giving you freedom over the look and
-        feel.
-      </AccordionContent>
-    </Accordion.Item>
-
-    <Accordion.Item className="AccordionItem" value="item-3">
-      <AccordionTrigger>Can it be animated?</AccordionTrigger>
-      <Accordion.Content className="AccordionContent">
-        <div className="AccordionContentText">
-          Yes! You can animate the Accordion with CSS or JavaScript.
-        </div>
-      </Accordion.Content>
-    </Accordion.Item>
+    {accordionData.map(({ id, question, answer }) => (
+      <Accordion.Item key={id} className="AccordionItem" value={id}>
+        <AccordionTrigger>{question}</AccordionTrigger>
+        <AccordionContent>{answer}</AccordionContent>
+      </Accordion.Item>
+    ))}
   </Accordion.Root>
 );
 

@@ -21,8 +21,7 @@ const EnterHookForm = ({ formClassName, handleGetCode }) => {
   });
 
   const onSubmit: SubmitHandler<IShippingField> = (data) => {
-    handleGetCode(data);
-    // console.log(data);
+    handleGetCode({ email: data.email });
   };
 
   return (

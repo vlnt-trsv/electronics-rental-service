@@ -41,6 +41,11 @@
     background: #ff36368f;
     color: #fff;
   }
+  &__success {
+    border-radius: 8px;
+    background: #4caf50;
+    color: #fff;
+  }
 }
 
 .size {
@@ -52,6 +57,9 @@
   }
   &__lg {
     padding: 8px;
+  }
+  &__s48 {
+    padding: 12.5px;
   }
   &__icon {
     padding: 2px;

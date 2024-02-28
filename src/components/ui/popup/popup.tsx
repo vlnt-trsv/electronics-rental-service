@@ -1,30 +1,40 @@
-import { useState } from "react";
+import { useRef } from "react";
 import styles from "./popup.module.scss";
+import { Button } from "../button";
 
-const Popup = ({ isOpen, onClose, children }) => {
-  // Состояние для управления видимостью всплывающего окна
-  const [isVisible, setIsVisible] = useState(isOpen);
+interface PopupProps {
+  isOpen: boolean;
+  onClose: () => void;
+  onConfirm: () => void;
+  children: React.ReactNode;
+}
 
-  // Обработчик для закрытия всплывающего окна
-  const handleClose = () => {
-    setIsVisible(false);
-    onClose && onClose();
-  };
+const Popup: React.FC<PopupProps> = ({
+  isOpen,
+  onClose,
+  onConfirm,
+  children,
+}) => {
+  // Ref для контейнера попапа
+  const popupRef = useRef<HTMLDivElement>(null);
 
-  // Если isVisible равно false, всплывающее окно не будет отображаться
-  if (!isVisible) {
+  // Если попап не открыт, не рендерим его
+  if (!isOpen) {
     return null;
   }
 
   return (
     <div className={styles.popup}>
-      <div className={styles.popup__container}>
-        <div className={styles.popup__wrapper}>
-          <div className={styles.popup__content}>
-            <button className={styles.closeButton} onClick={handleClose}>
-              Закрыть
-            </button>
-            {children}
+      <div className={styles.popup__container} ref={popupRef}>
+        <div className={styles.popup__content}>
+          {children}
+          <div className={styles.popup__form}>
+            <Button size={"lg"} variant={"ghost"} onClick={onClose}>
+              Отменить
+            </Button>
+            <Button size={"lg"} variant={"danger"} onClick={onConfirm}>
+              Подтвердить
+            </Button>
           </div>
         </div>
       </div>

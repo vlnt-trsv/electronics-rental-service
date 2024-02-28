@@ -29,18 +29,24 @@
 
   &__image {
     width: 50%;
+    height: 155px;
     border: 1px solid rgba(255, 255, 255, 0.16);
     border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
+
     .img {
+      min-width: 100%;
+      min-height: 100%;
     }
   }
 
   &__info {
     display: flex;
     gap: 16px;
+    height: 50%;
     &__item {
       display: flex;
       flex-direction: column;
@@ -99,4 +105,7 @@
 }
 .statusCompleted {
   color: rgb(136, 241, 255);
+}
+.statusCancel {
+  color: rgb(108, 185, 196);
 }

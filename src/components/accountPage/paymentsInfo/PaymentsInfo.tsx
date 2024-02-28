@@ -1,52 +1,63 @@
-import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 import styles from "./PaymentsInfo.module.scss";
 import Pagination from "./paginationItem/PaginationItem";
 import Table from "./tableItem/TableItem";
+import { useGetPaymentsQuery } from "@/redux/slices/api/api";
+import Cookies from "js-cookie";
 
 const PaymentsInfo = () => {
-  const subscriptions = useSelector((state) => state.subs.subscriptions);
-
-  // Функция для получения оплаченных подписок
-  const getPaidSubscriptions = (subscriptions) => {
-    return subscriptions.filter(
-      (sub) =>
-        sub.status === "Оплачено" ||
-        sub.status === "Завершено" ||
-        sub.status === "В аренде"
-    );
-  };
-
-  const paidSubscriptions = getPaidSubscriptions(subscriptions);
-
   const itemsPerPage = 5;
   const [currentPage, setCurrentPage] = useState(1);
 
-  const handlePageChange = (newPage) => {
+  const userId = JSON.parse(Cookies.get("connect.user"));
+  const {
+    data: payments,
+    isLoading,
+    isError,
+  } = useGetPaymentsQuery(userId._id);
+  console.log(payments?.payments[0]);
+
+  const handlePageChange = (newPage: any) => {
     setCurrentPage(newPage);
   };
 
-  const totalPages = Math.ceil(paidSubscriptions.length / itemsPerPage);
-  const paginatedSubscriptions = paidSubscriptions.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
-  );
+  // Инициализация totalPages и paginatedSubscriptions после загрузки данных
+  const [totalPages, setTotalPages] = useState(0);
+  const [paginatedPayments, setPaginatedPayments] = useState([]);
 
-  console.log(paginatedSubscriptions);
+  useEffect(() => {
+    if (payments?.payments && Array.isArray(payments?.payments)) {
+      setTotalPages(Math.ceil(payments?.payments.length / itemsPerPage));
+      setPaginatedPayments(
+        payments?.payments.slice(
+          (currentPage - 1) * itemsPerPage,
+          currentPage * itemsPerPage
+        )
+      );
+    }
+  }, [payments, currentPage, itemsPerPage]);
+
+  const notice = () => {
+    if (isLoading) {
+      return <div>Загрузка...</div>;
+    }
+    if (isError || !Array.isArray(payments?.payments)) {
+      return <div>Ошибка при загрузке данных</div>;
+    }
+    return <div>Нет совершенных платежей</div>;
+  };
 
   return (
     <div className={styles.payments}>
       <div className={styles.payments__title}>Платежи</div>
-      {paidSubscriptions.length === 0 ? (
+      {!Array.isArray(payments?.payments) || paginatedPayments.length === 0 ? (
         <div className={styles.payments__wrapper}>
-          <div className={styles.payments__noPayments}>
-            Нет совершенных платежей
-          </div>
+          <div className={styles.payments__noPayments}>{notice()}</div>
         </div>
       ) : (
         <>
           <div className={styles.payments__table}>
-            <Table data={paginatedSubscriptions} />
+            <Table data={paginatedPayments} />
           </div>
           <div className={styles.payments__pagination}>
             <Pagination

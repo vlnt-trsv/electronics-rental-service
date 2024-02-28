@@ -10,6 +10,8 @@ const getStatusClassName = (status) => {
       return styles.statusInRent; // класс для "Оплачено"
     case "Завершено":
       return styles.statusCompleted; // класс для "Оплачено"
+    case "Отменено":
+      return styles.statusCancel; // класс для "Оплачено"
   }
 };
 

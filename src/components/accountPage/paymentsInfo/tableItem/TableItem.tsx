@@ -1,4 +1,3 @@
-import shortid from "shortid";
 import {
   Table,
   TableBody,
@@ -10,7 +9,12 @@ import {
 } from "@/components/ui/table/table";
 
 interface Invoice {
+  _id: string;
+  amount: number;
   invoice: string;
+  rental: {
+    deliveryMethod: string;
+  };
   status: string;
   deliveryMethod: string;
   totalPrice: number;
@@ -21,15 +25,17 @@ type TableProps = {
   data: Invoice[];
 };
 
-const generateInvoiceNumber = () => {
-  return shortid.generate();
-};
-
 const TableItem: React.FC<TableProps> = ({ data }) => {
   const totalAmount = data.reduce(
-    (total, invoice) => total + invoice.totalPrice,
+    (total, payments) => total + payments.amount,
     0
   );
+
+  // Функция для усечения _id от 18 до 24 символов
+  const shortenId = (id: string) => {
+    return id.substring(18, 24).toUpperCase();
+  };
+
   return (
     <Table>
       <TableHeader>
@@ -41,19 +47,19 @@ const TableItem: React.FC<TableProps> = ({ data }) => {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {data.map((invoice) => (
-          <TableRow key={invoice.invoice}>
-            <TableCell>{generateInvoiceNumber()}</TableCell>
-            <TableCell>{invoice.status || "null"}</TableCell>
-            <TableCell>{invoice.deliveryMethod || "null"}</TableCell>
-            <TableCell>{parseFloat(invoice.totalPrice)} ₽</TableCell>
+        {data.map((payments) => (
+          <TableRow key={payments?._id}>
+            <TableCell>{shortenId(payments._id)}</TableCell>
+            <TableCell>{payments?.status || "null"}</TableCell>
+            <TableCell>{payments?.rental?.deliveryMethod || "null"}</TableCell>
+            <TableCell>{payments?.amount?.toFixed(2)} ₽</TableCell>
           </TableRow>
         ))}
       </TableBody>
       <TableFooter>
         <TableRow>
           <TableCell colSpan={3}>Общая сумма</TableCell>
-          <TableCell>{parseFloat(totalAmount)} ₽</TableCell>
+          <TableCell>{totalAmount?.toFixed(2)} ₽</TableCell>
         </TableRow>
       </TableFooter>
     </Table>

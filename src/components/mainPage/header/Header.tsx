@@ -1,19 +1,29 @@
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styles from "./Header.module.scss";
+import { Button } from "@/components/ui/button";
 
 const Header = () => {
   return (
-    <div className={styles.header}>
+    <div className={`${styles.header} container2`}>
       <div className={styles.header__logo}>
-        <img className={styles.header__logo__img} src="" alt="logo" />
+        <span className={styles.header__logo__text}>T2B</span>
       </div>
       <div className={styles.header__nav}>
-        <a  className={styles.header__nav__link} href="main">Главная</a>
-        <a className={styles.header__nav__link} href="aboutUs">О нас</a>
-        <a className={styles.header__nav__link} href="contact">Контакты</a>
-        <a className={styles.header__nav__link} href="faq">Вопрос & Ответы</a>
+        <a className={styles.header__nav__link} href="#aboutUs">
+          О нас
+        </a>
+        <a className={styles.header__nav__link} href="#contact">
+          Контакты
+        </a>
+        <a className={styles.header__nav__link} href="#faq">
+          Вопрос & Ответы
+        </a>
       </div>
-      <NavLink to={'/enterPage'} className={styles.header__button}>Арендовать</NavLink>
+      <Link to={"/enterPage"}>
+        <Button size={"s48"} variant={"primary"}>
+          Войти
+        </Button>
+      </Link>
     </div>
   );
 };

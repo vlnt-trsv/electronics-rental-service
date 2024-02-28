@@ -31,14 +31,19 @@ import Admin from "../admin/Admin.tsx";
 import Auth from "../admin/auth/Auth.tsx";
 import PrivateRoute from "@/routes/PrivateRoute.tsx";
 
+
 function App() {
   return (
     <Routes>
+      {/* Public Route */}
       <Route index element={<Layout />} />
+
       <Route path="/enterPage" element={<EnterPage />}>
         <Route index element={<EnterItem />} />
-        <Route path="enterClient" element={<EnterClient />} />
+        <Route path="enterClient/:email" element={<EnterClient />} />
       </Route>
+
+      {/* Private Route */}
       <Route element={<PrivateRoute />}>
         <Route path="/accountPage" element={<AccountPage />}>
           {/* Далее Персональная навигация - данные пользователя */}
@@ -67,10 +72,16 @@ function App() {
           <Route path="faq" element={<FaqInfo />} />
         </Route>
       </Route>
+
+      {/* Public Route */}
       {/* <Route path="/getPayments" element={<PaymentPage />} /> */}
       <Route path="*" element={<NotFound />} />
-      <Route path="/admin" element={<Admin />}>
-        <Route path="auth" element={<Auth />}></Route>
+
+      {/* Private Route */}
+      <Route element={<PrivateRoute />}>
+        <Route path="/admin" element={<Admin />}>
+          <Route path="auth" element={<Auth />}></Route>
+        </Route>
       </Route>
     </Routes>
   );

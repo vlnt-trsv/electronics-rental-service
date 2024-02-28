@@ -1,4 +1,3 @@
-
 import styles from "./GreetingInfo.module.scss";
 
 const GreetingInfo = () => {

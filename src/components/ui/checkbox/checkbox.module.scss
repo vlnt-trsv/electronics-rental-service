@@ -1,43 +1,44 @@
 .checkbox {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  &__input {
+    opacity: 0;
+    position: absolute;
+    margin: 0;
+  }
+
+  &__control {
+    width: 40px;
+    height: 20px;
+    background-color: #ccc;
+    border-radius: 4px;
+    position: relative;
+    transition: background-color 0.2s;
     display: flex;
     align-items: center;
-    cursor: pointer;
-  
-    &__input {
-      opacity: 0;
-      position: absolute;
-      margin: 0;
-    }
-  
-    &__control {
-      width: 40px; // Ширина ползунка
-      height: 20px; // Высота ползунка
-      background-color: #ccc; // Цвет фона в выключенном состоянии
-      border-radius: 10px; // Округление углов для формы ползунка
-      position: relative;
-      transition: background-color 0.2s;
-      display: flex;
-      align-items: center;
-      justify-content: flex-start; // Выравнивание кружка по левому краю
-    }
-  
-    &__input:checked + &__control {
-      background-color: #4caf50; // Цвет фона включенного состоянии
-      justify-content: flex-end; // Выравнивание кружка по правому краю
-    }
-  
-    &__input:checked + &__control::after {
-      content: ''; // Добавляем кружок только когда чекбокс активен
-      width: 18px; // Диаметр кружка
-      height: 18px; // Диаметр кружка
-      background-color: #fff; // Цвет кружка
-      border-radius: 50%; // Делаем кружок круглым
+
+    &:after {
+      content: '';
+      padding: 10px;
+      background-color: #fff;
+      border-radius: 4px;
       transition: transform 0.2s;
-    }
-  
-    &__label {
-      margin-left: 8px; // Расстояние между текстом и ползунком
-      color: #fff; // Цвет текста
+      transform: translateX(0); // Начальное положение кружка
     }
   }
-  
+
+  &__input:checked + &__control {
+    background-color: #4caf50;
+
+    &:after {
+      transform: translateX(21px); // Перемещаем кружок вправо при активации
+    }
+  }
+
+  &__label {
+    margin-left: 8px;
+    color: #fff;
+  }
+}

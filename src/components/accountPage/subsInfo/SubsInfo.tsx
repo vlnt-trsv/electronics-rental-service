@@ -2,55 +2,55 @@ import { Button } from "@/components/ui/button";
 import styles from "./SubsInfo.module.scss";
 import SubsCard from "./SubsCard";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  setSelectedFilter,
-  setSubscriptionStatus,
-} from "@/redux/slices/subsSlice";
+import { setSelectedFilter } from "@/redux/slices/subsSlice";
+import { useGetRentalQuery } from "@/redux/slices/api/api";
+import Cookies from "js-cookie";
 
 const SubsInfo = () => {
   const dispatch = useDispatch();
-  const { subscriptions, subscriptionFilter, selectedFilter } = useSelector(
-    (state) => state.subs
-  );
-  console.log("Данные карточки", subscriptions);
+  const { selectedFilter } = useSelector((state: any) => state.subs);
+  const userId = JSON.parse(Cookies.get("connect.user"));
+
+  const { data: rental, isError, isLoading } = useGetRentalQuery(userId._id);
+  console.log("RENTAL", rental?.rentals);
 
   const size = "lg";
-  const areSubscriptionsAvailable = subscriptions.length > 0;
+  const areSubscriptionsAvailable = rental?.rentals?.length > 0;
 
-  //Функция для вычисления варианта кнопки
-  const getButtonVariant = (status) => {
+  // Функция для вычисления варианта кнопки
+  const getButtonVariant = (status: any) => {
     if (!areSubscriptionsAvailable) return "default disabled";
     return selectedFilter === status ? "primary" : "";
   };
 
-  const subscriptionId = subscriptions[0]?.id;
-  const handleStatusChange = () => {
-    // Вызов dispatch при нажатии на кнопку или другое событие
-    dispatch(setSubscriptionStatus({ id: subscriptionId, status: "Завершено" }));
-  };
+  // Получаем уникальные статусы из аренд
+  const statuses = Array.from(
+    new Set(rental?.rentals?.map((rental: any) => rental.status))
+  );
 
   return (
     <div className={styles.subs}>
       <span className={styles.subs__title}>Подписки</span>
-      <div>
-        <Button variant={"outline"} size={"lg"} onClick={handleStatusChange}>
-          Изменить статус
-        </Button>
-      </div>
       <div className={styles.subs__filter}>
-        {areSubscriptionsAvailable &&
-          subscriptionFilter.map((status) => (
-            <Button
-              key={status}
-              size={size}
-              variant={getButtonVariant(status)}
-              onClick={() => dispatch(setSelectedFilter(status))}
-            >
-              {status}
-            </Button>
-          ))}
+        <Button
+          size={size}
+          variant={getButtonVariant("Все")}
+          onClick={() => dispatch(setSelectedFilter("Все"))}
+        >
+          Все
+        </Button>
+        {statuses.map((status: any) => (
+          <Button
+            key={status}
+            size={size}
+            variant={getButtonVariant(status)}
+            onClick={() => dispatch(setSelectedFilter(status))}
+          >
+            {status}
+          </Button>
+        ))}
       </div>
-      {subscriptions.length === 0 ? (
+      {rental?.rentals?.length === 0 ? (
         <div className={styles.subs__noCardsWrapper}>
           <div className={styles.subs__noCardsMessage}>
             Нет доступных подписок
@@ -59,15 +59,21 @@ const SubsInfo = () => {
       ) : (
         <>
           <div className={styles.subs__cards}>
-            {subscriptions
-              .filter((subscription) =>
-                selectedFilter === "Все"
-                  ? true
-                  : subscription.status === selectedFilter
-              )
-              .map((subscription) => (
-                <SubsCard key={subscription.id} data={subscription} />
-              ))}
+            {isLoading ? (
+              <p>Loading subs...</p>
+            ) : isError ? (
+              <p>Error loading subs</p>
+            ) : (
+              rental?.rentals
+                .filter((subscription: any) =>
+                  selectedFilter === "Все"
+                    ? true
+                    : subscription.status === selectedFilter
+                )
+                ?.map((subscription: any) => (
+                  <SubsCard key={subscription._id} data={subscription} />
+                ))
+            )}
           </div>
         </>
       )}

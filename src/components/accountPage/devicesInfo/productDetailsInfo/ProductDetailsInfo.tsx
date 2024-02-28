@@ -8,17 +8,28 @@ import { setSelectedSubscriptionOption } from "@/redux/slices/subscriptionOption
 
 const ProductDetailsInfo = () => {
   const subscriptionOptions = useSelector(
-    (state) => state.subscriptionOptions.subscriptionOptions
+    (state: any) =>
+      state.products.selectedProduct?.subscriptionOptions
   );
   const selectedSubscription = useSelector(
-    (state) => state.subscriptionOptions.selectedSubscription
+    (state: any) => state.subscriptionOptions.selectedSubscription
   );
+
+  const selectedCategory = useSelector(
+    (state: any) => state.categories.selectedCategory?.name
+  );
+  const selectedProducts = useSelector(
+    (state: any) => state.products.selectedProduct?.name
+  );
+  const prouductImage = useSelector(
+    (state: any) => state.products.selectedProduct?.deviceImage
+  );
+
   const dispatch = useDispatch();
-  const handleOptionSelect = (option) => {
-    // Используйте dispatch для отправки нового значения в Redux
+  const handleOptionSelect = (option: any) => {
     dispatch(
       setSelectedSubscriptionOption({
-        id: option.id,
+        id: option._id,
         duration: option.duration,
         price: option.price,
       })
@@ -26,24 +37,34 @@ const ProductDetailsInfo = () => {
     console.log(option);
   };
 
-  const notify = () => toast.warn("Сначала выберите подписку!");
+  const getImageUrl = (fileName: string) => {
+    return `http://localhost:8000/${fileName}`;
+  };
 
   return (
     <div className={styles.productDetails}>
       <div className={styles.productDetails__image}>
-        <img className={styles.img} src="" alt="ps5" />
+        <img
+          className={styles.img}
+          src={getImageUrl(prouductImage)}
+          alt="ps5"
+        />
       </div>
       <div className={styles.productDetails__payments}>
-        <span className={styles.productDetails__subtitle}>Приставка</span>
-        <span className={styles.productDetails__title}>Playstation 5</span>
-        {subscriptionOptions.map((option) => (
+        <span className={styles.productDetails__subtitle}>
+          {selectedCategory || "null"}
+        </span>
+        <span className={styles.productDetails__title}>
+          {selectedProducts || "null"}
+        </span>
+        {subscriptionOptions?.map((option: any) => (
           <Button
-            key={option.id}
-            variant={selectedSubscription?.id === option.id ? "primary" : ""}
+            key={option._id}
+            variant={selectedSubscription?.id === option?._id ? "primary" : ""}
             className={styles.productDetails__button}
             onClick={() => handleOptionSelect(option)}
           >
-            <span>{option.duration}</span>
+            <span>{option.duration} дней</span>
             <span>{option.price} ₽</span>
           </Button>
         ))}
@@ -58,7 +79,7 @@ const ProductDetailsInfo = () => {
           </Link>
         ) : (
           <Button
-            onClick={notify}
+            onClick={() => toast.warn("Сначала выберите подписку!")}
             className={styles.productDetails__button}
           >
             Оформить подписку

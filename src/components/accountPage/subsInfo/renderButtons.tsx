@@ -1,15 +1,64 @@
 import { Button } from "@/components/ui/button";
 import styles from "./SubsCard.module.scss";
-import { useDispatch } from "react-redux";
-import { removeSubscription } from "@/redux/slices/subsSlice";
+// import { useDispatch } from "react-redux";
 import { BsQrCodeScan } from "react-icons/bs";
-import Popup from "@/components/ui/popup/popup";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+// import Popup from "@/components/ui/popup/popup";
+import {
+  useCancelRentalMutation,
+  useDeleteRentalMutation,
+  usePayRentalMutation,
+} from "@/redux/slices/api/api";
 
-const renderButtons = (status) => {
-  const dispatch = useDispatch();
-  const handleRemoveSubscription = (subscriptionId) => {
-    // Вызов действия Redux для удаления подписки
-    dispatch(removeSubscription({ id: subscriptionId }));
+const renderButtons = (status: any, rentalId: any) => {
+  // const dispatch = useDispatch();
+
+  const [payRental] = usePayRentalMutation();
+  const [cancelRental] = useCancelRentalMutation();
+  const [deleteRental] = useDeleteRentalMutation();
+
+  const handlePaymentClick = async () => {
+    try {
+      const paymentDetails = {
+        cardNumber: "1234567812345678",
+        expiryDate: "12/24",
+        cvv: "123",
+        nameOnCard: "Valentin Tarasov",
+      };
+      const rentalData = { rentalId, paymentDetails };
+      await toast.promise(payRental(rentalData).unwrap(), {
+        pending: "Оплата аренды...",
+        success: "Аренда успешно оплачена!",
+        error: "Ошибка при оплате аренды. Попробуйте еще раз.",
+      });
+    } catch (error) {
+      console.error("Ошибка при оплате аренды:", error);
+    }
+  };
+
+  const handleCancelClick = async () => {
+    try {
+      await toast.promise(cancelRental(rentalId).unwrap(), {
+        pending: "Отмена аренды...",
+        success: "Аренда успешно отменена!",
+        error: "Ошибка при отмене аренды. Попробуйте еще раз.",
+      });
+    } catch (error) {
+      console.error("Ошибка при отмене аренды:", error);
+    }
+  };
+
+  const handleDeleteClick = async () => {
+    try {
+      await toast.promise(deleteRental(rentalId).unwrap(), {
+        pending: "Удаление аренды...",
+        success: "Аренда успешно удалена!",
+        error: "Ошибка при удалении аренды. Попробуйте еще раз.",
+      });
+    } catch (error) {
+      console.error("Ошибка при удалении аренды:", error);
+    }
   };
 
   switch (status) {
@@ -20,6 +69,7 @@ const renderButtons = (status) => {
             className={styles.subsCard__button}
             variant="primary"
             size="lg"
+            onClick={handlePaymentClick}
           >
             Оплатить подписку
           </Button>
@@ -27,6 +77,7 @@ const renderButtons = (status) => {
             className={styles.subsCard__button}
             variant="danger"
             size="lg"
+            onClick={handleCancelClick}
           >
             Отменить подписку
           </Button>
@@ -46,6 +97,7 @@ const renderButtons = (status) => {
             className={styles.subsCard__button}
             variant="danger"
             size="lg"
+            onClick={handleCancelClick}
           >
             Отменить подписку
           </Button>
@@ -65,6 +117,7 @@ const renderButtons = (status) => {
             className={styles.subsCard__button}
             variant="danger"
             size="lg"
+            onClick={handleDeleteClick}
           >
             Удалить
           </Button>
@@ -73,13 +126,13 @@ const renderButtons = (status) => {
     case "Оплачено":
       return (
         <div className={styles.subsCard__buttons}>
-          <Button
+          {/* <Button
             className={`${styles.subsCard__button} ${styles.subsCard__button__qr}`}
             variant="primary"
             size="lg"
           >
             <BsQrCodeScan />
-          </Button>
+          </Button> */}
           <Button
             className={styles.subsCard__button}
             variant="primary"
@@ -87,12 +140,26 @@ const renderButtons = (status) => {
           >
             Продлить подписку
           </Button>
-          <Button
+          {/* <Button
             className={styles.subsCard__button}
             variant="danger"
             size="lg"
+            onClick={handleCancelClick}
           >
             Отменить подписку
+          </Button> */}
+        </div>
+      );
+    case "Отменено":
+      return (
+        <div className={styles.subsCard__buttons}>
+          <Button
+            className={styles.subsCard__button}
+            variant="default"
+            size="lg"
+            onClick={handleDeleteClick}
+          >
+            Удалить
           </Button>
         </div>
       );

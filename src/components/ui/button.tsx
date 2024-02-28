@@ -19,11 +19,13 @@ const buttonVariants = cva(
         link: styles.variant__link,
         disabled: styles.variant__disabled,
         danger: styles.variant__danger,
+        success: styles.variant__success,
       },
       size: {
         default: styles.size__default,
         sm: styles.size__sm,
         lg: styles.size__lg,
+        s48: styles.size__s48,
         icon: styles.size__icon,
       },
     },

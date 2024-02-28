@@ -7,13 +7,24 @@ $aside-secondary-background: var(--secondary-15, rgba(51, 213, 223, 0.15));
   flex-direction: column;
   gap: 16px;
   padding: 16px;
-  height: calc(100vh - 146px);
-  max-height: calc(1080px - 146px);
   overflow: auto;
+  justify-content: space-between;
+  height: 100%;
 
   border-radius: $aside-border-radius;
   border: 1px solid var(--outline, rgba(255, 255, 255, 0.1));
   background: $aside-background;
+
+  &__icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
 
   &__profile {
     display: flex;
@@ -38,8 +49,12 @@ $aside-secondary-background: var(--secondary-15, rgba(51, 213, 223, 0.15));
       width: 100px;
       height: 100px;
       border-radius: 8px;
-      opacity: 0.1;
-      background: var(--text, #eaeaea);
+      overflow: hidden;
+      .image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
     }
   }
 
@@ -48,7 +63,6 @@ $aside-secondary-background: var(--secondary-15, rgba(51, 213, 223, 0.15));
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
-    flex: 1 0 0;
     align-self: stretch;
 
     .username {
@@ -75,14 +89,15 @@ $aside-secondary-background: var(--secondary-15, rgba(51, 213, 223, 0.15));
 
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.5s ease-out;
+    transition: margin-top 0.5s ease, max-height 0.5s ease;
 
     &-expanded {
+      margin-top: 16px;
+      transition: max-height 0.5s ease;
       max-height: 500px;
     }
   }
 
-  &__dropdown,
   &__button-second,
   &__button-nav {
     display: flex;
@@ -104,25 +119,43 @@ $aside-secondary-background: var(--secondary-15, rgba(51, 213, 223, 0.15));
   }
 
   &__dropdown {
-    justify-content: center;
+    margin-left: auto;
+    margin-top: auto;
     background: none;
+    padding: 0;
     border: none;
     opacity: 0.5;
-    transition: opacity 0.2s ease-out;
+    width: 24px;
+    height: 24px;
 
+    transition: opacity 0.2s ease-out;
+  }
+
+  &__dropdown--flipped180 {
+    transform: rotate(90deg);
+    transition: opacity 0.2s ease, transform 0.5s ease;
     &:hover {
+      transform: rotate(75deg);
+      opacity: 1;
+    }
+  }
+  &__dropdown--flipped0 {
+    transform: rotate(0deg);
+    transition: opacity 0.2s ease, transform 0.5s ease;
+    &:hover {
+      transform: rotate(15deg);
       opacity: 1;
     }
   }
 
   &__button-nav {
+    flex: 0 20%;
+    flex-grow: 1;
     display: flex;
-    min-width: 225px;
-    height: 88px;
     justify-content: center;
     align-items: center;
-    padding: 0;
-    transition: background .2s ease-out;
+    padding: 32px;
+    transition: transform 0.2s ease-out, background 0.2s ease-out;
 
     &:last-child {
       opacity: 0.5;
@@ -132,6 +165,7 @@ $aside-secondary-background: var(--secondary-15, rgba(51, 213, 223, 0.15));
 
     &:hover {
       background: rgba(51, 213, 223, 0.3);
+      transform: scale(1.02);
     }
   }
   a {
@@ -142,8 +176,8 @@ $aside-secondary-background: var(--secondary-15, rgba(51, 213, 223, 0.15));
     display: flex;
     align-items: flex-start;
     gap: 16px;
-    flex-wrap: wrap;
     width: 100%;
+    flex-wrap: wrap;
   }
 
   &__link {
@@ -172,19 +206,26 @@ $aside-secondary-background: var(--secondary-15, rgba(51, 213, 223, 0.15));
     }
   }
 
-  // &__exit {
-  //   display: flex;
-  //   width: 48px;
-  //   height: 48px;
-  //   flex-direction: column;
-  //   justify-content: center;
-  //   align-items: center;
+  &__exit {
+    display: flex;
+    width: 48px;
+    height: 48px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: background 0.2s ease-out;
 
-  //   border-radius: 8px;
-  //   background: var(--secondary-15, rgba(51, 213, 223, 0.15));
-  //   &-img {
-  //   }
-  // }
+    cursor: pointer;
+    border-radius: 8px;
+    background: var(--secondary-15, rgba(51, 213, 223, 0.15));
+    &-icon {
+      width: 24px;
+      height: 24px;
+    }
+    &:hover {
+      background: rgba(51, 213, 223, 0.3);
+    }
+  }
 }
 
 ::-webkit-scrollbar {

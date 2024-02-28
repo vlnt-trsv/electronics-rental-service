@@ -1,10 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { memo, useCallback, useState } from "react";
+import { SetStateAction, memo, useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./CardItem.module.scss";
 import { addSubscription } from "@/redux/slices/subsSlice";
-// import SuccesfullyPayment from "../GetPayment/GetPayment";
+import { useCreateRentalMutation } from "@/redux/slices/api/api";
 
 const CardUp = memo(
   ({
@@ -13,45 +13,42 @@ const CardUp = memo(
     selectedCategory,
     selectedSubscription,
     totalPrice,
-  }) => (
+    getImage,
+  }: any) => (
     <div className={styles.cardUp}>
-      <span className={styles.title}>Аренда приставки</span>
+      <span className={styles.title}>Аренда девайса</span>
       <hr className={styles.hr} />
-      <div className={styles.cardUp__info}>
+      <div className={styles.cardUp__row}>
         <div className={styles.cardUp__image}>
-          <img className={styles.img} src="" alt="img" />
+          <img className={styles.img} src={getImage} alt="img" />
         </div>
-        <div className={styles.cardUp__text__title}>
+        <div className={styles.cardUp__column}>
           <div className={styles.cardUp__text}>
             <span className={styles.cardUp__subtitle}>
-              {selectedCategory?.title}
+              {selectedCategory?.name || "null"}
             </span>
             <span className={styles.cardUp__title}>
-              {selectedProduct?.title}
+              {selectedProduct?.name || "null"}
             </span>
           </div>
-          <div className={styles.cardUp__text}>
-            <span>Подписка на {selectedSubscription?.duration}</span>
-            <span>{selectedSubscription?.price} ₽</span>
+          <div className={styles.cardUp__justify}>
+            <div className={styles.cardUp__text}>
+              <span>
+                Подписка на {selectedSubscription?.duration || "null"} дней
+              </span>
+              <span>{selectedSubscription?.price || "null"} ₽</span>
+            </div>
+            <hr className={styles.hr} />
+            <div className={styles.cardUp__text}>
+              <span>Доставка</span>
+              {visible ? "240 ₽" : "Нет"}
+            </div>
+            <div className={styles.cardUp__text}>
+              <span>К оплате</span>
+              <span>{totalPrice} ₽</span>
+            </div>
           </div>
         </div>
-      </div>
-      <hr className={styles.hr} />
-      {/* <div>
-        <Button>Использовать бонусы</Button>
-        <span>Введите количество бонусов</span>
-      </div> */}
-      {/* <div>
-        <span>Бонусы</span>
-        <span>0 ₽</span>
-      </div> */}
-      <div className={styles.cardUp__text}>
-        <span>Доставка</span>
-        {visible ? "240 ₽" : "Нет"}
-      </div>
-      <div className={styles.cardUp__text}>
-        <span>К оплате</span>
-        <span>{totalPrice} ₽</span>
       </div>
     </div>
   )
@@ -62,10 +59,8 @@ const CardDown = memo(
     deliveryMethod,
     onDeliveryMethodChange,
     selectedProduct,
-    selectedCategory,
     selectedSubscription,
-    totalPrice,
-  }) => {
+  }: any) => {
     // const navigate = useNavigate();
     // const handlePayment = useCallback(() => {
     //   console.log("Оплата прошла");
@@ -74,15 +69,24 @@ const CardDown = memo(
 
     const dispatch = useDispatch();
 
-    const handlePaymentClick = () => {
-      const subscriptionData = {
-        product: selectedProduct,
-        categories: selectedCategory,
-        subscriptionOption: selectedSubscription,
-        deliveryMethod: deliveryMethod,
-        totalPrice: totalPrice,
-      };
-      dispatch(addSubscription(subscriptionData));
+    const userData = useSelector((state: any) => state.user.user);
+
+    const [createRental] = useCreateRentalMutation();
+
+    const handlePaymentClick = async () => {
+      try {
+        const rentalData: any = {
+          userId: userData?._id,
+          deviceId: selectedProduct._id,
+          subscriptionOptionsId: selectedSubscription.id,
+          deliveryMethod: deliveryMethod,
+        };
+        console.log(rentalData);
+
+        await createRental(rentalData).unwrap();
+      } catch (error) {
+        console.error("Ошибка при отправке аренды:", error);
+      }
     };
 
     return (
@@ -141,18 +145,27 @@ const CardDown = memo(
 const CardItem = () => {
   const [deliveryMethod, setDeliveryMethod] = useState("Доставка"); // Состояние для выбора способа получения
   const selectedProduct = useSelector(
-    (state) => state.products.selectedProduct
+    (state: any) => state.products.selectedProduct
   );
+  console.log("PRODUCTS", selectedProduct);
   const selectedCategory = useSelector(
-    (state) => state.categories.selectedCategory
+    (state: any) => state.categories.selectedCategory
   );
+  console.log("CATEGORY", selectedCategory);
   const selectedSubscription = useSelector(
-    (state) => state.subscriptionOptions.selectedSubscription
+    (state: any) => state.subscriptionOptions.selectedSubscription
   );
 
-  const handleDeliveryMethodChange = useCallback((method) => {
-    setDeliveryMethod(method);
-  }, []);
+  const handleDeliveryMethodChange = useCallback(
+    (method: SetStateAction<string>) => {
+      setDeliveryMethod(method);
+    },
+    []
+  );
+
+  const getImageUrl = (fileName: string) => {
+    return `http://localhost:8000/${fileName}`;
+  };
 
   // Вычисление общей цены на основе выбранных данных
   const productPrice = selectedSubscription?.price || 0;
@@ -164,6 +177,7 @@ const CardItem = () => {
       <CardUp
         visible={deliveryMethod === "Доставка"}
         selectedProduct={selectedProduct}
+        getImage={getImageUrl(selectedProduct?.deviceImage)}
         selectedCategory={selectedCategory}
         selectedSubscription={selectedSubscription}
         totalPrice={totalPrice}
@@ -176,7 +190,6 @@ const CardItem = () => {
         totalPrice={totalPrice}
         onDeliveryMethodChange={handleDeliveryMethodChange}
       />
-      {/* <SuccesfullyPayment /> */}
     </div>
   );
 };
