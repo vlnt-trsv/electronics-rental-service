@@ -3,17 +3,17 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./components/app/App.tsx";
 import "./main.css";
 import { Provider } from "react-redux";
-import { store } from "./redux/store";
-import ApiProvider from "./context/ApiProvider.tsx";
+import { PersistGate } from "redux-persist/integration/react";
+import { store, persistor } from "./redux/store";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   // <React.StrictMode>
-  <BrowserRouter>
-    <Provider store={store}>
-      <ApiProvider>
+  <Provider store={store}>
+    <PersistGate loading={"Loading..."} persistor={persistor}>
+      <BrowserRouter>
         <App />
-      </ApiProvider>
-    </Provider>
-  </BrowserRouter>
+      </BrowserRouter>
+    </PersistGate>
+  </Provider>
   // </React.StrictMode>
 );
