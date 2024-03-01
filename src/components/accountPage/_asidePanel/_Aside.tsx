@@ -1,7 +1,6 @@
 import { useCallback, useState } from "react";
 import styles from "./_Aside.module.scss";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import { IoExitOutline } from "react-icons/io5";
 import { RiSettings3Fill } from "react-icons/ri";
 import { RiAccountCircleFill } from "react-icons/ri";
@@ -13,13 +12,13 @@ import {
 } from "@/redux/slices/api/api";
 import Cookies from "js-cookie";
 
-import eye from "@/assets/imgs/eye.gif";
 import moprh from "@/assets/imgs/morph.gif";
 
 const _Aside = () => {
   const navigate = useNavigate();
   const [moreInfo, setMoreInfo] = useState(false);
-  const userId = JSON.parse(Cookies.get("connect.user"));
+  
+  const userId = JSON.parse(Cookies.get("connect.user") || "");
 
   // const userData = useSelector((state: any) => state.persistedReducer.user.user);
   const [logout] = useLogoutMutation();
