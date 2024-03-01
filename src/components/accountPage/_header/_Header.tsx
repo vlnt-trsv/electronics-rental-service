@@ -1,21 +1,23 @@
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import styles from "./_Header.module.scss";
-
-import whiteLogo from "@/assets/imgs/white-logo.svg";
+import { IoNotifications } from "react-icons/io5";
 
 const _Header = () => {
   return (
     <div className={`${styles.header}`}>
       <div className={styles.header__logo}>
-        {/* <img src={whiteLogo} alt="logo" /> */}
-        <span className={styles.header__logo__span}>two2buddy</span>
+        <span className={styles.header__logo__span}>T2B</span>
       </div>
-      <Link to={"/accountPage"}>Личный кабинет</Link>
-      <div className={styles.header__user}>
-        <img src="" alt="user" />
+      <div className={styles.header__nav}>
+        {/* <Link className={styles.header__account} to={"/accountPage"}>
+          acc
+        </Link> */}
+        <div className={styles.header__notify}>
+          <IoNotifications className={styles.header__icon} />
+        </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default _Header
+export default _Header;

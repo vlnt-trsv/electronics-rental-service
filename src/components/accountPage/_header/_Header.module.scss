@@ -18,12 +18,23 @@ $aside-background: var(--foreground, rgba(255, 255, 255, 0.05));
       font-weight: 700;
     }
   }
-  &__user {
+  &__nav {
+    display: flex;
+    gap: 16px;
+  }
+  &__notify,
+  &__account {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     width: 46px;
     height: 46px;
-
+    background: var(--secondary-15, rgba(51, 213, 223, 0.15));
     border-radius: 8px;
-    opacity: 0.25;
-    background: var(--text, #eaeaea);
+  }
+  &__icon {
+    width: 24px;
+    height: 24px;
   }
 }

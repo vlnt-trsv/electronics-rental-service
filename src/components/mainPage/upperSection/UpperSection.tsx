@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import styles from "./UpperSection.module.scss";
-import PSBG from "@/assets/imgs/ps5S.png";
+import { Link } from "react-router-dom";
 
 const UpperSection = () => {
   return (
@@ -9,9 +9,11 @@ const UpperSection = () => {
         <span className={styles.upper__title}>
           Арендуйте на срок, который вам нужен
         </span>
-        <Button size={"s48"} variant={"primary"}>
-          Арендовать
-        </Button>
+        <Link to={"/accountPage/devices"}>
+          <Button style={{ width: "100%" }} size={"s48"} variant={"primary"}>
+            Арендовать
+          </Button>
+        </Link>
       </div>
       <span className={styles.upper__subtitle}>Two2Buddy</span>
     </div>

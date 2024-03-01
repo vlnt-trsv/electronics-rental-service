@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import styles from "./Header.module.scss";
 import { Button } from "@/components/ui/button";
+import Cookies from "js-cookie";
 
 const Header = () => {
   return (
@@ -19,11 +20,21 @@ const Header = () => {
           Вопрос & Ответы
         </a>
       </div>
-      <Link to={"/enterPage"}>
-        <Button size={"s48"} variant={"primary"}>
-          Войти
-        </Button>
-      </Link>
+      {Cookies.get("connect.user") ? (
+        <Link to={"/accountPage"}>
+          {" "}
+          <Button size={"s48"} variant={"primary"}>
+            Личный аккаунт
+          </Button>
+        </Link>
+      ) : (
+        <Link to={"/enterPage"}>
+          {" "}
+          <Button size={"s48"} variant={"primary"}>
+            Войти
+          </Button>
+        </Link>
+      )}
     </div>
   );
 };

@@ -1,82 +1,163 @@
 import styles from "./PersonalDataInfo.module.scss";
 import { Input } from "@/components/ui/input";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import Popup from "@/components/ui/popup/popup";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   useDeleteUserMutation,
+  useGetUserByIdQuery,
   useUpdateUserMutation,
 } from "@/redux/slices/api/api";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 
+interface FormData {
+  firstName: any;
+  lastName: any;
+  patronymic: any;
+  nickname: any;
+  email: any;
+  phone: any;
+  consentToPrivacyPolicy: any;
+  consentToDataProcessing: any;
+  consentToReceiveNotifications: any;
+  [key: string]: any;
+}
+
 const PersonalDataInfo: React.FC = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const userData = useSelector((state: any) => state.user.user);
+
+  // const userData = useSelector((state: any) => state.user.user);
+  const userId = JSON.parse(Cookies.get("connect.user") || "");
+  const { data: userData } = useGetUserByIdQuery(userId._id);
+
   const [updateUser] = useUpdateUserMutation();
   const [deleteUser] = useDeleteUserMutation();
   const navigate = useNavigate();
 
-  const [formData, setFormData] = useState({
-    firstName: userData?.firstName || "",
-    lastName: userData?.lastName || "",
-    patronymic: userData?.patronymic || "",
-    email: userData?.email || "",
-    phone: userData?.phone || "",
-    consentToPrivacyPolicy: userData?.consentToPrivacyPolicy || false,
-    consentToDataProcessing: userData?.consentToDataProcessing || false,
-    consentToReceiveNotifications:
-      userData?.consentToReceiveNotifications || false,
+  const [formData, setFormData] = useState<FormData>({
+    firstName: "",
+    lastName: "",
+    patronymic: "",
+    nickname: "",
+    email: "",
+    phone: "",
+    consentToPrivacyPolicy: false,
+    consentToDataProcessing: false,
+    consentToReceiveNotifications: false,
   });
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  useEffect(() => {
+    if (userData) {
+      setFormData({
+        firstName: userData?.user?.firstName || "",
+        lastName: userData?.user?.lastName || "",
+        patronymic: userData?.user?.patronymic || "",
+        nickname: userData?.user?.nickname || "",
+        email: userData?.user?.email || "",
+        phone: userData?.user?.phone || "",
+        consentToPrivacyPolicy: userData?.user?.consentToPrivacyPolicy || false,
+        consentToDataProcessing:
+          userData?.user?.consentToDataProcessing || false,
+        consentToReceiveNotifications:
+          userData?.user?.consentToReceiveNotifications || false,
+      });
+    }
+  }, [userData]);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: type === "checkbox" ? checked : value,
-    }));
-  };
-
-  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, checked } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: checked,
-    }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    try {
-      if (formData.consentToPrivacyPolicy && formData.consentToDataProcessing) {
-        const result = await toast.promise(
-          updateUser({ userId: userData._id, updatedData: formData }),
-          {
-            pending: "Сохранение данных...",
-            success: `Данные успешно сохранились ${new Date().toLocaleDateString()} в ${new Date().toLocaleTimeString()}`,
-            error: "Ошибка при сохранении данных",
-          }
-        );
-        console.log(result);
-      } else {
-        toast.warn("Проставьте обе галочки перед сохранением.");
-      }
-    } catch (error) {
-      console.error("Error:", error);
+    if (type === "checkbox") {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: checked,
+      }));
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
     }
   };
 
-  const handleDelete = () => {
+  const hasFormDataChanged = () => {
+    return Object.keys(formData).some((key) => formData[key] !== userData[key]);
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (formData.consentToPrivacyPolicy && formData.consentToDataProcessing) {
+      if (hasFormDataChanged()) {
+        try {
+          await toast.promise(
+            updateUser({
+              userId: userData?.user?._id,
+              updatedData: formData,
+            }).unwrap(),
+            {
+              pending: "Сохранение данных...",
+              success: `Данные успешно сохранены ${new Date().toLocaleDateString()} в ${new Date().toLocaleTimeString()}`,
+              error: "Ошибка при сохранении данных",
+            }
+          );
+        } catch (error) {
+          console.error("Error:", error);
+        }
+      } else {
+        toast.warn("Данные не изменились.");
+      }
+    } else {
+      toast.warn("Проставьте обе галочки перед сохранением.");
+    }
+  };
+
+  const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
     setIsPopupOpen(true);
   };
+
   const confirmDelete = async () => {
-    await deleteUser(userData._id);
-    Cookies.remove("connect.user");
-    Cookies.remove("connect.sid");
-    navigate("/enterPage");
+    try {
+      await deleteUser(userData?.user?._id).unwrap();
+      Cookies.remove("connect.user");
+      Cookies.remove("connect.sid");
+      navigate("/enterPage");
+    } catch (error) {
+      console.error("Error:", error);
+      toast.error("Ошибка при удалении аккаунта.");
+    } finally {
+      setIsPopupOpen(false);
+    }
   };
+
+  const fullName = [
+    { name: "firstName", placeholder: "Имя", type: "text" },
+    { name: "lastName", placeholder: "Фамилия", type: "text" },
+    { name: "patronymic", placeholder: "Отчество", type: "text" },
+  ];
+
+  const extra = [
+    { name: "nickname", placeholder: "Никнейм", type: "text" },
+    { name: "email", placeholder: "Email", type: "email", disabled: true },
+    { name: "phone", placeholder: "Телефон", type: "tel" },
+  ];
+
+  const checkboxFields = [
+    {
+      name: "consentToPrivacyPolicy",
+      label: "Я ознакомлен с Политикой Конфиденциальности",
+    },
+    {
+      name: "consentToDataProcessing",
+      label: "Я даю Согласие на обработку персональных данных",
+    },
+    {
+      name: "consentToReceiveNotifications",
+      label: "Я хочу получать информационные и рекламные уведомления",
+    },
+  ];
 
   return (
     <>
@@ -91,91 +172,51 @@ const PersonalDataInfo: React.FC = () => {
           </span>
         </div>
         <div className={styles.personal__form__fullName}>
-          <Input
-            type="text"
-            name="firstName"
-            value={formData?.firstName}
-            className={styles.personal__input}
-            onChange={handleInputChange}
-            required
-            validationEnabled
-            autoComplete="none"
-            placeholder="Имя"
-          />
-          <Input
-            type="text"
-            name="lastName"
-            value={formData?.lastName}
-            className={styles.personal__input}
-            onChange={handleInputChange}
-            required
-            validationEnabled
-            autoComplete="none"
-            placeholder="Фамилия"
-          />
-          <Input
-            type="text"
-            name="patronymic"
-            value={formData?.patronymic}
-            className={styles.personal__input}
-            onChange={handleInputChange}
-            autoComplete="none"
-            placeholder="Отчество"
-          />
+          {fullName.map((field) => (
+            <Input
+              key={field.name}
+              type={field.type}
+              name={field.name}
+              value={formData[field.name]}
+              className={styles.personal__input}
+              onChange={handleChange}
+              required
+              validationEnabled
+              autoComplete="none"
+              placeholder={field.placeholder}
+            />
+          ))}
         </div>
         <div className={styles.personal__form__extra}>
-          <Input
-            type="email"
-            name="email"
-            value={formData?.email}
-            className={styles.personal__input}
-            onChange={handleInputChange}
-            validationEnabled
-            autoComplete="none"
-            placeholder="Email"
-            disabled
-          />
-          <Input
-            type="tel"
-            name="phone"
-            value={formData?.phone}
-            className={styles.personal__input}
-            onChange={handleInputChange}
-            required
-            validationEnabled
-            autoComplete="none"
-            placeholder="Телефон"
-          />
+          {extra.map((field) => (
+            <Input
+              key={field.name}
+              type={field.type}
+              name={field.name}
+              value={formData[field.name]}
+              className={styles.personal__input}
+              onChange={handleChange}
+              required
+              validationEnabled
+              autoComplete="none"
+              placeholder={field.placeholder}
+              disabled={field.disabled}
+            />
+          ))}
         </div>
         <div className={styles.personal__form}>
           <span className={styles.personal__title}>Согласие пользователя</span>
-          <label className={styles.personal__checkbox}>
-            <input
-              type="checkbox"
-              name="consentToPrivacyPolicy"
-              checked={formData?.consentToPrivacyPolicy}
-              onChange={handleCheckboxChange}
-            />
-            Я ознакомлен с Политикой Конфиденциальности
-          </label>
-          <label className={styles.personal__checkbox}>
-            <input
-              type="checkbox"
-              name="consentToDataProcessing"
-              checked={formData?.consentToDataProcessing}
-              onChange={handleCheckboxChange}
-            />
-            Я даю Согласие на обработку персональных данных
-          </label>
-          <label className={styles.personal__checkbox}>
-            <input
-              type="checkbox"
-              name="consentToReceiveNotifications"
-              checked={formData?.consentToReceiveNotifications}
-              onChange={handleCheckboxChange}
-            />
-            Я хочу получать информационные и рекламные уведомления
-          </label>
+          {checkboxFields.map((field) => (
+            <label key={field.name} className={styles.personal__checkbox}>
+              <input
+                type="checkbox"
+                name={field.name}
+                checked={formData[field.name]}
+                onChange={handleChange}
+              />
+              {field.label}
+            </label>
+          ))}
         </div>
         <div className={styles.personal__action}>
           <Button size={"lg"} variant={"success"} type="submit">
@@ -191,6 +232,7 @@ const PersonalDataInfo: React.FC = () => {
           </Button>
         </div>
       </form>
+
       <Popup
         isOpen={isPopupOpen}
         onClose={() => setIsPopupOpen(false)}

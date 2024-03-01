@@ -4,10 +4,25 @@ import Main from "./_main/_Main";
 import { ToastContainer, Slide } from "react-toastify";
 import styles from "./AccountInfo.module.scss";
 import "react-toastify/dist/ReactToastify.min.css";
+import { useEffect, useState } from "react";
+import Preloader from "../ui/preloader/Preloader";
+import { useGetUserByIdQuery } from "@/redux/slices/api/api";
+import Cookies from "js-cookie";
 
 const AccountInfo = () => {
+  const userId = JSON.parse(Cookies.get("connect.user") || "");
+  const {
+    data: userData,
+    isLoading,
+    isFetching,
+  } = useGetUserByIdQuery(userId._id);
+
+  // Определяем, загрузились ли данные
+  const isDataLoaded = !isLoading && !isFetching && userData;
+
   return (
     <div className={`${styles.account} grid-container`}>
+      <Preloader isDataLoaded={isDataLoaded} />
       <header className={`${styles.account__header} grid-header`}>
         <Header />
       </header>

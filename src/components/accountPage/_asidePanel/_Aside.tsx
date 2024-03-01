@@ -53,7 +53,7 @@ const _Aside = () => {
                   }`}
                 </span>
                 <span className={styles["nickname"]}>
-                  @{userData?.user?.username || "null"}
+                  @{userData?.user?.nickname || "null"}
                 </span>
               </div>
               <span className={styles["status"]}>
