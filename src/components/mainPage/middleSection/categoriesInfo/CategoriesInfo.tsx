@@ -7,13 +7,13 @@ const CategoriesInfo = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const cardsData = [
     { title: "Приставка", subtitle: "от 990 ₽", img: console },
-    { title: "Колонки", subtitle: "от 990 ₽", img: console },
-    { title: "Проекты", subtitle: "от 990 ₽", img: console },
-    { title: "Ноубуки", subtitle: "от 990 ₽", img: console },
+    { title: "Колонки", subtitle: "от 690 ₽", img: console },
+    { title: "Проекторы", subtitle: "от 790 ₽", img: console },
+    { title: "Ноубуки", subtitle: "от 890 ₽", img: console },
   ];
 
   // Обработчик для установки активной карточки при наведении
-  const handleCardHover = (index:any) => {
+  const handleCardHover = (index: any) => {
     setActiveIndex(index);
   };
 

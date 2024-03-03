@@ -1,5 +1,6 @@
 import styles from "./ContactUsInfo.module.scss";
 import { FaTelegramPlane } from "react-icons/fa";
+// import gif from "@/assets/imgs/gif.gif";
 
 const ContactUsInfo = () => {
   return (

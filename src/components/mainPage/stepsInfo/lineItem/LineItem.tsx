@@ -1,7 +1,6 @@
-import React from "react";
 import styles from "./LineItem.module.scss";
 
-const LineItem = ({ status }) => {
+const LineItem = ({ status }: any) => {
   let pointClassName = styles.point;
   let lineElement = null;
 

@@ -22,14 +22,12 @@ const Header = () => {
       </div>
       {Cookies.get("connect.user") ? (
         <Link to={"/accountPage"}>
-          {" "}
           <Button size={"s48"} variant={"primary"}>
             Личный аккаунт
           </Button>
         </Link>
       ) : (
         <Link to={"/enterPage"}>
-          {" "}
           <Button size={"s48"} variant={"primary"}>
             Войти
           </Button>

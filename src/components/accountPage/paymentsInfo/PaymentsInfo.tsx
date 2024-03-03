@@ -4,6 +4,7 @@ import Pagination from "./paginationItem/PaginationItem";
 import Table from "./tableItem/TableItem";
 import { useGetPaymentsQuery } from "@/redux/slices/api/api";
 import Cookies from "js-cookie";
+import Notice from "@/components/ui/notice/Notice";
 
 const PaymentsInfo = () => {
   const itemsPerPage = 5;
@@ -15,7 +16,7 @@ const PaymentsInfo = () => {
     isLoading,
     isError,
   } = useGetPaymentsQuery(userId._id);
-  console.log(payments?.payments[0]);
+  console.log("PAYMENTS", payments?.payments);
 
   const handlePageChange = (newPage: any) => {
     setCurrentPage(newPage);
@@ -37,23 +38,16 @@ const PaymentsInfo = () => {
     }
   }, [payments, currentPage, itemsPerPage]);
 
-  const notice = () => {
-    if (isLoading) {
-      return <div>Загрузка...</div>;
-    }
-    if (isError || !Array.isArray(payments?.payments)) {
-      return <div>Ошибка при загрузке данных</div>;
-    }
-    return <div>Нет совершенных платежей</div>;
-  };
-
   return (
     <div className={styles.payments}>
       <div className={styles.payments__title}>Платежи</div>
-      {!Array.isArray(payments?.payments) || paginatedPayments.length === 0 ? (
-        <div className={styles.payments__wrapper}>
-          <div className={styles.payments__noPayments}>{notice()}</div>
-        </div>
+      {paginatedPayments.length === 0 ? (
+        <Notice
+          data={payments?.payments || []}
+          isLoading={isLoading}
+          isError={isError}
+          message="Нет совершенных платежей"
+        />
       ) : (
         <>
           <div className={styles.payments__table}>

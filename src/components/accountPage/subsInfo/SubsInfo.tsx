@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setSelectedFilter } from "@/redux/slices/subsSlice";
 import { useGetRentalQuery } from "@/redux/slices/api/api";
 import Cookies from "js-cookie";
+import Notice from "@/components/ui/notice/Notice";
 
 const SubsInfo = () => {
   const dispatch = useDispatch();
@@ -28,54 +29,56 @@ const SubsInfo = () => {
     new Set(rental?.rentals?.map((rental: any) => rental.status))
   );
 
+  // Проверяем, есть ли доступные подписки
+  const hasSubscriptions = rental?.rentals && rental.rentals.length > 0;
+
   return (
     <div className={styles.subs}>
       <span className={styles.subs__title}>Подписки</span>
-      <div className={styles.subs__filter}>
-        <Button
-          size={size}
-          variant={getButtonVariant("Все")}
-          onClick={() => dispatch(setSelectedFilter("Все"))}
-        >
-          Все
-        </Button>
-        {statuses.map((status: any) => (
+      {/* Отображаем компонент Notice, если данных нет */}
+      {!hasSubscriptions && (
+        <Notice
+          data={rental?.rentals || []}
+          isLoading={isLoading}
+          isError={isError}
+          message="Нет доступных подписок"
+        />
+      )}
+      {/* Отображаем кнопки фильтрации, если есть доступные подписки */}
+      {hasSubscriptions && (
+        <div className={styles.subs__filter}>
           <Button
-            key={status}
             size={size}
-            variant={getButtonVariant(status)}
-            onClick={() => dispatch(setSelectedFilter(status))}
+            variant={getButtonVariant("Все")}
+            onClick={() => dispatch(setSelectedFilter("Все"))}
           >
-            {status}
+            Все
           </Button>
-        ))}
-      </div>
-      {rental?.rentals?.length === 0 ? (
-        <div className={styles.subs__noCardsWrapper}>
-          <div className={styles.subs__noCardsMessage}>
-            Нет доступных подписок
-          </div>
+          {statuses.map((status: any) => (
+            <Button
+              key={status}
+              size={size}
+              variant={getButtonVariant(status)}
+              onClick={() => dispatch(setSelectedFilter(status))}
+            >
+              {status}
+            </Button>
+          ))}
         </div>
-      ) : (
-        <>
-          <div className={styles.subs__cards}>
-            {isLoading ? (
-              <p>Loading subs...</p>
-            ) : isError ? (
-              <p>Error loading subs</p>
-            ) : (
-              rental?.rentals
-                .filter((subscription: any) =>
-                  selectedFilter === "Все"
-                    ? true
-                    : subscription.status === selectedFilter
-                )
-                ?.map((subscription: any) => (
-                  <SubsCard key={subscription._id} data={subscription} />
-                ))
-            )}
-          </div>
-        </>
+      )}
+      {/* Отображаем карточки подписок, если есть доступные подписки */}
+      {hasSubscriptions && (
+        <div className={styles.subs__cards}>
+          {rental?.rentals
+            .filter((subscription: any) =>
+              selectedFilter === "Все"
+                ? true
+                : subscription.status === selectedFilter
+            )
+            .map((subscription: any) => (
+              <SubsCard key={subscription._id} data={subscription} />
+            ))}
+        </div>
       )}
     </div>
   );

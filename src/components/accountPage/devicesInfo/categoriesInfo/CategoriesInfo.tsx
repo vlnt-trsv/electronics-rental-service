@@ -5,29 +5,34 @@ import CardItem from "../CardItem.tsx";
 import { setSelectedCategory } from "@/redux/slices/categoriesSlice.tsx";
 import getCategoryForm from "./getCategoryForm.tsx";
 import { useGetCategoriesQuery } from "@/redux/slices/api/api.tsx";
+import Notice from "@/components/ui/notice/Notice.tsx";
 
 const CategoriesInfo = () => {
   const dispatch = useDispatch();
-  
+
   const { data: categories, isError, isLoading } = useGetCategoriesQuery();
-  // console.log(categories, isError, isLoading);
 
   const products = useSelector((state: any) => state.products);
-
 
   const handleCategoryClick = (category: any) => {
     dispatch(setSelectedCategory(category));
   };
 
+  // Проверяем, есть ли категории в данных
+  const hasCategories = categories && categories.length > 0;
+
   return (
     <div className={styles.categories}>
-      <div className={styles.categories__cards}>
-        {isLoading ? (
-          <p>Loading categories...</p>
-        ) : isError ? (
-          <p>Error loading categories</p>
-        ) : (
-          categories?.map((category: any) => {
+      {!hasCategories ? (
+        <Notice
+          data={[]}
+          isLoading={isLoading}
+          isError={isError}
+          message="Нет доступных категорий"
+        />
+      ) : (
+        <div className={styles.categories__cards}>
+          {categories?.map((category: any) => {
             const productCount = products[category.deviceCount]?.length || 0;
             const categoryWord = getCategoryForm(category.name, productCount);
             return (
@@ -40,17 +45,16 @@ const CategoriesInfo = () => {
                 <CardItem
                   title={category.name}
                   subtitle={category.subtitle}
-                  description={`В наличии ${productCount} ${categoryWord}`}  // TODO: add description
+                  description={`В наличии ${productCount} ${categoryWord}`} // TODO: add description
                   imageUrl={category.imageUrl}
                   altText={category.altText}
                 />
               </Link>
             );
-          })
-        )}
-      </div>
+          })}
+        </div>
+      )}
     </div>
   );
 };
-
 export default CategoriesInfo;

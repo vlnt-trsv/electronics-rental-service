@@ -4,7 +4,6 @@ import Main from "./_main/_Main";
 import { ToastContainer, Slide } from "react-toastify";
 import styles from "./AccountInfo.module.scss";
 import "react-toastify/dist/ReactToastify.min.css";
-import { useEffect, useState } from "react";
 import Preloader from "../ui/preloader/Preloader";
 import { useGetUserByIdQuery } from "@/redux/slices/api/api";
 import Cookies from "js-cookie";
@@ -14,24 +13,28 @@ const AccountInfo = () => {
   const {
     data: userData,
     isLoading,
-    isFetching,
+    isError,
   } = useGetUserByIdQuery(userId._id);
 
   // Определяем, загрузились ли данные
-  const isDataLoaded = !isLoading && !isFetching && userData;
+  const isDataLoaded = !isLoading && !isError && userData;
 
   return (
     <div className={`${styles.account} grid-container`}>
-      <Preloader isDataLoaded={isDataLoaded} />
-      <header className={`${styles.account__header} grid-header`}>
-        <Header />
-      </header>
-      <aside className={`${styles.account__aside} grid-aside`}>
-        <Aside />
-      </aside>
-      <main className={`${styles.account__main} grid-main`}>
-        <Main />
-      </main>
+      <Preloader isDataLoaded={isDataLoaded} isLoading={isLoading} />
+      {isDataLoaded && (
+        <>
+          <header className={`${styles.account__header} grid-header`}>
+            <Header />
+          </header>
+          <aside className={`${styles.account__aside} grid-aside`}>
+            <Aside />
+          </aside>
+          <main className={`${styles.account__main} grid-main`}>
+            <Main />
+          </main>
+        </>
+      )}
       <ToastContainer
         position="bottom-right"
         autoClose={5000}

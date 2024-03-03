@@ -15,7 +15,7 @@ const DevicesInfo = () => {
   return (
     // <DataCheckingContainer>
       <div className={styles.devices}>
-        <span className={styles.devices__title}>Девайсы {back}</span>
+        <span className={styles.devices__title}>Девайсы</span> 
         {/* <Breadcrumbs /> */}
         <Outlet />
       </div>

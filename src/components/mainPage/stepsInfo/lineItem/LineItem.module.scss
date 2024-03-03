@@ -6,7 +6,7 @@
   gap: 32px;
   margin: 0;
   padding: 0;
-  transition: all .5s ease-out;
+  transition: all 0.5s ease-out;
 
   .point {
     width: 16px;
@@ -36,22 +36,24 @@
     width: 2px;
     height: 150px; /* Высота линии */
     background-color: #fff;
+    transition: transform 0.5s ease-in-out;
 
     &.inProgressLine {
-      background-color: rgba(
-        255,
-        255,
-        255,
-        0.5
-      ); /* Прозрачность 50% для состояния "В процессе" */
+      background-color: rgba(255, 255, 255, 0.5);
+      transform: scaleY(0);
+      transform-origin: top;
     }
 
     &.doneLine {
-      background-color: #0059ff; /* Синий цвет для состояния "Пройдено" */
+      background-color: #0059ff;
+      transform: scaleY(1);
+      transform-origin: top;
     }
 
     &.endLine {
-      background-color: #73c344; /* Зеленый цвет для состояния "Насладиться" */
+      background-color: #73c344;
+      transform: scaleY(1);
+      transform-origin: top;
     }
   }
 }

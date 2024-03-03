@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import styles from "./EnterItem.module.scss";
 import EnterHookForm from "../enterHookForm/EnterHookForm";
 import { useSendCodeMutation } from "@/redux/slices/api/api";
+import { toast } from "react-toastify";
 
 const EnterItem = () => {
   const navigate = useNavigate();
@@ -9,7 +10,11 @@ const EnterItem = () => {
 
   const handleGetCode = async (data: { email: string }) => {
     try {
-      const result = await sendCode(data.email);
+      const result = await toast.promise(sendCode(data.email).unwrap(), {
+        pending: "Код отправлен...",
+        success: "Одноразовый код отправлен",
+        error: "Ошибка при отправке кода",
+      });
       console.log(result);
       navigate(`/enterPage/enterClient/${data.email}`);
     } catch (error) {
