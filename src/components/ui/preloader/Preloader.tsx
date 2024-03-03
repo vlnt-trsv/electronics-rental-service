@@ -1,12 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styles from "./Preloader.module.scss";
 
 interface PreloaderProps {
   isDataLoaded: boolean;
+  isLoading: boolean;
 }
 
-const Preloader: React.FC<PreloaderProps> = ({ isDataLoaded }) => {
+const Preloader: React.FC<PreloaderProps> = ({ isDataLoaded, isLoading }) => {
   const [isVisible, setIsVisible] = useState(true);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const preloaderRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (isDataLoaded) {
@@ -18,13 +21,33 @@ const Preloader: React.FC<PreloaderProps> = ({ isDataLoaded }) => {
       // Очищаем таймер при размонтировании компонента или при изменении isDataLoaded
       return () => clearTimeout(timer);
     }
-  }, [isDataLoaded]);
+    if (!isDataLoaded && !isLoading) {
+      setErrorMessage("Личный кабинет временно недоступен. Попробуйте позже");
+    }
+  }, [isDataLoaded, isLoading]);
+
+  useEffect(() => {
+    if (!isVisible) {
+      // Удаляем прелоадер после затухания
+      const preloader = preloaderRef.current;
+      if (preloader) {
+        preloader.addEventListener("transitionend", () => {
+          preloader.remove();
+        });
+      }
+    }
+  }, [isVisible]);
 
   return (
     <div
+      ref={preloaderRef}
       className={`${styles.loader} ${isVisible ? styles.show : styles.hide}`}
     >
-      <div className={styles.spinner}></div>
+      {errorMessage ? (
+        <div className={styles.errorMessage}>{errorMessage}</div>
+      ) : (
+        <div className={styles.spinner}></div>
+      )}
     </div>
   );
 };
