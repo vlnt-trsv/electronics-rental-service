@@ -80,7 +80,7 @@ function App() {
       {/* Private Route */}
       <Route element={<PrivateRoute />}>
         <Route path="/admin" element={<Admin />}>
-          <Route path="auth" element={<Auth />}></Route>
+          <Route index element={<Auth />}></Route>
         </Route>
       </Route>
     </Routes>
