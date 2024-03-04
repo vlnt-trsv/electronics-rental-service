@@ -11,7 +11,7 @@ const ProductRegistrationInfo = () => {
           Проверьте, ту ли вещь вы арендуете
         </span>
         <span className={styles.productRegistration__subtitle}>
-          После оформление товара, подписка будет действительна
+          После оформление товара, подписку надо оплатить
         </span>
       </div>
 

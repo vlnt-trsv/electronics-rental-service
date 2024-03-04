@@ -10,7 +10,7 @@ import styles from "./EnterHookForm.module.scss";
 
 import HookFormInput from "@/components/ui/hookFormInput/HookFormInput";
 
-const EnterHookForm = ({ formClassName, handleGetCode }) => {
+const EnterHookForm = ({ formClassName, handleGetCode }: any) => {
   // const notify = () => toast("Wow so easy !");
   const {
     register,
