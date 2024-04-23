@@ -23,7 +23,7 @@ import FaqInfo from "../accountPage/faqInfo/FaqInfo.tsx";
 import ProductInfo from "../accountPage/devicesInfo/productInfo/ProductInfo.tsx";
 import ProductRegistrationInfo from "../accountPage/devicesInfo/productRegistrationInfo/ProductRegistrationInfo.tsx";
 import ProductDetailsInfo from "../accountPage/devicesInfo/productDetailsInfo/ProductDetailsInfo.tsx";
-import PaymentPage from "../accountPage/devicesInfo/GetPayment/PaymentPage.tsx";
+// import PaymentPage from "../accountPage/devicesInfo/GetPayment/PaymentPage.tsx";
 import CategoriesInfo from "../accountPage/devicesInfo/categoriesInfo/CategoriesInfo.tsx";
 
 // Secure Routes
