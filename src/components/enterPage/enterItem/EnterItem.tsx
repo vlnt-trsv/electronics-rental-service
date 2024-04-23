@@ -11,7 +11,7 @@ const EnterItem = () => {
   const handleGetCode = async (data: { email: string }) => {
     try {
       const result = await toast.promise(sendCode(data.email).unwrap(), {
-        pending: "Код отправлен...",
+        pending: "Отправление кода...",
         success: "Одноразовый код отправлен",
         error: "Ошибка при отправке кода",
       });

@@ -1,9 +1,9 @@
 import { Button } from "@/components/ui/button";
 import styles from "./CardDeviceItem.module.scss";
 
-const CardDeviceItem = ({ title, price, imageUrl, altText, onClick }) => {
+const CardDeviceItem = ({ title, price, imageUrl, altText, onClick }: any) => {
   return (
-    <div className={styles.card}>
+    <div onClick={onClick} className={styles.card}>
       <div className={styles.card__img}>
         <img className={styles.img} src={imageUrl} alt={altText} />
       </div>
@@ -12,7 +12,14 @@ const CardDeviceItem = ({ title, price, imageUrl, altText, onClick }) => {
         <span className={styles.card__price}>{price}</span>
       </div>
       <div className={styles.card__button}>
-        <Button onClick={onClick} className={styles.button} variant="outline" size="lg">Оформить подписку</Button>
+        <Button
+          onClick={onClick}
+          className={styles.button}
+          variant="outline"
+          size="lg"
+        >
+          Оформить подписку
+        </Button>
       </div>
     </div>
   );

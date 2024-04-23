@@ -11,6 +11,7 @@ const CategoriesInfo = () => {
   const dispatch = useDispatch();
 
   const { data: categories, isError, isLoading } = useGetCategoriesQuery();
+  console.log(categories);
 
   const products = useSelector((state: any) => state.products);
 
@@ -25,7 +26,7 @@ const CategoriesInfo = () => {
     <div className={styles.categories}>
       {!hasCategories ? (
         <Notice
-          data={[]}
+          data={categories}
           isLoading={isLoading}
           isError={isError}
           message="Нет доступных категорий"
@@ -39,7 +40,11 @@ const CategoriesInfo = () => {
               <Link
                 className={styles.categories__link}
                 onClick={() => handleCategoryClick(category)}
-                to={category.name}
+                to={{
+                  pathname: category.engName,
+                  // search: `?${category._id}`,
+                }}
+                // to={category.name}
                 key={category.name}
               >
                 <CardItem

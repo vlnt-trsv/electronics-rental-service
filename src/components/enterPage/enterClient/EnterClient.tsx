@@ -33,7 +33,7 @@ const EnterClient = () => {
     try {
       const result = await verifyCode({ email, code: enteredCode });
       const user = result?.data?.user
-      dispatch(setUser(user));
+      // dispatch(setUser(user));
       console.log(user);
       navigate("/accountPage");
     } catch (error) {

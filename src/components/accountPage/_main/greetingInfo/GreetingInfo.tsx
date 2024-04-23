@@ -16,7 +16,7 @@ const GreetingInfo = () => {
       <span className={styles.greeting__description}>
         Теперь вы можете управлять своей арендой через личный кабинет
       </span>
-      <Link to={"/accountPage"}>
+      <Link to={"/accountPage/devices"}>
         <Button variant="primary" size={"lg"}>
           Перейти к девайсам
         </Button>
