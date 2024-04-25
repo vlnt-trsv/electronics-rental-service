@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 
-import { api } from "./slices/api/api";
+import { api } from "../api/api";
 import categories from "./slices/categoriesSlice";
 import products from "./slices/productsSlice";
 import subscriptionOptions from "./slices/subscriptionOptionSlice";

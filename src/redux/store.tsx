@@ -12,7 +12,7 @@ import {
 } from "redux-persist";
 import rootReducer from "./rootReducer";
 import persistConfig from "./persistConfig";
-import { api } from "./slices/api/api";
+import { api } from "../api/api";
 // import { setupListeners } from "@reduxjs/toolkit/query";
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
