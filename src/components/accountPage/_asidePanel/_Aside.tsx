@@ -9,7 +9,7 @@ import {
   useGetRentalQuery,
   useGetUserByIdQuery,
   useLogoutMutation,
-} from "@/redux/slices/api/api";
+} from "@/api/api";
 import Cookies from "js-cookie";
 
 import moprh from "@/assets/imgs/morph.gif";

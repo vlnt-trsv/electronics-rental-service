@@ -8,7 +8,7 @@ import {
   useDeleteUserMutation,
   useGetUserByIdQuery,
   useUpdateUserMutation,
-} from "@/redux/slices/api/api";
+} from "@/api/api";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";

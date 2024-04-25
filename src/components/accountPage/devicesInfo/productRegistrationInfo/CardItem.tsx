@@ -4,7 +4,7 @@ import { SetStateAction, memo, useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./CardItem.module.scss";
 import { addSubscription } from "@/redux/slices/subsSlice";
-import { useCreateRentalMutation } from "@/redux/slices/api/api";
+import { useCreateRentalMutation } from "@/api/api";
 
 const CardUp = memo(
   ({

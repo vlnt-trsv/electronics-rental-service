@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import CardItem from "../CardItem.tsx";
 import { setSelectedCategory } from "@/redux/slices/categoriesSlice.tsx";
 import getCategoryForm from "./getCategoryForm.tsx";
-import { useGetCategoriesQuery } from "@/redux/slices/api/api.tsx";
+import { useGetCategoriesQuery } from "@/api/api.tsx";
 import Notice from "@/components/ui/notice/Notice.tsx";
 
 const CategoriesInfo = () => {

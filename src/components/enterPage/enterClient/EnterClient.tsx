@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import styles from "./EnterClient.module.scss";
 import { Input } from "@/components/ui/input";
-import { useVerifyCodeMutation } from "@/redux/slices/api/api";
+import { useVerifyCodeMutation } from "@/api/api";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { loadUser, setUser } from "@/redux/slices/user/userSlice";

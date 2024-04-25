@@ -9,7 +9,7 @@ import {
   useCancelRentalMutation,
   useDeleteRentalMutation,
   usePayRentalMutation,
-} from "@/redux/slices/api/api";
+} from "@/api/api";
 
 const renderButtons = (status: any, rentalId: any) => {
   // const dispatch = useDispatch();

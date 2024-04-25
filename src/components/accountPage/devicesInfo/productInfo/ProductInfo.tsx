@@ -3,7 +3,7 @@ import CardDeviceItem from "./CardDeviceItem";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setSelectedProduct } from "@/redux/slices/productsSlice";
-import { useGetProductsQuery } from "@/redux/slices/api/api";
+import { useGetProductsQuery } from "@/api/api";
 import Notice from "@/components/ui/notice/Notice";
 
 const ProductInfo = () => {
