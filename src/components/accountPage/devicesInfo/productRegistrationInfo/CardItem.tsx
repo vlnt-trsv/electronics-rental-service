@@ -1,10 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { SetStateAction, memo, useCallback, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { memo, useCallback, useState } from "react";
 import styles from "./CardItem.module.scss";
-import { addSubscription } from "@/redux/slices/subsSlice";
-import { useCreateRentalMutation } from "@/api/api";
+import { useCreateRentalMutation } from "@/shared/api/api";
 
 const CardUp = memo(
   ({
@@ -67,9 +65,7 @@ const CardDown = memo(
     //   navigate("/success");
     // }, [navigate]);
 
-    const dispatch = useDispatch();
-
-    const userData = useSelector((state: any) => state.user.user);
+    const userData = JSON.parse(localStorage.getItem("userData"));
 
     const [createRental] = useCreateRentalMutation();
 
@@ -78,7 +74,7 @@ const CardDown = memo(
         const rentalData: any = {
           userId: userData?._id,
           deviceId: selectedProduct._id,
-          subscriptionOptionsId: selectedSubscription.id,
+          subscriptionOptionsId: selectedSubscription._id,
           deliveryMethod: deliveryMethod,
         };
         console.log(rentalData);
@@ -144,23 +140,15 @@ const CardDown = memo(
 
 const CardItem = () => {
   const [deliveryMethod, setDeliveryMethod] = useState("Доставка"); // Состояние для выбора способа получения
-  const selectedProduct = useSelector(
-    (state: any) => state.products.selectedProduct
-  );
-  console.log("PRODUCTS", selectedProduct);
-  const selectedCategory = useSelector(
-    (state: any) => state.categories.selectedCategory
-  );
-  console.log("CATEGORY", selectedCategory);
-  const selectedSubscription = useSelector(
-    (state: any) => state.subscriptionOptions.selectedSubscription
-  );
 
-  const handleDeliveryMethodChange = useCallback(
-    (method: SetStateAction<string>) => {
-      setDeliveryMethod(method);
-    },
-    []
+  const handleDeliveryMethodChange = useCallback((method: string) => {
+    setDeliveryMethod(method);
+  }, []);
+
+  const selectedProduct = JSON.parse(localStorage.getItem("selectedProduct"));
+  const selectedCategory = JSON.parse(localStorage.getItem("selectedCategory"));
+  const selectedSubscription = JSON.parse(
+    localStorage.getItem("selectedSubscriptionOption")
   );
 
   const getImageUrl = (fileName: string) => {

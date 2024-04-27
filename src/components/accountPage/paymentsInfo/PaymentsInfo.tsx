@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import styles from "./PaymentsInfo.module.scss";
 import Pagination from "./paginationItem/PaginationItem";
 import Table from "./tableItem/TableItem";
-import { useGetPaymentsQuery } from "@/api/api";
+import { useGetPaymentsQuery } from "@/shared/api/api";
 import Cookies from "js-cookie";
 import Notice from "@/components/ui/notice/Notice";
 

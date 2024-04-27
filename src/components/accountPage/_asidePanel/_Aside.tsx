@@ -9,10 +9,10 @@ import {
   useGetRentalQuery,
   useGetUserByIdQuery,
   useLogoutMutation,
-} from "@/api/api";
+} from "@/shared/api/api";
 import Cookies from "js-cookie";
 
-import moprh from "@/assets/imgs/morph.gif";
+import moprh from "@/shared/assets/imgs/morph.gif";
 
 const _Aside = () => {
   const navigate = useNavigate();

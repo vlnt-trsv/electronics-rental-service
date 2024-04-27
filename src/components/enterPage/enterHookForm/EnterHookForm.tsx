@@ -1,6 +1,6 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { IShippingField } from "./EnterHookForm.interface";
-import { cn } from "@/lib/utils";
+import { cn } from "@/shared/lib/utils";
 import { Button } from "@/components/ui/button";
 
 // import { ToastContainer, toast } from 'react-toastify';

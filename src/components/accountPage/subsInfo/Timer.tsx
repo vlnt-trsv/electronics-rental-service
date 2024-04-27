@@ -22,7 +22,7 @@ const Timer = ({ endDate }: any) => {
       const minutes = Math.floor((difference / 1000 / 60) % 60);
       const seconds = Math.floor((difference / 1000) % 60);
 
-      return `${days} дн. ${hours} ч. ${minutes} мин. ${seconds} сек.`;
+      return `[${days}:${hours}:${minutes}:${seconds}]`;
     } else {
       return "Аренда завершена";
     }

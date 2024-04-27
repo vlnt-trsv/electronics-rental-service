@@ -2,43 +2,25 @@ import { Button } from "@/components/ui/button";
 import styles from "./ProductDetailtInfo.module.scss";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-
-import { useSelector, useDispatch } from "react-redux";
-import { setSelectedSubscriptionOption } from "@/redux/slices/subscriptionOptionSlice";
+import { useState } from "react";
 
 const ProductDetailsInfo = () => {
-  const subscriptionOptions = useSelector(
-    (state: any) =>
-      state.products.selectedProduct?.subscriptionOptions
+  const [selectedOption, setSelectedOption] = useState(
+    JSON.parse(localStorage.getItem("selectedSubscriptionOption"))
   );
-  const selectedSubscription = useSelector(
-    (state: any) => state.subscriptionOptions.selectedSubscription
-  );
-
-  const selectedCategory = useSelector(
-    (state: any) => state.categories.selectedCategory?.name
-  );
-  const selectedProducts = useSelector(
-    (state: any) => state.products.selectedProduct?.name
-  );
-  const prouductImage = useSelector(
-    (state: any) => state.products.selectedProduct?.deviceImage
-  );
-
-  const dispatch = useDispatch();
-  const handleOptionSelect = (option: any) => {
-    dispatch(
-      setSelectedSubscriptionOption({
-        id: option._id,
-        duration: option.duration,
-        price: option.price,
-      })
-    );
-    console.log(option);
-  };
+  const product = JSON.parse(localStorage.getItem("selectedProduct"));
+  const category = JSON.parse(localStorage.getItem("selectedCategory"));
 
   const getImageUrl = (fileName: string) => {
     return `http://localhost:8000/${fileName}`;
+  };
+
+  const handleOptionSelect = (option: any) => {
+    setSelectedOption(option); // Обновление состояния при выборе опции
+    localStorage.setItem(
+      "selectedSubscriptionOption",
+      JSON.stringify({ ...option })
+    );
   };
 
   return (
@@ -46,21 +28,21 @@ const ProductDetailsInfo = () => {
       <div className={styles.productDetails__image}>
         <img
           className={styles.img}
-          src={getImageUrl(prouductImage)}
+          src={getImageUrl(product.deviceImage)}
           alt="ps5"
         />
       </div>
       <div className={styles.productDetails__payments}>
         <span className={styles.productDetails__subtitle}>
-          {selectedCategory || "null"}
+          {category.name || "null"}
         </span>
         <span className={styles.productDetails__title}>
-          {selectedProducts || "null"}
+          {product.name || "null"}
         </span>
-        {subscriptionOptions?.map((option: any) => (
+        {product.subscriptionOptions?.map((option: any) => (
           <Button
             key={option._id}
-            variant={selectedSubscription?.id === option?._id ? "primary" : ""}
+            variant={selectedOption?._id === option?._id ? "primary" : ""}
             className={styles.productDetails__button}
             onClick={() => handleOptionSelect(option)}
           >
@@ -71,8 +53,8 @@ const ProductDetailsInfo = () => {
         <span className={styles.productDetails__description}>
           Оплата проходит в начале периода
         </span>
-        {selectedSubscription ? (
-          <Link to="registration">
+        {selectedOption?._id ? (
+          <Link to="order">
             <Button className={styles.productDetails__button}>
               Оформить подписку
             </Button>

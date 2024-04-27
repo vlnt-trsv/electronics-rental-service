@@ -1,29 +1,27 @@
 import styles from "./ProductInfo.module.scss";
 import CardDeviceItem from "./CardDeviceItem";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { setSelectedProduct } from "@/redux/slices/productsSlice";
-import { useGetProductsQuery } from "@/api/api";
+import { useGetProductsQuery } from "@/shared/api/api";
 import Notice from "@/components/ui/notice/Notice";
 
 const ProductInfo = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
-  const categoryId = useSelector(
-    (state: any) => state.categories.selectedCategory?._id
-  );
+  const category = JSON.parse(localStorage.getItem("selectedCategory"));
+  const categoryId = category._id
+  console.log(category)
+
   const {
     data: products,
     isError,
     isLoading,
   } = useGetProductsQuery(categoryId);
 
-  console.log("PRODUCTS", products?.devices);
+  // console.log("PRODUCTS", products?.devices);
 
   const handleProductClick = (product: any) => {
+    localStorage.setItem("selectedProduct", JSON.stringify({ ...product }));
     navigate(`${product.name}`);
-    dispatch(setSelectedProduct(product));
   };
 
   const getImageUrl = (fileName: string) => {
@@ -48,6 +46,7 @@ const ProductInfo = () => {
             <CardDeviceItem
               key={product._id}
               title={product.name}
+              subtitle={category.name}
               price={`${product.price} ₽`}
               imageUrl={getImageUrl(product.deviceImage)}
               altText={product.altText || "Image not available"}

@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./EnterItem.module.scss";
 import EnterHookForm from "../enterHookForm/EnterHookForm";
-import { useSendCodeMutation } from "@/api/api";
+import { useSendCodeMutation } from "@/shared/api/api";
 import { toast } from "react-toastify";
 
 const EnterItem = () => {

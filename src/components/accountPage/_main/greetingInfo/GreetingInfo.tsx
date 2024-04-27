@@ -1,6 +1,6 @@
 import Cookies from "js-cookie";
 import styles from "./GreetingInfo.module.scss";
-import { useGetUserByIdQuery } from "@/api/api";
+import { useGetUserByIdQuery } from "@/shared/api/api";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 

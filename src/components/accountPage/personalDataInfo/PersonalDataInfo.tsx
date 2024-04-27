@@ -8,7 +8,7 @@ import {
   useDeleteUserMutation,
   useGetUserByIdQuery,
   useUpdateUserMutation,
-} from "@/api/api";
+} from "@/shared/api/api";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
@@ -29,7 +29,6 @@ interface FormData {
 const PersonalDataInfo: React.FC = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
-  // const userData = useSelector((state: any) => state.user.user);
   const userId = JSON.parse(Cookies.get("connect.user") || "");
   const { data: userData } = useGetUserByIdQuery(userId._id);
 

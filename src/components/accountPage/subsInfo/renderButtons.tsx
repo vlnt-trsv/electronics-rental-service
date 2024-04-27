@@ -9,7 +9,7 @@ import {
   useCancelRentalMutation,
   useDeleteRentalMutation,
   usePayRentalMutation,
-} from "@/api/api";
+} from "@/shared/api/api";
 
 const renderButtons = (status: any, rentalId: any) => {
   // const dispatch = useDispatch();

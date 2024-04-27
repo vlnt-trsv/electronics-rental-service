@@ -1,6 +1,6 @@
 import styles from "./CardItem.module.scss";
 
-const CardItem = ({ title, subtitle, description, imageUrl, altText }) => {
+const CardItem = ({ title, subtitle, description, imageUrl, altText }: any) => {
   return (
     <div className={styles.card}>
       <div className={styles.card__content}>

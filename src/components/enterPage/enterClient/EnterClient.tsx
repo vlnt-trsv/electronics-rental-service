@@ -2,14 +2,11 @@ import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import styles from "./EnterClient.module.scss";
 import { Input } from "@/components/ui/input";
-import { useVerifyCodeMutation } from "@/api/api";
+import { useVerifyCodeMutation } from "@/shared/api/api";
 import { useParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { loadUser, setUser } from "@/redux/slices/user/userSlice";
 
 const EnterClient = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const { email } = useParams();
   const [codeInputs, setCodeInputs] = useState(["", "", "", ""]);
   const [verifyCode, { isLoading, isError }] = useVerifyCodeMutation();
@@ -32,8 +29,8 @@ const EnterClient = () => {
   const handleVerifyCode = async (email: string, enteredCode: number) => {
     try {
       const result = await verifyCode({ email, code: enteredCode });
-      const user = result?.data?.user
-      // dispatch(setUser(user));
+      const user = result?.data?.user;
+      localStorage.setItem("userData", JSON.stringify({ ...user }));
       console.log(user);
       navigate("/accountPage");
     } catch (error) {

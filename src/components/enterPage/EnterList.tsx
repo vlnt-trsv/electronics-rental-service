@@ -1,5 +1,5 @@
 import styles from "./EnterList.module.scss";
-import whiteLogo from "@/assets/imgs/white-logo.svg";
+import whiteLogo from "@/shared/assets/imgs/white-logo.svg";
 // import blackLogo from "@/assets/imgs/white-logo.svg";
 import { Outlet } from "react-router-dom";
 import { ToastContainer, Slide } from "react-toastify";

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import CardItem from "./cardItem/CardItem";
 import styles from "./CategoriesInfo.module.scss";
-import console from "@/assets/imgs/console.png";
+import console from "@/shared/assets/imgs/console.png";
 
 const CategoriesInfo = () => {
   const [activeIndex, setActiveIndex] = useState(0);

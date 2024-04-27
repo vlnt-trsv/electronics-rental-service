@@ -1,31 +1,40 @@
 .card {
   border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 8px;
-  padding: 8px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 8px;
   color: #fff;
 
   width: 300px;
 
+  &__content {
+    display: flex;
+    gap: 16px;
+    padding: 16px;
+  }
+
   &__head {
     display: flex;
+    flex-direction: column;
+    gap: 4px;
     justify-content: space-between;
     width: 100%;
   }
-  &__title {
+  &__title, &__price {
+    font-weight: bold;
   }
-  &__price {
+  
+  &__subtitle {
     opacity: 0.5;
   }
+
   &__img {
     display: flex;
     align-items: center;
     justify-content: center;
 
-    outline: 1px solid rgba($color: white, $alpha: 0.1);
+    outline: 1px solid rgba($color: white, $alpha: 0.16);
     border-radius: 4px;
 
     overflow: hidden;
@@ -38,9 +47,10 @@
     }
   }
   &__button {
-    .button {
-      border-radius: 4px;
-      width: 100%;
-    }
+    display: flex;
+    align-self: flex-end;
+    border-radius: 4px;
+    width: 42px;
+    height: 42px;
   }
 }
