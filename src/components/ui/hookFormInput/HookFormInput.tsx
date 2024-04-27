@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from "@/shared/lib/utils";
 
 const HookFormInput = ({ register, errors, formInput, input, type, ...props }) => {
   return (

@@ -3,7 +3,7 @@ import * as Accordion from "@radix-ui/react-accordion";
 import classNames from "classnames";
 import { ChevronDownIcon } from "@radix-ui/react-icons";
 import "./Accordion.scss";
-import { cn } from "@/lib/utils";
+import { cn } from "@/shared/lib/utils";
 
 // Определите пропсы для AccordionDemo
 const AccordionDemo = ({ items }) => (

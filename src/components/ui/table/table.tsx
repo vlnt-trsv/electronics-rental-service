@@ -2,7 +2,7 @@ import * as React from "react";
 
 import styles from "./table.module.scss";
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/shared/lib/utils";
 
 const Table = React.forwardRef<
   HTMLTableElement,
