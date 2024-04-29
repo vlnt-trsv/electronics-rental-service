@@ -1,8 +1,7 @@
-import styles from "./Footer.module.scss";
-import { FaTelegramPlane } from "react-icons/fa";
-import { MdEmail } from "react-icons/md";
+import styles from "./FooterMain.module.scss";
+import { TelegramIcon, EmailIcon } from "@/shared/ui";
 
-const FooterInfo = () => {
+export default function FooterMain() {
   return (
     <div className={`${styles.footer} container`}>
       <div className={styles.footer__info__left}>
@@ -22,17 +21,15 @@ const FooterInfo = () => {
           target="_blank"
           className={styles.footer__info__social}
         >
-          <FaTelegramPlane className={styles.footer__info__social__img} />
+          <TelegramIcon className={styles.footer__info__social__img} />
         </a>
         <a
           href="mailto:two-2-buddy@mail.ru"
           className={styles.footer__info__social}
         >
-          <MdEmail className={styles.footer__info__social__img} />
+          <EmailIcon className={styles.footer__info__social__img} />
         </a>
       </div>
     </div>
   );
-};
-
-export default FooterInfo;
+}

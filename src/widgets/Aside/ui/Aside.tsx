@@ -57,7 +57,7 @@ export default function Aside() {
               </span>
             </div>
             <ArrowDownLeftIcon
-              onClick={toggleMoreInfo}
+              onClick={() => setMoreInfo((prevMoreInfo) => !prevMoreInfo)}
               className={`${styles.aside__dropdown} ${
                 moreInfo
                   ? styles["aside__dropdown--flipped180"]

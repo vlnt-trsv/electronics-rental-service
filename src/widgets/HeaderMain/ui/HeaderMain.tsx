@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
-import styles from "./Header.module.scss";
+import styles from "./HeaderMain.module.scss";
 import { Button } from "@/shared/ui/button/button";
 import Cookies from "js-cookie";
 
-const Header = () => {
+export default function HeaderMain() {
   return (
     <div className={`${styles.header} container2`}>
       <div className={styles.header__logo}>
@@ -35,6 +35,4 @@ const Header = () => {
       )}
     </div>
   );
-};
-
-export default Header;
+}

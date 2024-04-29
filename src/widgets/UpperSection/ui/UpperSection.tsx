@@ -2,7 +2,7 @@ import { Button } from "@/shared/ui/button/button";
 import styles from "./UpperSection.module.scss";
 import { Link } from "react-router-dom";
 
-const UpperSection = () => {
+export default function UpperSection() {
   return (
     <div className={`${styles.upper} container2`}>
       <div className={styles.upper__cta}>
@@ -18,6 +18,4 @@ const UpperSection = () => {
       <span className={styles.upper__subtitle}>Two2Buddy</span>
     </div>
   );
-};
-
-export default UpperSection;
+}
