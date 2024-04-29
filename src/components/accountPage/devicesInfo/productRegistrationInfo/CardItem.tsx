@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/ui/button/button";
 import { Link } from "react-router-dom";
 import { memo, useCallback, useState } from "react";
 import styles from "./CardItem.module.scss";

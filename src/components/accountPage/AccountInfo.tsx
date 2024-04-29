@@ -4,7 +4,7 @@ import Main from "./_main/_Main";
 import { ToastContainer, Slide } from "react-toastify";
 import styles from "./AccountInfo.module.scss";
 import "react-toastify/dist/ReactToastify.min.css";
-import Preloader from "../ui/preloader/Preloader";
+import Preloader from "../../shared/ui/preloader/Preloader";
 import { useGetUserByIdQuery } from "@/shared/api/api";
 import Cookies from "js-cookie";
 

@@ -1,4 +1,4 @@
-import Checkbox from "@/components/ui/checkbox/checkbox";
+import Checkbox from "@/shared/ui/checkbox/checkbox";
 import style from "./NotificationInfo.module.scss";
 import { useState } from "react";
 

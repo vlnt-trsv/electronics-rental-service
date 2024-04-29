@@ -3,7 +3,7 @@ import styles from "./CategoriesInfo.module.scss";
 import CardItem from "../CardItem.tsx";
 import getCategoryForm from "./getCategoryForm.tsx";
 import { useGetCategoriesQuery } from "@/shared/api/api.tsx";
-import Notice from "@/components/ui/notice/Notice.tsx";
+import Notice from "@/shared/ui/notice/Notice.tsx";
 import _console from "@/shared/assets/imgs/_console.jpg";
 
 const CategoriesInfo = () => {

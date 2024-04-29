@@ -1,13 +1,6 @@
 import { Routes, Route } from "react-router-dom";
+import { Account, Enter, Main, NotFound } from "@/pages";
 
-import Layout from "@/pages/Layout.tsx";
-import NotFound from "@/components/notFound/NotFound.tsx";
-
-import EnterPage from "@/pages/EnterPage.tsx";
-import EnterItem from "@/components/enterPage/enterItem/EnterItem.tsx";
-import EnterClient from "@/components/enterPage/enterClient/EnterClient.tsx";
-
-import AccountPage from "@/pages/AccountPage.tsx";
 import PersonalDataInfo from "@/components/accountPage/personalDataInfo/PersonalDataInfo.tsx";
 import PaymentsInfo from "@/components/accountPage/paymentsInfo/PaymentsInfo.tsx";
 import NotificationInfo from "@/components/accountPage/notificationInfo/NotificationInfo.tsx";
@@ -31,16 +24,13 @@ export const Router = () => {
   return (
     <Routes>
       {/* Public Route */}
-      <Route index element={<Layout />} />
+      <Route index element={<Main />} />
 
-      <Route path="/enterPage" element={<EnterPage />}>
-        <Route index element={<EnterItem />} />
-        <Route path="enterClient/:email" element={<EnterClient />} />
-      </Route>
+      <Route path="/enterPage" element={<Enter />} />
 
       {/* Private Route */}
       <Route element={<PrivateRoute />}>
-        <Route path="/accountPage" element={<AccountPage />}>
+        <Route path="/accountPage" element={<Account />}>
           {/* Далее Персональная навигация - данные пользователя */}
           <Route path="personalDataInfo" element={<PersonalDataInfo />} />
           <Route path="bankInfo" element={<BankCardInfo />} />

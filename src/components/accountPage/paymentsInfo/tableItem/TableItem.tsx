@@ -6,7 +6,7 @@ import {
   TableHeader,
   TableFooter,
   TableRow,
-} from "@/components/ui/table/table";
+} from "@/shared/ui/table/table";
 
 interface Invoice {
   _id: string;

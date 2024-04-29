@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/ui/button/button";
 import styles from "./BankCardInfo.module.scss";
 
 const BankCardInfo = () => {

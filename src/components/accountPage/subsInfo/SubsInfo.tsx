@@ -1,9 +1,9 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/ui/button/button";
 import styles from "./SubsInfo.module.scss";
 import SubsCard from "./SubsCard";
 import { useGetRentalQuery } from "@/shared/api/api";
 import Cookies from "js-cookie";
-import Notice from "@/components/ui/notice/Notice";
+import Notice from "@/shared/ui/notice/Notice";
 import { useEffect, useState } from "react";
 
 const SubsInfo = () => {

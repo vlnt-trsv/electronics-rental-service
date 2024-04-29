@@ -4,7 +4,7 @@ import Pagination from "./paginationItem/PaginationItem";
 import Table from "./tableItem/TableItem";
 import { useGetPaymentsQuery } from "@/shared/api/api";
 import Cookies from "js-cookie";
-import Notice from "@/components/ui/notice/Notice";
+import Notice from "@/shared/ui/notice/Notice";
 
 const PaymentsInfo = () => {
   const itemsPerPage = 5;

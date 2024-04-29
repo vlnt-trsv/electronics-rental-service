@@ -1,4 +1,4 @@
-import AccordionDemo from "@/components/ui/accordion/Accordion";
+import AccordionDemo from "@/shared/ui/accordion/Accordion";
 import styles from "./FaqInfo.module.scss";
 
 const FaqInfo = () => {

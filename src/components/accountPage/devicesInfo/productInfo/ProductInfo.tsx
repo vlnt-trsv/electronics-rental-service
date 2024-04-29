@@ -2,7 +2,7 @@ import styles from "./ProductInfo.module.scss";
 import CardDeviceItem from "./CardDeviceItem";
 import { useNavigate } from "react-router-dom";
 import { useGetProductsQuery } from "@/shared/api/api";
-import Notice from "@/components/ui/notice/Notice";
+import Notice from "@/shared/ui/notice/Notice";
 
 const ProductInfo = () => {
   const navigate = useNavigate();

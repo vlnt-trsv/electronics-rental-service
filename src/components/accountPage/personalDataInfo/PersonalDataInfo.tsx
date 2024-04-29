@@ -1,9 +1,9 @@
 import styles from "./PersonalDataInfo.module.scss";
-import { Input } from "@/components/ui/input";
+import { Input } from "@/shared/ui/input/input";
 // import { useSelector } from "react-redux";
-import Popup from "@/components/ui/popup/popup";
+import Popup from "@/shared/ui/popup/popup";
 import { useEffect, useState } from "react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/ui/button/button";
 import {
   useDeleteUserMutation,
   useGetUserByIdQuery,

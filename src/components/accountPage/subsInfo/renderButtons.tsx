@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/ui/button/button";
 import styles from "./SubsCard.module.scss";
 // import { useDispatch } from "react-redux";
 import { BsQrCodeScan } from "react-icons/bs";

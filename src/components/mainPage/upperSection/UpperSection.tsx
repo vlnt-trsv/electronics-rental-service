@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/ui/button/button";
 import styles from "./UpperSection.module.scss";
 import { Link } from "react-router-dom";
 

@@ -7,7 +7,7 @@ import {
   PaginationLink as BasePaginationLink,
   PaginationNext as BasePaginationNext,
   PaginationPrevious as BasePaginationPrevious,
-} from "@/components/ui/pagination/pagination";
+} from "@/shared/ui/pagination/pagination";
 
 type PaginationProps = {
   totalPages: number;

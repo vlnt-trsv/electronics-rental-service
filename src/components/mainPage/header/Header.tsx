@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styles from "./Header.module.scss";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/ui/button/button";
 import Cookies from "js-cookie";
 
 const Header = () => {

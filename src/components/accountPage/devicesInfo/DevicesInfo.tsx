@@ -1,7 +1,7 @@
 import { Outlet, useNavigate } from "react-router-dom";
 import styles from "./DevicesInfo.module.scss";
 // import Breadcrumbs from "@/components/ui/breadcrumb/Breadcrumb.tsx";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/ui/button/button";
 // import { useSelector } from "react-redux";
 
 const DevicesInfo = () => {
