@@ -13,8 +13,11 @@ const SubsInfo = () => {
   const [statuses, setStatuses] = useState([]);
 
   const userId = JSON.parse(Cookies.get("connect.user") || "");
-  const { data: rental, isError, isLoading } = useGetRentalQuery(userId._id);
-  console.log("RENTAL", rental?.rentals);
+  const { data: rental, isError, isLoading } = useGetRentalQuery(userId._id, {
+    pollingInterval: 5000,
+    skipPollingIfUnfocused: true,
+  });
+  // console.log("RENTAL", rental?.rentals);
 
   useEffect(() => {
     if (rental?.rentals?.length > 0) {

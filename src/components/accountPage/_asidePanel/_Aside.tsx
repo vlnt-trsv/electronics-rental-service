@@ -17,10 +17,8 @@ import moprh from "@/shared/assets/imgs/morph.gif";
 const _Aside = () => {
   const navigate = useNavigate();
   const [moreInfo, setMoreInfo] = useState(false);
-  
   const userId = JSON.parse(Cookies.get("connect.user") || "");
 
-  // const userData = useSelector((state: any) => state.persistedReducer.user.user);
   const [logout] = useLogoutMutation();
 
   const { data: rental } = useGetRentalQuery(userId._id);
@@ -31,10 +29,10 @@ const _Aside = () => {
   }, []);
 
   const handleLogout = async () => {
+    navigate("/enterPage");
     await logout({});
     Cookies.remove("connect.user");
     Cookies.remove("connect.sid");
-    navigate("/enterPage");
   };
 
   return (
@@ -62,7 +60,11 @@ const _Aside = () => {
             </div>
             <BsArrowDownLeftSquareFill
               onClick={toggleMoreInfo}
-              className={`${styles.aside__dropdown} ${moreInfo ? styles['aside__dropdown--flipped180'] : styles['aside__dropdown--flipped0']}`}
+              className={`${styles.aside__dropdown} ${
+                moreInfo
+                  ? styles["aside__dropdown--flipped180"]
+                  : styles["aside__dropdown--flipped0"]
+              }`}
             />
           </div>
           <div
@@ -72,7 +74,7 @@ const _Aside = () => {
           >
             <div className={styles["aside__info"]}>
               <div className={styles["aside__info-item"]}>
-                Подписки: {rental?.count || "null"}
+                Подписки: {rental?.count || "0"}
               </div>
               <div className={styles["aside__info-item"]}>
                 Бонусный счёт: {userData?.user?.bonus || "null"} ₽

@@ -8,14 +8,13 @@ const ProductInfo = () => {
   const navigate = useNavigate();
 
   const category = JSON.parse(localStorage.getItem("selectedCategory"));
-  const categoryId = category._id
-  console.log(category)
+  console.log(category._id)
 
   const {
     data: products,
     isError,
     isLoading,
-  } = useGetProductsQuery(categoryId);
+  } = useGetProductsQuery(category._id);
 
   // console.log("PRODUCTS", products?.devices);
 
