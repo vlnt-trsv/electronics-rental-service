@@ -8,7 +8,6 @@ export const api = createApi({
     },
     credentials: "include",
   }),
-  keepUnusedDataFor: 5,
   refetchOnFocus: true,
   endpoints: (builder) => ({
     // Mutation
@@ -35,7 +34,6 @@ export const api = createApi({
       query: () => ({
         url: "/logout",
         method: "GET",
-        keepUnusedDataFor: 0,
       }),
     }),
 
