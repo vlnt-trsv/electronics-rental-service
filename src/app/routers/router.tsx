@@ -10,13 +10,12 @@ import {
   PrivacyPolicy,
   ProcessingOfPersonalData,
   ServiceUsageAgreement,
+  Devices,
+  Categories,
+  Product,
+  ProductDetailed,
+  ProductOrder,
 } from "@/widgets";
-
-import DevicesInfo from "@/components/accountPage/devicesInfo/DevicesInfo.tsx";
-import ProductInfo from "@/components/accountPage/devicesInfo/productInfo/ProductInfo.tsx";
-import ProductRegistrationInfo from "@/components/accountPage/devicesInfo/productRegistrationInfo/ProductRegistrationInfo.tsx";
-import ProductDetailsInfo from "@/components/accountPage/devicesInfo/productDetailsInfo/ProductDetailsInfo.tsx";
-import CategoriesInfo from "@/components/accountPage/devicesInfo/categoriesInfo/CategoriesInfo.tsx";
 
 // Secure Routes
 import PrivateRoute from "@/app/routers/privateRouter";
@@ -39,16 +38,13 @@ export const Router = () => {
           <Route path="doc2" element={<PrivacyPolicy />} />
           <Route path="doc3" element={<ProcessingOfPersonalData />} />
           {/* Далее навигационные кнопки - основные */}
-          <Route path="devices" element={<DevicesInfo />}>
-            <Route index element={<CategoriesInfo />} />
-            <Route path=":categoryId" element={<ProductInfo />} />
-            <Route
-              path=":categoryId/:productId"
-              element={<ProductDetailsInfo />}
-            />
+          <Route path="devices" element={<Devices />}>
+            <Route index element={<Categories />} />
+            <Route path=":categoryId" element={<Product />} />
+            <Route path=":categoryId/:productId" element={<ProductOrder />} />
             <Route
               path=":categoryId/:productId/order"
-              element={<ProductRegistrationInfo />}
+              element={<ProductDetailed />}
             />
           </Route>
           <Route path="subs" element={<Subscription />} />

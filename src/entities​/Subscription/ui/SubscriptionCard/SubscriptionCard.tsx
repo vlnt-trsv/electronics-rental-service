@@ -2,6 +2,7 @@ import styles from "./SubscriptionCard.module.scss";
 import renderButtons from "@/shared/lib/utils/renderButtons/renderButtons";
 import getStatusClassName from "@/shared/lib/utils/getStatusClassName/getStatusClassName";
 import Timer from "@/shared/lib/utils/timer/Timer";
+import { Subscription } from "./SubscriptionCardInterface";
 
 // Функция для форматирования даты
 const formatDate = (dateString: any) => {
@@ -18,7 +19,7 @@ const shortenId = (id: any) => {
   return id.substring(18, 24).toUpperCase();
 };
 
-export default function SubsCardItem({ data }: any) {
+export default function SubscriptionCard({ data }: Subscription) {
   // Форматирование даты оформления заказа
   const formattedRentalDate = formatDate(data?.rentalDate);
   const formattedStartDate = formatDate(data?.startDate);
@@ -37,7 +38,10 @@ export default function SubsCardItem({ data }: any) {
     <div className={styles.subsCard}>
       <div className={styles.subsCard__head}>
         <span className={`${styles.subsCard__titleHead}`}>
-          Статус: <span style={getStatusClassName(data?.status)}>{data?.status || "STATUS"}</span>
+          Статус:{" "}
+          <span style={getStatusClassName(data?.status)}>
+            {data?.status || "STATUS"}
+          </span>
         </span>
         <span className={`${styles.subsCard__titleHead}`}>
           Дата оформления заказа: {formattedRentalDate || "DATE"}

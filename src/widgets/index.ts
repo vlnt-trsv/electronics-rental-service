@@ -10,6 +10,9 @@ export { Subscription } from "./Subscription";
 export { Payments } from "./Payments";
 export { AccountFAQ } from "./FAQ";
 export { Contacts } from "./Contacts";
+export { Devices } from "./Devices";
+export { Categories } from "./Categories";
+export { Product, ProductDetailed, ProductOrder } from "./Products";
 export { PrivacyPolicy, ProcessingOfPersonalData, ServiceUsageAgreement } from "./Documents";
 
 // Виджет входа
