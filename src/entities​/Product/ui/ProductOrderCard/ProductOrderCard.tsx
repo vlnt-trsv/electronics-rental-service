@@ -35,7 +35,7 @@ export default function ProductsOrder() {
       <CardUp
         visible={deliveryMethod === "Доставка"}
         selectedProduct={selectedProduct}
-        getImage={getImageUrl} // Передаем функцию, а не результат ее вызова
+        getImage={getImageUrl(selectedProduct.deviceImage)} // Передаем функцию, а не результат ее вызова
         selectedCategory={selectedCategory}
         selectedSubscription={selectedSubscription}
         totalPrice={totalPrice}

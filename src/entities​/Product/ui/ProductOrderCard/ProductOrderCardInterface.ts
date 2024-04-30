@@ -8,7 +8,7 @@ export interface CardUpProps {
     selectedCategory: Categories; 
     selectedSubscription: Subscription;
     totalPrice: number;
-    getImage: (fileName: string) => string;
+    getImage: (fileName: string) => void;
   }
   
   export interface CardDownProps {
