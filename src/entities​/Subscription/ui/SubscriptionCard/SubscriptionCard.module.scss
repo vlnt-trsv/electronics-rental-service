@@ -1,0 +1,112 @@
+.subsCard {
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 8px;
+    padding: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    width: 642px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  
+    &__head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px;
+      border-radius: 4px;
+      background-color: rgba($color: #fff, $alpha: 0.16);
+    }
+    // &__titleHead {
+    //   // opacity: 0.5;
+    // }
+  
+    &__main {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+  
+    &__image {
+      width: 50%;
+      height: 155px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+  
+      .img {
+        min-width: 100%;
+        min-height: 100%;
+      }
+    }
+  
+    &__info {
+      display: flex;
+      gap: 16px;
+      height: 50%;
+      &__item {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        width: 100%;
+      }
+    }
+  
+    &__subtitle {
+      color: #888;
+      display: flex;
+      justify-content: space-between;
+    }
+  
+    &__title {
+      color: #ffffff;
+    }
+  
+    &__text {
+      display: flex;
+      justify-content: space-between;
+      color: #ffffff;
+    }
+  
+    &__price {
+      font-weight: bold;
+      color: #ff6b6b; /* Цвет цены */
+    }
+    &__button,
+    &__link {
+      width: 100%;
+    }
+    &__button {
+      &__qr {
+        width: 10%;
+      }
+    }
+    &__buttons {
+      display: flex;
+      gap: 8px;
+    }
+  
+    &__three:first-child {
+      width: 10%;
+    }
+  }
+  
+  // .statusNotPaid {
+  //   color: rgb(255, 73, 73);
+  // }
+  // .statusPaid {
+  //   color: rgb(0, 255, 64);
+  // }
+  // .statusInRent {
+  //   color: rgb(255, 153, 0);
+  // }
+  // .statusCompleted {
+  //   color: rgb(136, 241, 255);
+  // }
+  // .statusCancel {
+  //   color: rgb(108, 185, 196);
+  // }
+  
