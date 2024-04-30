@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./Enter.module.scss";
-import EnterHookForm from "@/shared/hooks/enterHookForm/EnterHookForm";
+import EnterHookForm from "@/shared/ui/enterHookForm/EnterHookForm";
 import { Input } from "@/shared/ui/input/input";
 import { useSendCodeMutation, useVerifyCodeMutation } from "@/shared/api/api";
 import { toast } from "react-toastify";
@@ -111,7 +111,8 @@ export default function Enter() {
               ))}
             </div>
             <Link
-              to={currentStep === "verifyCode" ? "/enterPage" : "/"}
+              to={""}
+              onClick={() => setCurrentStep("getCode")}
               className={styles.enter__back}
             >
               Вернуться на страницу ввода телефона

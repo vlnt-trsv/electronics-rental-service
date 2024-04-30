@@ -3,7 +3,7 @@ import { TelegramIcon, EmailIcon } from "@/shared/ui";
 
 export default function FooterMain() {
   return (
-    <div className={`${styles.footer} container`}>
+    <div className={styles.footer}>
       <div className={styles.footer__info__left}>
         <span className={styles.footer__info__text}>Two2Buddy © 2024</span>
         <span className={styles.footer__info__text}>Все права защищены.</span>

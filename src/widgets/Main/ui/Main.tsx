@@ -1,6 +1,6 @@
 import { Outlet, useLocation } from "react-router-dom";
 import styles from "./Main.module.scss";
-import { Greeting } from "@/widgets/Greeting";
+import { Greeting } from "@/features";
 
 export default function Main() {
   const location = useLocation();

@@ -5,7 +5,7 @@ import Cookies from "js-cookie";
 
 export default function HeaderMain() {
   return (
-    <div className={`${styles.header} container2`}>
+    <div className={styles.header}>
       <div className={styles.header__logo}>
         <span className={styles.header__logo__text}>T2B</span>
       </div>

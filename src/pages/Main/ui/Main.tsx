@@ -2,7 +2,12 @@ import {
   HeaderMain,
   FooterMain,
   UpperSection,
-  MiddleSection,
+  AboutUs,
+  CTA,
+  CategoryMain,
+  ContactUs,
+  Steps,
+  MainFAQ,
 } from "@/widgets/index";
 
 export default function Main() {
@@ -10,8 +15,15 @@ export default function Main() {
     <>
       <HeaderMain />
       <UpperSection />
-      <MiddleSection />
-      <FooterMain />
+      <div className="container">
+        <CategoryMain />
+        <AboutUs />
+        <CTA />
+        <ContactUs />
+        <Steps />
+        <MainFAQ />
+        <FooterMain />
+      </div>
     </>
   );
 }

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export default function UpperSection() {
   return (
-    <div className={`${styles.upper} container2`}>
+    <div className={styles.upper}>
       <div className={styles.upper__cta}>
         <span className={styles.upper__title}>
           Арендуйте на срок, который вам нужен

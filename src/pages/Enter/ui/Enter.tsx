@@ -1,5 +1,5 @@
 import styles from "./Enter.module.scss";
-import { EnterForm } from "@/widgets/Enter";
+import { EnterForm } from "@/widgets";
 import whiteLogo from "@/shared/assets/imgs/white-logo.svg";
 // import blackLogo from "@/assets/imgs/white-logo.svg";
 import { ToastContainer, Slide } from "react-toastify";
