@@ -1,0 +1,78 @@
+.enter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 350px;
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 16px;
+  }
+
+  &__title {
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  &__input {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    align-self: stretch; // Если это не нужно, уберите эту строку
+    width: 100%; // Для второго сниппета input имеет ширину 100%
+    border: 1px solid rgba($color: white, $alpha: 0.5);
+    border-radius: 8px;
+  }
+
+  &__number {
+    padding: 16px;
+    align-self: stretch;
+    border-radius: 8px;
+    border: 1px solid rgba($color: white, $alpha: 0.5);
+  }
+
+  &__form {
+    &__before {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      width: 100%;
+    }
+
+    &__after {
+      display: flex;
+      gap: 16px;
+      width: 100%;
+    }
+
+    &__complete {
+      width: 55px;
+      height: 55px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      background: #3b3b3b;
+      border: 1px solid rgba($color: white, $alpha: 0.5);
+    }
+
+    &.complete {
+      height: 100%;
+      border: 1px solid rgba($color: white, $alpha: 0.5);
+    }
+  }
+
+  &__button,
+  &__next {
+    width: 100%;
+  }
+
+  &__back {
+  }
+}
