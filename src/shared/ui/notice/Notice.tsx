@@ -5,6 +5,7 @@ interface NoticeProps {
   data: any[];
   isLoading: boolean;
   isError: boolean;
+  isFetching: boolean;
   message: string;
 }
 
@@ -12,11 +13,12 @@ const Notice: React.FC<NoticeProps> = ({
   data,
   isLoading,
   isError,
+  isFetching,
   message,
 }) => {
   let noticeContent = null;
 
-  if (isLoading) {
+  if (isLoading || isFetching) {
     noticeContent = <div className={styles.notice__info}>Загрузка...</div>;
   } else if (isError) {
     noticeContent = (
@@ -24,6 +26,8 @@ const Notice: React.FC<NoticeProps> = ({
     );
   } else if (Array.isArray(data) && data.length === 0) {
     noticeContent = <div className={styles.notice__info}>{message}</div>;
+  } else {
+    noticeContent = <div className={styles.notice__info}>Нет данных</div>;
   }
 
   return <div className={styles.notice}>{noticeContent}</div>;
