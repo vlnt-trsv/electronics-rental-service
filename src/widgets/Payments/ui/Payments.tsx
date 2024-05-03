@@ -39,11 +39,11 @@ export default function Payments() {
 
   return (
     <div className={styles.payments}>
-      <div className={styles.payments__title}>Платежи</div>
       {paginatedPayments.length === 0 ? (
         <Notice
           data={payments?.payments || []}
           isLoading={isLoading}
+          isFetching={false}
           isError={isError}
           message="Нет совершенных платежей"
         />

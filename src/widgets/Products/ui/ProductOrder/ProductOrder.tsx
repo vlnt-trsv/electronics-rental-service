@@ -4,7 +4,7 @@ import { ProductOrderCard } from "@/entities​";
 export default function ProductsOrder() {
   return (
     <div className={styles.productRegistration}>
-      <div className={styles.productRegistration__head}>
+      <div className={styles.productRegistration__extra}>
         <span className={styles.productRegistration__title}>
           Проверьте, ту ли вещь вы арендуете
         </span>

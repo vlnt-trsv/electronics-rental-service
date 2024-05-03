@@ -1,33 +1,23 @@
 import styles from "./Product.module.scss";
-import { ProductCard } from "@/entities​";
-import { useNavigate } from "react-router-dom";
-import { useGetProductsQuery } from "@/shared/api/api";
 import Notice from "@/shared/ui/notice/Notice";
+import { ProductCard } from "@/entities​";
+import { useMemo } from "react";
+import { useProducts } from "../lib";
 
 export default function Products() {
-  const navigate = useNavigate();
-
-  const category = JSON.parse(localStorage.getItem("selectedCategory") || "");
-  console.log(category._id);
-
   const {
-    data: products,
+    products,
+    category,
     isError,
     isLoading,
-  } = useGetProductsQuery(category._id);
+    handleProductClick,
+    getImageUrl,
+  } = useProducts();
 
-  // console.log("PRODUCTS", products?.devices);
-
-  const handleProductClick = (product: any) => {
-    localStorage.setItem("selectedProduct", JSON.stringify({ ...product }));
-    navigate(`${product.name}`);
-  };
-
-  const getImageUrl = (fileName: string) => {
-    return `http://localhost:8000/${fileName}`;
-  };
-
-  const hasProducts = products?.devices && products?.devices.length > 0;
+  const hasProducts = useMemo(
+    () => products?.devices && products.devices.length > 0,
+    [products]
+  );
 
   return (
     <div className={styles.product}>
@@ -44,8 +34,8 @@ export default function Products() {
           products?.devices.map((product: any) => (
             <ProductCard
               key={product._id}
-              title={product.name}
-              subtitle={category.name}
+              name={product.name}
+              subtitle={category?.name}
               price={`${product.price} ₽`}
               imageUrl={getImageUrl(product.deviceImage)}
               altText={product.altText || "Image not available"}

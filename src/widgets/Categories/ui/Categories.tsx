@@ -24,8 +24,9 @@ export default function Categories() {
     <div className={styles.categories}>
       {!hasCategories ? (
         <Notice
-          data={categories}
+          data={categories || []}
           isLoading={isLoading}
+          isFetching={false}
           isError={isError}
           message="Нет доступных категорий"
         />

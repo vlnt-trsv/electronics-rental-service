@@ -3,7 +3,16 @@ $aside-background: var(--foreground, rgba(255, 255, 255, 0.05));
 .main {
   border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 16px;
-  padding: 16px;
   background: $aside-background;
   height: 100%;
+
+  &__title {
+    padding: 16px;
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  &__wrapper {
+    padding: 16px;
+  }
 }

@@ -23,7 +23,6 @@ export default function Notification() {
 
   return (
     <div className={style.notify}>
-      <span className={style.notify__title}>Настройка уведомлений</span>
       <div className={style.notify__extra}>
         <span className={style.notify__subtitle}>
           Пожалуйста, укажите параметры, которые хотите видеть

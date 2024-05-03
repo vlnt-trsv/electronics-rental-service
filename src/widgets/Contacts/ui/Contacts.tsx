@@ -6,7 +6,6 @@ import { AiFillInstagram } from "react-icons/ai";
 export default function Contacts() {
   return (
     <div className={styles.contact}>
-      <div className={styles.contact__title}>Контакты</div>
       <div className={styles.contact__wrapper}>
         <div className={styles.contact__link}>
           <span className={styles.contact__subtitle}>Связаться</span>

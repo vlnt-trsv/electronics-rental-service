@@ -1,63 +1,32 @@
-import { Button } from "@/shared/ui/button/button";
 import styles from "./Subscription.module.scss";
-import { SubscriptionCard } from "@/entities​";
-import { useGetRentalQuery } from "@/shared/api/api";
-import Cookies from "js-cookie";
 import Notice from "@/shared/ui/notice/Notice";
-import { useEffect, useState } from "react";
+import { Button } from "@/shared/ui/button/button";
+import { SubscriptionCard } from "@/entities​";
+import { useSubscriptions } from "../lib";
+import { ISubscription } from "@/entities​/Subscription/ISubcription";
 
-export default function Subs() {
-  const [selectedFilter, setSelectedFilter] = useState("Все");
-  const [areSubscriptionsAvailable, setAreSubscriptionsAvailable] =
-    useState(false);
-  const [statuses, setStatuses] = useState([]);
-
-  const userId = JSON.parse(Cookies.get("connect.user") || "");
+export default function Subscription() {
   const {
-    data: rental,
+    rental,
+    subs,
+    statuses,
+    selectedFilter,
     isError,
     isLoading,
-  } = useGetRentalQuery(userId._id, {
-    pollingInterval: 5000,
-    skipPollingIfUnfocused: true,
-  });
-  // console.log("RENTAL", rental?.rentals);
+    hasSubscriptions,
+    getButtonVariant,
+    handleFilterChange,
+  } = useSubscriptions();
 
-  useEffect(() => {
-    if (rental?.rentals?.length > 0) {
-      setAreSubscriptionsAvailable(true);
-      const uniqueStatuses: any = Array.from(
-        new Set(rental.rentals.map((rental: { status: any }) => rental.status))
-      );
-      setStatuses(uniqueStatuses);
-    } else {
-      setAreSubscriptionsAvailable(false);
-    }
-  }, [rental]);
-
-  // Функция для вычисления варианта кнопки
-  const getButtonVariant = (status: any) => {
-    if (!areSubscriptionsAvailable) return "default disabled";
-    return selectedFilter === status ? "primary" : "";
-  };
-
-  const handleFilterChange = (status: any) => {
-    setSelectedFilter(status);
-    localStorage.setItem("selectedFilter", JSON.stringify(status));
-  };
-
-  // Проверяем, есть ли доступные подписки
-  const hasSubscriptions =
-    areSubscriptionsAvailable && rental.rentals.length > 0;
+  // console.log("SUBS", subs);
 
   return (
     <div className={styles.subs}>
-      <span className={styles.subs__title}>Подписки</span>
-      {/* Отображаем компонент Notice, если данных нет */}
       {!hasSubscriptions ? (
         <Notice
           data={rental?.rentals || []}
           isLoading={isLoading}
+          isFetching={false}
           isError={isError}
           message="Нет доступных подписок"
         />
@@ -67,7 +36,7 @@ export default function Subs() {
           <div className={styles.subs__filter}>
             <Button
               size={"lg"}
-              varicant={getButtonVariant("Все")}
+              variant={getButtonVariant("Все")}
               onClick={() => handleFilterChange("Все")}
             >
               Все
@@ -85,13 +54,13 @@ export default function Subs() {
           </div>
           {/* Отображаем карточки подписок, если есть доступные подписки */}
           <div className={styles.subs__cards}>
-            {rental?.rentals
-              .filter((subscription: any) =>
+            {subs
+              .filter((subscription: ISubscription) =>
                 selectedFilter === "Все"
                   ? true
                   : subscription.status === selectedFilter
               )
-              .map((subscription: any) => (
+              .map((subscription: ISubscription) => (
                 <SubscriptionCard key={subscription._id} data={subscription} />
               ))}
           </div>

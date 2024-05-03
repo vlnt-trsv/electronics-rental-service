@@ -2,34 +2,19 @@ import styles from "./ProductDetailed.module.scss";
 import { Button } from "@/shared/ui/button/button";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useState } from "react";
+import { useProducts } from "../lib/hooks/useProducts";
 
 export default function ProductsDetailed() {
-  const [selectedOption, setSelectedOption] = useState(
-    JSON.parse(localStorage.getItem("selectedSubscriptionOption") || "")
-  );
-  const product = JSON.parse(localStorage.getItem("selectedProduct") || "");
-  const category = JSON.parse(localStorage.getItem("selectedCategory") || "");
-
-  const getImageUrl = (fileName: string) => {
-    return `http://localhost:8000/${fileName}`;
-  };
-
-  const handleOptionSelect = (option: any) => {
-    setSelectedOption(option); // Обновление состояния при выборе опции
-    localStorage.setItem(
-      "selectedSubscriptionOption",
-      JSON.stringify({ ...option })
-    );
-  };
+  const { product, category, handleOptionSelect, selectedOption, getImageUrl } =
+    useProducts();
 
   return (
     <div className={styles.productDetails}>
       <div className={styles.productDetails__image}>
         <img
           className={styles.img}
-          src={getImageUrl(product.deviceImage)}
-          alt="ps5"
+          src={getImageUrl(product.deviceImage || "")}
+          alt={product?.name || "Product image"}
         />
       </div>
       <div className={styles.productDetails__payments}>

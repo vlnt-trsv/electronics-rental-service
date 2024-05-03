@@ -1,7 +1,12 @@
 import { useCallback, useState } from "react";
 import styles from "./Aside.module.scss";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { ExitIcon, SettingIcon, AccountIcon, ArrowDownLeftIcon } from "@/shared/ui";
+import {
+  ExitIcon,
+  SettingIcon,
+  AccountIcon,
+  ArrowDownLeftIcon,
+} from "@/shared/ui";
 import {
   useGetRentalQuery,
   useGetUserByIdQuery,
@@ -14,7 +19,7 @@ import moprh from "@/shared/assets/imgs/morph.gif";
 export default function Aside() {
   const navigate = useNavigate();
   const [moreInfo, setMoreInfo] = useState(false);
-  const userId = JSON.parse(Cookies.get("connect.user") || "");
+  const userId = JSON.parse(Cookies.get("connect.user") || "{}");
 
   const [logout] = useLogoutMutation();
 
@@ -82,12 +87,9 @@ export default function Aside() {
               className={styles["aside__button-second"]}
               to={"personalDataInfo"}
             >
-              {<AccountIcon className={styles.aside__icon} />}{" "}
-              Персональные данные
+              {<AccountIcon className={styles.aside__icon} />} Персональные
+              данные
             </Link>
-            {/* <Link to={"bankInfo"} className={styles["aside__button-second"]}>
-              {card}Банковские карты
-            </Link> */}
             <Link
               to={"notificationInfo"}
               className={styles["aside__button-second"]}

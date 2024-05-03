@@ -32,10 +32,7 @@ export default function FAQ() {
 
   return (
     <div className={styles.faq}>
-      <div className={styles.faq__title}>Вопросы & Ответы</div>
-      <div className={styles.faq__wrapper}>
-        <AccordionDemo items={items} />
-      </div>
+      <AccordionDemo items={items} />
     </div>
   );
 }
