@@ -9,6 +9,8 @@ export const api = createApi({
     credentials: "include",
   }),
   refetchOnFocus: true,
+  refetchOnReconnect: true,
+  tagTypes: ["User", "Categories", "Products", "Rental", "Payments"],
   endpoints: (builder) => ({
     // Mutation
     // Отправка кода
@@ -133,8 +135,6 @@ export const api = createApi({
     }),
   }),
 });
-
-// console.log("All SID", JSON.stringify(Cookies.get(), null, 2));
 
 export const {
   // Mutation
