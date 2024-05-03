@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useCallback, useState } from "react";
 import styles from "./ProductOrderCard.module.scss";
 import { useCreateRentalMutation } from "@/shared/api/api";
-import { CardUpProps, CardDownProps } from './ProductOrderCardInterface';
+import { CardUpProps, CardDownProps } from "./IProductOrderCard";
 
 export default function ProductsOrder() {
   const [deliveryMethod, setDeliveryMethod] = useState("Доставка");
@@ -112,11 +112,11 @@ function CardDown({
   //   navigate("/success");
   // }, [navigate]);
 
-  const userData = JSON.parse(localStorage.getItem("userData") || "");
+  const userData = JSON.parse(localStorage.getItem("userData") || "{}");
 
   const [createRental] = useCreateRentalMutation();
 
-  const handlePaymentClick = async () => {
+  const handleAddRent = async () => {
     try {
       const rentalData: any = {
         userId: userData?._id,
@@ -124,8 +124,6 @@ function CardDown({
         subscriptionOptionsId: selectedSubscription._id,
         deliveryMethod: deliveryMethod,
       };
-      console.log(rentalData);
-
       await createRental(rentalData).unwrap();
     } catch (error) {
       console.error("Ошибка при отправке аренды:", error);
@@ -173,10 +171,7 @@ function CardDown({
       </div>
       {/* Реализовать оплату */}
       <Link className={styles.cardDown__link} to="/accountPage/subs">
-        <Button
-          onClick={handlePaymentClick}
-          className={styles.cardDown__button}
-        >
+        <Button onClick={handleAddRent} className={styles.cardDown__button}>
           Перейти к оплате
         </Button>
       </Link>

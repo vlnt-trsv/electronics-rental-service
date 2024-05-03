@@ -1,5 +1,5 @@
 import styles from "./CategoriesCard.module.scss";
-import { Categories } from "./CategoriesCardInterface";
+import { Categories } from "../../ICategories";
 
 export default function CategoriesCard({
   title,

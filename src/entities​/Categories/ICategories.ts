@@ -1,4 +1,4 @@
-export interface Categories {
+export interface ICategories {
     title: string;
     name: string;
     subtitle: string;

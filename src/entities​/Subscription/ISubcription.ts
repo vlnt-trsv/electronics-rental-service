@@ -1,4 +1,5 @@
-export interface Subscription {
+export interface ISubscription {
+  [x: string]: any;
   data: {
     _id: string;
     status: string;

@@ -1,5 +1,5 @@
-export interface Product {
-    title: string;
+export interface IProduct {
+    [x: string]: any;
     name: string;
     subtitle: string;
     price: string;

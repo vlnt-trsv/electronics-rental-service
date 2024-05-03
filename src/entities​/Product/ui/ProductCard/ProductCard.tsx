@@ -1,15 +1,15 @@
 import { Button } from "@/shared/ui/button/button";
 import styles from "./ProductCard.module.scss";
-import { Product } from "./ProductCardInterface";
+import { IProduct } from "../../IProduct";
 
 export default function ProductCard({
-  title,
+  name,
   subtitle,
   price,
   imageUrl,
   altText,
   onClick,
-}: Product) {
+}: IProduct) {
   return (
     <div className={styles.card}>
       <div className={styles.card__img}>
@@ -18,7 +18,7 @@ export default function ProductCard({
       <div className={styles.card__content}>
         <div className={styles.card__head}>
           <span className={styles.card__subtitle}>{subtitle}</span>
-          <span className={styles.card__title}>{title}</span>
+          <span className={styles.card__title}>{name}</span>
           <span className={styles.card__price}>{price}</span>
         </div>
         <div className={styles.card__button}>

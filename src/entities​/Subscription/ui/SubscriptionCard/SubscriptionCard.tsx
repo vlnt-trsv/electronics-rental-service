@@ -2,7 +2,9 @@ import styles from "./SubscriptionCard.module.scss";
 import renderButtons from "@/shared/lib/utils/renderButtons/renderButtons";
 import getStatusClassName from "@/shared/lib/utils/getStatusClassName/getStatusClassName";
 import Timer from "@/shared/lib/utils/timer/Timer";
-import { Subscription } from "./SubscriptionCardInterface";
+import { ISubscription } from "../../ISubcription";
+
+// TODO: Переделать карточку подписки
 
 // Функция для форматирования даты
 const formatDate = (dateString: any) => {
@@ -19,7 +21,7 @@ const shortenId = (id: any) => {
   return id.substring(18, 24).toUpperCase();
 };
 
-export default function SubscriptionCard({ data }: Subscription) {
+export default function SubscriptionCard({ data }: ISubscription) {
   // Форматирование даты оформления заказа
   const formattedRentalDate = formatDate(data?.rentalDate);
   const formattedStartDate = formatDate(data?.startDate);
