@@ -1,0 +1,13 @@
+.categories {
+    &__cards {
+      display: flex;
+      align-content: space-between;
+      gap: 16px;
+      width: 100%;
+      flex-wrap: wrap;
+    }
+    &__link {
+      flex: 1 0 49%;
+    }
+  }
+  

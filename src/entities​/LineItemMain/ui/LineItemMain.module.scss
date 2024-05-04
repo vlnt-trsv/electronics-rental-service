@@ -1,0 +1,60 @@
+.ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 32px;
+    margin: 0;
+    padding: 0;
+    transition: all 0.5s ease-out;
+  
+    .point {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background-color: #fff;
+  
+      &.inProgressPoint {
+        background-color: rgba(
+          255,
+          255,
+          255,
+          0.5
+        ); /* Прозрачность 50% для состояния "В процессе" */
+      }
+  
+      &.donePoint {
+        background-color: #0059ff; /* Синий цвет для состояния "Пройдено" */
+      }
+  
+      &.endPoint {
+        background-color: #73c344; /* Зеленый цвет для состояния "Насладиться" */
+      }
+    }
+  
+    .line {
+      width: 2px;
+      height: 150px; /* Высота линии */
+      background-color: #fff;
+      transition: transform 0.5s ease-in-out;
+  
+      &.inProgressLine {
+        background-color: rgba(255, 255, 255, 0.5);
+        transform: scaleY(0);
+        transform-origin: top;
+      }
+  
+      &.doneLine {
+        background-color: #0059ff;
+        transform: scaleY(1);
+        transform-origin: top;
+      }
+  
+      &.endLine {
+        background-color: #73c344;
+        transform: scaleY(1);
+        transform-origin: top;
+      }
+    }
+  }
+  

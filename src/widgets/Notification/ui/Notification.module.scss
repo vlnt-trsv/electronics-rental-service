@@ -1,0 +1,16 @@
+.notify {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    &__extra {
+      display: flex;
+      flex-direction: column;
+    }
+    &__subtitle {
+      font-weight: 700;
+    }
+    &__description {
+      opacity: 0.5;
+    }
+  }
+  

@@ -1,0 +1,16 @@
+.productRegistration {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  &__extra {
+    display: flex;
+    flex-direction: column;
+  }
+  &__title {
+    font-weight: 700;
+  }
+  &__subtitle {
+    opacity: 0.5;
+  }
+}

@@ -1,0 +1,17 @@
+.greeting {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+  &__title {
+    font-size: 24px;
+    font-weight: 700;
+  }
+  &__description {
+    opacity: 0.5;
+    font-size: 16px;
+    text-align: center;
+    width: 300px;
+  }
+}

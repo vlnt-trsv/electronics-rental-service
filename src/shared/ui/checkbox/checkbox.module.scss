@@ -1,0 +1,44 @@
+.checkbox {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  &__input {
+    opacity: 0;
+    position: absolute;
+    margin: 0;
+  }
+
+  &__control {
+    width: 40px;
+    height: 20px;
+    background-color: #ccc;
+    border-radius: 4px;
+    position: relative;
+    transition: background-color 0.2s;
+    display: flex;
+    align-items: center;
+
+    &:after {
+      content: '';
+      padding: 10px;
+      background-color: #fff;
+      border-radius: 4px;
+      transition: transform 0.2s;
+      transform: translateX(0); // Начальное положение кружка
+    }
+  }
+
+  &__input:checked + &__control {
+    background-color: #4caf50;
+
+    &:after {
+      transform: translateX(21px); // Перемещаем кружок вправо при активации
+    }
+  }
+
+  &__label {
+    margin-left: 8px;
+    color: #fff;
+  }
+}

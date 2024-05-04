@@ -1,0 +1,15 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  &__input {
+    display: flex;
+    padding: 16px;
+    align-items: center;
+    align-self: stretch;
+
+    border-radius: 8px;
+    border: 1px solid rgba($color: white, $alpha: 0.5);
+  }
+
+}
