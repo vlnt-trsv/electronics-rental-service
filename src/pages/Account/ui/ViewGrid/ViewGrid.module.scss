@@ -4,19 +4,18 @@
   grid-template-rows: auto auto;
   grid-gap: 16px;
   max-width: 1920px;
+  align-items: stretch;
   margin: 16px;
-  align-items: flex-start;
 }
 
 .header {
-  grid-column: span 2; /* Занимает обе колонки */
+  grid-column: 1 / -1;
 }
 
 .aside {
   grid-column: span 1;
-  height: calc(100dvh - 146px);
 }
 
 .main {
-  grid-column: span 1; /* Занимают одну колонку */
+  grid-column: span 1;
 }
