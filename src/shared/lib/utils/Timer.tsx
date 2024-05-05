@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const Timer = ({ endDate }: any) => {
+export const Timer = ({ endDate }: any) => {
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
 
   useEffect(() => {
@@ -31,4 +31,3 @@ const Timer = ({ endDate }: any) => {
   return <span>{timeLeft}</span>;
 };
 
-export default Timer;
