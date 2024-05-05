@@ -1,12 +1,19 @@
-$aside-background: var(--foreground, rgba(255, 255, 255, 0.05));
+$background: var(--foreground, rgba(255, 255, 255, 0.05));
 
 .main {
   border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 16px;
-  background: $aside-background;
-  height: 100%;
+  height: calc(100vh - 128px);
+  max-height: calc(100vh - 128px);
+  overflow: auto;
+  background: $background;
 
   &__container {
+    position: sticky;
+    z-index: 10;
+    top: 0;
+    background: rgb(28, 28, 28);
+    width: 100%;
     display: flex;
     // justify-content: space-between;
     border-bottom: 1px solid rgba(255, 255, 255, 0.16);
@@ -14,16 +21,13 @@ $aside-background: var(--foreground, rgba(255, 255, 255, 0.05));
 
   &__sblock {
     border-left: 1px solid rgba(255, 255, 255, 0.16);
-  }
-
-  &__title,
-  &__sblock {
     padding: 16px;
     font-size: 24px;
     font-weight: 700;
   }
 
   &__wrapper {
+    overflow: hidden;
     padding: 16px;
   }
 }

@@ -1,7 +1,11 @@
 import React, { CSSProperties, ReactNode } from "react";
 
+type JustifyType = "space-between" | "center";
+
 interface TextProps {
   children: ReactNode;
+  flex?: boolean;
+  justify?: JustifyType;
   size?: string | number;
   color?: string;
   weight?: string | number;
@@ -11,6 +15,8 @@ interface TextProps {
 
 const Text: React.FC<TextProps> = ({
   children,
+  flex = false,
+  justify,
   size = "16px",
   color,
   weight = "normal",
@@ -19,6 +25,8 @@ const Text: React.FC<TextProps> = ({
   ...props
 }) => {
   const style: CSSProperties = {
+    display: flex ? "flex" : undefined,
+    justifyContent: justify,
     fontSize: size,
     color: color,
     fontWeight: weight,

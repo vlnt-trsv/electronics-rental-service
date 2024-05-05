@@ -8,8 +8,9 @@ $aside-secondary-background: var(--secondary-15, rgba(51, 213, 223, 0.15));
   gap: 16px;
   padding: 16px;
   overflow: auto;
+  height: calc(100vh - 128px - 32px);
+  max-height: calc(100vh - 128px - 32px);
   justify-content: space-between;
-  height: 100%;
 
   border-radius: $aside-border-radius;
   border: 1px solid var(--outline, rgba(255, 255, 255, 0.1));
