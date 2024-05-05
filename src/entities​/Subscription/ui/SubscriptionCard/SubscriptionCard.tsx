@@ -1,56 +1,31 @@
 import styles from "./SubscriptionCard.module.scss";
-import renderButtons from "@/shared/lib/utils/renderButtons/renderButtons";
-import getStatusClassName from "@/shared/lib/utils/getStatusClassName/getStatusClassName";
-import Timer from "@/shared/lib/utils/timer/Timer";
+import {
+  getStatusClassName,
+  getShortenId,
+  getFormatedDate,
+  getImageUrl,
+} from "@/shared/lib/utils";
 import { ISubscription } from "../../ISubcription";
-
-// TODO: Переделать карточку подписки
-
-// Функция для форматирования даты
-const formatDate = (dateString: any) => {
-  const date = new Date(dateString);
-  return date.toLocaleDateString("ru-RU", {
-    day: "2-digit",
-    month: "2-digit",
-    year: "numeric",
-  });
-};
-
-// Функция для усечения _id от 18 до 24 символов
-const shortenId = (id: any) => {
-  return id.substring(18, 24).toUpperCase();
-};
+import { renderSubscriptionDetails, renderButtons } from "../../lib/utils";
+import Text from "@/widgets/Aside/ui/Text";
 
 export default function SubscriptionCard({ data }: ISubscription) {
-  // Форматирование даты оформления заказа
-  const formattedRentalDate = formatDate(data?.rentalDate);
-  const formattedStartDate = formatDate(data?.startDate);
-  const formattedEndDate = formatDate(data?.endDate);
-
-  // Усечение _id до 6 символов
-  const shortenedId = shortenId(data?._id || "");
-
-  const getImageUrl = (fileName: string) => {
-    return `http://localhost:8000/${fileName}`;
-  };
-
-  const totalAmount = data?.deliveryCost + data?.subscriptionOptions?.price;
+  const calculateTotalAmount = (deliveryCost: number, price: number) =>
+    deliveryCost + price;
 
   return (
     <div className={styles.subsCard}>
       <div className={styles.subsCard__head}>
-        <span className={`${styles.subsCard__titleHead}`}>
+        <Text>
           Статус:{" "}
-          <span style={getStatusClassName(data?.status)}>
+          <Text style={getStatusClassName(data?.status)}>
             {data?.status || "STATUS"}
-          </span>
-        </span>
-        <span className={`${styles.subsCard__titleHead}`}>
-          Дата оформления заказа: {formattedRentalDate || "DATE"}
-        </span>
-        <span className={`${styles.subsCard__titleHead}`}>
-          №{shortenedId || "NUMBER"}
-        </span>
+          </Text>
+        </Text>
+        <Text>
+          Дата оформления заказа: {getFormatedDate(data?.rentalDate || "")}
+        </Text>
+        <Text>№{getShortenId(data?._id || "")}</Text>
       </div>
       <div className={styles.subsCard__main}>
         <div className={styles.subsCard__info}>
@@ -62,78 +37,54 @@ export default function SubscriptionCard({ data }: ISubscription) {
             />
           </div>
           <div className={styles.subsCard__info__item}>
-            <span className={styles.subsCard__subtitle}>
-              {data?.category?.name || "CATEGORY NAME"}
-              {":"}
-              <span className={styles.subsCard__title}>
-                {data?.device?.name || "PRODUCT NAME"}
-              </span>
-            </span>
-            <hr className="hr" />
-            <span className={styles.subsCard__text}>
-              Подписка на {data?.subscriptionOptions?.duration || "DURATION"}{" "}
-              дней
-              <span className={styles.subsCard__price}>
-                {data?.subscriptionOptions?.price || "PRICE"} ₽
-              </span>
-            </span>
-            {
-              data?.status === "Не оплачено" ? (
-                <span className={styles.subsCard__text}>
-                  Оплатить товар до{":"}
-                  <span className={styles.subsCard__title}>
-                    {formattedRentalDate}
-                  </span>
-                </span>
-              ) : data?.status === "Завершено" ? (
-                <span className={styles.subsCard__text}>
-                  Вернуть товар до{":"}
-                  <span className={styles.subsCard__title}>-</span>
-                </span>
-              ) : data?.status === "В аренде" ? (
-                <span className={styles.subsCard__text}>
-                  Подписка действует{":"}
-                  <span className={styles.subsCard__title}>
-                    <Timer endDate={data?.endDate} />
-                  </span>
-                </span>
-              ) : data?.status === "Отменено" ? (
-                <span className={styles.subsCard__text}>
-                  Подписка не действительна
-                </span>
-              ) : null
-              // <span className={styles.subsCard__text}>
-              //   Забрать товар до{":"}
-              //   <span className={styles.subsCard__title}>
-              //     {data?.deliveryMethod === "Самовывоз" &&
-              //     data?.status === "Оплачено"
-              //       ? "12.12.2024"
-              //       : "null"}
-              //   </span>
-              // </span>
-            }
-
-            {data?.deliveryMethod === "Доставка" ? (
-              <span className={styles.subsCard__text}>
+            <Text
+              flex={true}
+              justify="space-between"
+              style={{
+                opacity: "0.5",
+              }}
+            >
+              {data?.category?.name || "CATEGORY NAME"}:
+              <Text>{data?.device?.name || "PRODUCT NAME"}</Text>
+            </Text>
+            <hr />
+            {renderSubscriptionDetails(
+              data?.status,
+              data?.subscriptionOptions,
+              getFormatedDate(data?.rentalDate || ""),
+              getFormatedDate(data?.startDate || ""),
+              getFormatedDate(data?.endDate || "")
+            )}
+            {data?.deliveryMethod === "Доставка" && (
+              <Text flex={true} justify="space-between">
                 Доставка (опционально)
-                <span className={styles.subsCard__price}>240 ₽</span>
-              </span>
-            ) : null}
-
-            <hr className="hr" />
-            <span className={styles.subsCard__text}>
-              К оплате{" "}
-              <span className={styles.subsCard__price}>
-                {totalAmount || "TOTAL PRICE"} ₽
-              </span>
-            </span>
-            <span style={{ opacity: "0.5" }}>
-              Подписка начнётся с момента получения девайса
-            </span>
+                <Text color="#ff6b6b" weight={700}>
+                  {data?.deliveryCost} ₽
+                </Text>
+              </Text>
+            )}
+            {data?.deliveryMethod === "Самовывоз" &&
+              data?.status === "Оплачено" && (
+                <Text>Заберите девайс в пункте выдачи</Text>
+              )}
+            <hr />
+            <Text flex={true} justify="space-between">
+              К оплате
+              <Text color="#ff6b6b" weight={700}>
+                {calculateTotalAmount(
+                  data?.deliveryCost,
+                  data?.subscriptionOptions?.price
+                )}{" "}
+                ₽
+              </Text>
+            </Text>
+            <Text style={{ opacity: ".5" }}>
+              Подписка начнётся с момента получения девайса
+            </Text>
           </div>
         </div>
-        {renderButtons(data?.status, data?._id)}
       </div>
+      {renderButtons(data?.status, data?._id)}
     </div>
   );
 }
