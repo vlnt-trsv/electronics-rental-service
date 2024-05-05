@@ -17,11 +17,12 @@ const styles = {
     gap: "8px",
   },
   subsCard__button: {
-    width:"100%",
+    borderRadius: "4px",
+    width: "100%",
   },
 };
 
-const renderButtons = (status: any, rentalId: any) => {
+export const renderButtons = (status: any, rentalId: any) => {
   // const dispatch = useDispatch();
 
   const [payRental] = usePayRentalMutation();
@@ -96,11 +97,7 @@ const renderButtons = (status: any, rentalId: any) => {
     case "В аренде":
       return (
         <div style={styles.subsCard__buttons}>
-          <Button
-            style={styles.subsCard__button}
-            variant="primary"
-            size="lg"
-          >
+          <Button style={styles.subsCard__button} variant="primary" size="lg">
             Продлить подписку
           </Button>
           <Button
@@ -116,11 +113,7 @@ const renderButtons = (status: any, rentalId: any) => {
     case "Завершено":
       return (
         <div style={styles.subsCard__buttons}>
-          <Button
-            style={styles.subsCard__button}
-            variant="primary"
-            size="lg"
-          >
+          <Button style={styles.subsCard__button} variant="primary" size="lg">
             Повторить подписку
           </Button>
           <Button
@@ -143,21 +136,17 @@ const renderButtons = (status: any, rentalId: any) => {
           >
             <BsQrCodeScan />
           </Button> */}
-          <Button
-            style={styles.subsCard__button}
-            variant="primary"
-            size="lg"
-          >
+          <Button style={styles.subsCard__button} variant="primary" size="lg">
             Продлить подписку
           </Button>
-          {/* <Button
-            className={styles.subsCard__button}
+          <Button
+            style={styles.subsCard__button}
             variant="danger"
             size="lg"
             onClick={handleCancelClick}
           >
             Отменить подписку
-          </Button> */}
+          </Button>
         </div>
       );
     case "Отменено":
@@ -177,5 +166,3 @@ const renderButtons = (status: any, rentalId: any) => {
       return null;
   }
 };
-
-export default renderButtons;

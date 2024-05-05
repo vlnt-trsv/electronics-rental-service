@@ -1,0 +1,1 @@
+export const getImageUrl = (fileName: string) => `http://localhost:8000/${fileName}`;

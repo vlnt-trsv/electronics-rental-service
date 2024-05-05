@@ -1,0 +1,21 @@
+.container {
+  display: grid;
+  grid-template-columns: 500px 1fr;
+  grid-template-rows: auto auto;
+  grid-gap: 16px;
+  max-width: 1920px;
+  align-items: stretch;
+  margin: 16px;
+}
+
+.header {
+  grid-column: 1 / -1;
+}
+
+.aside {
+  grid-column: span 1;
+}
+
+.main {
+  grid-column: span 1;
+}

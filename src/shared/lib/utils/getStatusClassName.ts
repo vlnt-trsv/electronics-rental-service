@@ -6,7 +6,7 @@ const styles = {
   statusCancel: { color: "rgb(108, 185, 196)" },
 };
 
-const getStatusClassName = (status: any) => {
+export const getStatusClassName = (status: any) => {
   switch (status) {
     case "Не оплачено":
       return styles.statusNotPaid; // класс для "Не оплачено"
@@ -21,4 +21,3 @@ const getStatusClassName = (status: any) => {
   }
 };
 
-export default getStatusClassName;

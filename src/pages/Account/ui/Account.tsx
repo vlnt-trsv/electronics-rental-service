@@ -4,6 +4,7 @@ import "react-toastify/dist/ReactToastify.min.css";
 import Preloader from "@/shared/ui/preloader/Preloader";
 import { useGetUserByIdQuery } from "@/shared/api/api";
 import Cookies from "js-cookie";
+import ViewGrid from "./ViewGrid/ViewGrid";
 
 export default function Account() {
   const userId = JSON.parse(Cookies.get("connect.user") || "");
@@ -17,19 +18,21 @@ export default function Account() {
   const isDataLoaded = !isLoading && !isError && userData;
 
   return (
-    <div className="grid-container">
+    <>
       <Preloader isDataLoaded={isDataLoaded} isLoading={isLoading} />
       {isDataLoaded && (
         <>
-          <header className="grid-header">
-            <Header />
-          </header>
-          <aside className="grid-aside">
-            <Aside />
-          </aside>
-          <main className="grid-main">
-            <Main />
-          </main>
+          <ViewGrid type="container">
+            <ViewGrid type="header">
+              <Header />
+            </ViewGrid>
+            <ViewGrid type="aside">
+              <Aside />
+            </ViewGrid>
+            <ViewGrid type="main">
+              <Main />
+            </ViewGrid>
+          </ViewGrid>
         </>
       )}
       <ToastContainer
@@ -48,6 +51,6 @@ export default function Account() {
         theme="light"
         transition={Slide}
       />
-    </div>
+    </>
   );
 }

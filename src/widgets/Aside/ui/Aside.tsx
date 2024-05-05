@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import styles from "./Aside.module.scss";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import {
@@ -13,8 +13,8 @@ import {
   useLogoutMutation,
 } from "@/shared/api/api";
 import Cookies from "js-cookie";
-
-import moprh from "@/shared/assets/imgs/morph.gif";
+import Avatar from "./Avatar/Avatar";
+import Text from "./Text";
 
 export default function Aside() {
   const navigate = useNavigate();
@@ -25,10 +25,6 @@ export default function Aside() {
 
   const { data: rental } = useGetRentalQuery(userId._id);
   const { data: userData } = useGetUserByIdQuery(userId._id);
-
-  const toggleMoreInfo = useCallback(() => {
-    setMoreInfo((prevMoreInfo) => !prevMoreInfo);
-  }, []);
 
   const handleLogout = async () => {
     navigate("/enterPage");
@@ -42,24 +38,18 @@ export default function Aside() {
     <aside className={styles.aside}>
       <div className={styles.aside__header}>
         <div className={styles["aside__profile"]}>
-          <div className={styles["aside__avatar"]}>
-            <div className={styles["aside__avatar-image"]}>
-              <img className={styles["image"]} src={moprh} alt="" />
-            </div>
+          <div className={styles["aside__user"]}>
+            <Avatar size={100} />
             <div className={styles["aside__user-info"]}>
               <div className={styles["username"]}>
-                <span className={styles["name"]}>
-                  {`${userData?.user?.firstName || "null"} ${
-                    userData?.user?.lastName || "null"
-                  }`}
-                </span>
-                <span className={styles["nickname"]}>
+                <Text>{`${userData?.user?.firstName || "null"} ${
+                  userData?.user?.lastName || "null"
+                }`}</Text>
+                <Text style={{ opacity: "0.5" }}>
                   @{userData?.user?.nickname || "null"}
-                </span>
+                </Text>
               </div>
-              <span className={styles["status"]}>
-                Ваш статус: {userData?.user?.status || "null"}
-              </span>
+              <Text>Ваш статус: {userData?.user?.status || "null"}</Text>
             </div>
             <ArrowDownLeftIcon
               onClick={() => setMoreInfo((prevMoreInfo) => !prevMoreInfo)}
