@@ -7,8 +7,7 @@ import { ISubscription } from "@/entities​/Subscription/ISubcription";
 
 export default function Subscription() {
   const {
-    rental,
-    subs,
+    rentalData,
     statuses,
     selectedFilter,
     isError,
@@ -18,13 +17,11 @@ export default function Subscription() {
     handleFilterChange,
   } = useSubscriptions();
 
-  // console.log("SUBS", subs);
-
   return (
     <div className={styles.subs}>
       {!hasSubscriptions ? (
         <Notice
-          data={rental?.rentals || []}
+          data={rentalData?.rentals || []}
           isLoading={isLoading}
           isFetching={false}
           isError={isError}
@@ -54,7 +51,7 @@ export default function Subscription() {
           </div>
           {/* Отображаем карточки подписок, если есть доступные подписки */}
           <div className={styles.subs__cards}>
-            {subs
+            {rentalData?.rentals
               .filter((subscription: ISubscription) =>
                 selectedFilter === "Все"
                   ? true

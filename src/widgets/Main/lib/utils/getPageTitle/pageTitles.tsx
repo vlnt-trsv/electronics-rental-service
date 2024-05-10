@@ -1,4 +1,8 @@
-const pageTitles = {
+type PageTitleType = {
+  [key: string]: string;
+};
+
+const pageTitles: PageTitleType = {
   "/accountPage": "Личный кабинет",
   "/accountPage/personalDataInfo": "Персональные данные",
   "/accountPage/notificationInfo": "Настройки уведомлений",
@@ -9,7 +13,7 @@ const pageTitles = {
   "/accountPage/devices/:categoryId": "Девайсы - Продукты",
   "/accountPage/devices/:categoryId/:productId":
     "Девайсы - Продукты - Детальная страницы",
-  "/accountPage/devices/:categoryId/:productId/order":
+  "/accountPage/devices/:categoryId/:productId/order/:orderId":
     "Девайсы - Продукты - Детальная страницы - Оформление заказа",
   "/accountPage/subs": "Подписки",
   "/accountPage/payments": "Платежи",

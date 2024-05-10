@@ -8,9 +8,12 @@ $aside-secondary-background: var(--secondary-15, rgba(51, 213, 223, 0.15));
   gap: 16px;
   padding: 16px;
   overflow: auto;
-  height: calc(100vh - 128px - 32px);
-  max-height: calc(100vh - 128px - 32px);
+  height: 100%;
+
+  // height: calc(100vh - 128px - 32px);
+  // max-height: calc(100vh - 128px - 32px);
   justify-content: space-between;
+  box-sizing: border-box;
 
   border-radius: $aside-border-radius;
   border: 1px solid var(--outline, rgba(255, 255, 255, 0.1));
@@ -87,26 +90,6 @@ $aside-secondary-background: var(--secondary-15, rgba(51, 213, 223, 0.15));
     }
   }
 
-  &__button-second,
-  &__button-nav {
-    display: flex;
-    padding: 8px;
-    justify-content: space-between;
-    align-items: center;
-    align-self: stretch;
-    border-radius: 8px;
-    background: $aside-secondary-background;
-  }
-
-  &__button-second {
-    justify-content: flex-start;
-    gap: 8px;
-    transition: background 0.2s ease-out;
-    &:hover {
-      background: rgba(51, 213, 223, 0.3);
-    }
-  }
-
   &__dropdown {
     margin-left: auto;
     margin-top: auto;
@@ -137,46 +120,12 @@ $aside-secondary-background: var(--secondary-15, rgba(51, 213, 223, 0.15));
     }
   }
 
-  &__button-nav {
-    flex: 0 20%;
-    flex-grow: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 32px;
-    transition: transform 0.2s ease-out, background 0.2s ease-out;
-
-    &:last-child {
-      opacity: 0.5;
-      cursor: default;
-      pointer-events: none;
-    }
-
-    &:hover {
-      background: rgba(51, 213, 223, 0.3);
-      transform: scale(1.02);
-    }
-  }
-  a {
-    color: #fff;
-  }
-
   &__navigation {
     display: flex;
     align-items: flex-start;
     gap: 16px;
     width: 100%;
     flex-wrap: wrap;
-  }
-
-  &__link {
-    opacity: 0.5;
-    text-decoration: underline;
-    cursor: pointer;
-    transition: opacity 0.1s ease-out;
-    &:hover {
-      opacity: 1;
-    }
   }
 
   &__info {
@@ -219,9 +168,4 @@ $aside-secondary-background: var(--secondary-15, rgba(51, 213, 223, 0.15));
 
 ::-webkit-scrollbar {
   width: 0;
-}
-
-.svg {
-  width: 24px;
-  height: 24px;
 }

@@ -15,7 +15,7 @@ export function useProducts() {
     JSON.parse(localStorage.getItem("selectedSubscriptionOption") || "{}")
   );
 
-  const product = JSON.parse(localStorage.getItem("selectedProduct") || "");
+  const product = JSON.parse(localStorage.getItem("selectedProduct") || "{}");
   const handleProductClick = (product: any) => {
     localStorage.setItem("selectedProduct", JSON.stringify({ ...product }));
     navigate(`${product?._id}`);
