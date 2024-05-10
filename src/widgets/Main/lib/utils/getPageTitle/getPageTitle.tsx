@@ -9,7 +9,7 @@ const getPageTitle = (pathname: string) => {
 
     if (pathSegments.length === templateSegments.length) {
       let isMatch = true;
-      const dynamicValues = {};
+      const dynamicValues: any = {};
 
       for (let i = 0; i < templateSegments.length; i++) {
         if (templateSegments[i].startsWith(":")) {

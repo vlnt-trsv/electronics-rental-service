@@ -41,9 +41,12 @@ export const Router = () => {
           <Route path="devices" element={<Devices />}>
             <Route index element={<Categories />} />
             <Route path=":categoryId" element={<Product />} />
-            <Route path=":categoryId/:productId" element={<ProductDetailed />} />
             <Route
-              path=":categoryId/:productId/order"
+              path=":categoryId/:productId"
+              element={<ProductDetailed />}
+            />
+            <Route
+              path=":categoryId/:productId/order/:orderId"
               element={<ProductOrder />}
             />
           </Route>

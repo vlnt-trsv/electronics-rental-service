@@ -1,12 +1,23 @@
 import styles from "./ProductDetailed.module.scss";
 import { Button } from "@/shared/ui/button/button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useProducts } from "../lib/hooks/useProducts";
+import { v4 as uuidv4 } from "uuid";
 
 export default function ProductsDetailed() {
   const { product, category, handleOptionSelect, selectedOption, getImageUrl } =
     useProducts();
+
+  const navigate = useNavigate();
+  const handleOrder = () => {
+    if (selectedOption?._id) {
+      const uniqueOrderId = uuidv4();
+      navigate(`order/${uniqueOrderId}`, { replace: true });
+    } else {
+      toast.warn("Сначала выберите подписку!");
+    }
+  };
 
   return (
     <div className={styles.productDetails}>
@@ -38,20 +49,18 @@ export default function ProductsDetailed() {
         <span className={styles.productDetails__description}>
           Оплата проходит в начале периода
         </span>
-        {selectedOption?._id ? (
-          <Link to="order">
-            <Button className={styles.productDetails__button}>
-              Оформить подписку
-            </Button>
-          </Link>
-        ) : (
-          <Button
-            onClick={() => toast.warn("Сначала выберите подписку!")}
-            className={styles.productDetails__button}
-          >
-            Оформить подписку
-          </Button>
-        )}
+        {/* {selectedOption?._id ? ( */}
+        <Button className={styles.productDetails__button} onClick={handleOrder}>
+          Оформить подписку
+        </Button>
+        {/* // ) : (
+        //   <Button
+        //     onClick={() => toast.warn("Сначала выберите подписку!")}
+        //     className={styles.productDetails__button}
+        //   >
+        //     Оформить подписку
+        //   </Button>
+        // )} */}
       </div>
     </div>
   );

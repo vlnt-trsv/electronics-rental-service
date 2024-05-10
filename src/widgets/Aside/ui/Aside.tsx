@@ -15,6 +15,7 @@ import {
 import Cookies from "js-cookie";
 import Avatar from "./Avatar/Avatar";
 import Text from "./Text";
+import Button from "./Button/Button";
 
 export default function Aside() {
   const navigate = useNavigate();
@@ -27,12 +28,67 @@ export default function Aside() {
   const { data: userData } = useGetUserByIdQuery(userId._id);
 
   const handleLogout = async () => {
-    navigate("/enterPage");
     await logout({});
+    navigate("/enterPage");
     Cookies.remove("connect.user");
     Cookies.remove("connect.sid");
     localStorage.clear();
   };
+
+  const primary: any = [
+    {
+      children: "Девайсы",
+      location: "devices",
+    },
+    {
+      children: "Подписки",
+      location: "subs",
+    },
+    {
+      children: "Платежи",
+      location: "payments",
+    },
+    {
+      children: "Контакты",
+      location: "contacts",
+    },
+    {
+      children: "Вопросы & Ответы",
+      location: "faq",
+    },
+    {
+      children: "?",
+      location: "*",
+    },
+  ];
+
+  const secondary: any = [
+    {
+      children: "Персональные данные",
+      location: "personalDataInfo",
+      icon: <AccountIcon />,
+    },
+    {
+      children: "Настройки уведомлений",
+      location: "notificationInfo",
+      icon: <SettingIcon />,
+    },
+  ];
+
+  const tertiary: any = [
+    {
+      children: "Договор на использование сервиса",
+      location: "doc1",
+    },
+    {
+      children: "Политика конфиденциальности",
+      location: "doc2",
+    },
+    {
+      children: "Согласие на обработку персональных данных",
+      location: "doc3",
+    },
+  ];
 
   return (
     <aside className={styles.aside}>
@@ -73,58 +129,48 @@ export default function Aside() {
                 Бонусный счёт: {userData?.user?.bonus || "null"} ₽
               </div>
             </div>
-            <Link
-              className={styles["aside__button-second"]}
-              to={"personalDataInfo"}
-            >
-              {<AccountIcon className={styles.aside__icon} />} Персональные
-              данные
-            </Link>
-            <Link
-              to={"notificationInfo"}
-              className={styles["aside__button-second"]}
-            >
-              {<SettingIcon className={styles.aside__icon} />}Настройки
-              уведомлений
-            </Link>
-            <Link to={"doc1"} className={styles["aside__link"]}>
-              Договор на использование сервиса
-            </Link>
-            <Link to={"doc2"} className={styles["aside__link"]}>
-              Политика конфиденциальности
-            </Link>
-            <Link to={"doc3"} className={styles["aside__link"]}>
-              Согласие на обработку персональных данных
-            </Link>
+            {secondary?.map((s: any) => {
+              return (
+                <Button
+                  key={s.children}
+                  children={s.children}
+                  location={s.location}
+                  type="secondary"
+                  justify="left"
+                  icon={s.icon}
+                />
+              );
+            })}
+            {tertiary?.map((t: any) => {
+              return (
+                <Button
+                  key={t.children}
+                  children={t.children}
+                  location={t.location}
+                  type="tertiary"
+                  justify="left"
+                />
+              );
+            })}
           </div>
         </div>
         <nav className={styles["aside__navigation"]}>
-          <NavLink to={"devices"} className={styles["aside__button-nav"]}>
-            Девайсы
-          </NavLink>
-          <NavLink to={"subs"} className={styles["aside__button-nav"]}>
-            Подписки
-          </NavLink>
-          <NavLink to={"payments"} className={styles["aside__button-nav"]}>
-            Платежи
-          </NavLink>
-          <NavLink to={"contacts"} className={styles["aside__button-nav"]}>
-            Контакты
-          </NavLink>
-          <NavLink to={"faq"} className={styles["aside__button-nav"]}>
-            Вопросы & Ответы
-          </NavLink>
-          <NavLink to={"*"} className={styles["aside__button-nav"]}>
-            ?
-          </NavLink>
+          {primary?.map((p: any) => {
+            return (
+              <Button
+                key={p.children}
+                children={p.children}
+                location={p.location}
+                type="primary"
+                justify="center"
+              />
+            );
+          })}
         </nav>
       </div>
       <div className={styles.aside__footer}>
-        <div className={styles["aside__exit"]}>
-          <ExitIcon
-            className={styles["aside__exit-icon"]}
-            onClick={handleLogout}
-          />
+        <div onClick={handleLogout} className={styles["aside__exit"]}>
+          <ExitIcon className={styles["aside__exit-icon"]} />
         </div>
       </div>
     </aside>

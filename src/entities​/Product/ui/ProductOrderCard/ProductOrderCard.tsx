@@ -1,9 +1,9 @@
 import { Button } from "@/shared/ui/button/button";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useCallback, useState } from "react";
 import styles from "./ProductOrderCard.module.scss";
 import { useCreateRentalMutation } from "@/shared/api/api";
-import { CardUpProps, CardDownProps } from "./IProductOrderCard";
+import { CardUpProps, CardDownProps, IRental } from "./IProductOrderCard";
 
 export default function ProductsOrder() {
   const [deliveryMethod, setDeliveryMethod] = useState("Доставка");
@@ -106,7 +106,6 @@ function CardDown({
   selectedProduct,
   selectedSubscription,
 }: CardDownProps) {
-  // const navigate = useNavigate();
   // const handlePayment = useCallback(() => {
   //   console.log("Оплата прошла");
   //   navigate("/success");
@@ -114,17 +113,20 @@ function CardDown({
 
   const userData = JSON.parse(localStorage.getItem("userData") || "{}");
 
-  const [createRental] = useCreateRentalMutation();
+  const [createRental] = useCreateRentalMutation({});
+
+  const navigate = useNavigate();
 
   const handleAddRent = async () => {
     try {
-      const rentalData: any = {
+      const rentalData: IRental = {
         userId: userData?._id,
         deviceId: selectedProduct._id,
         subscriptionOptionsId: selectedSubscription._id,
         deliveryMethod: deliveryMethod,
       };
       await createRental(rentalData).unwrap();
+      navigate("/accountPage/subs");
     } catch (error) {
       console.error("Ошибка при отправке аренды:", error);
     }
@@ -170,11 +172,9 @@ function CardDown({
         ) : null}
       </div>
       {/* Реализовать оплату */}
-      <Link className={styles.cardDown__link} to="/accountPage/subs">
-        <Button onClick={handleAddRent} className={styles.cardDown__button}>
-          Перейти к оплате
-        </Button>
-      </Link>
+      <Button onClick={handleAddRent} className={styles.cardDown__button}>
+        Перейти к оплате
+      </Button>
     </div>
   );
 }

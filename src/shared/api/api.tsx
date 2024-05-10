@@ -8,6 +8,7 @@ export const api = createApi({
     },
     credentials: "include",
   }),
+  keepUnusedDataFor: 30,
   refetchOnFocus: true,
   refetchOnReconnect: true,
   tagTypes: ["User", "Categories", "Products", "Rental", "Payments"],
@@ -37,6 +38,14 @@ export const api = createApi({
         url: "/logout",
         method: "GET",
       }),
+      onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
+        try {
+          await queryFulfilled;
+          dispatch(api.util.invalidateTags(["User"]));
+        } catch (error) {
+          console.error("Error saving rental data:", error);
+        }
+      },
     }),
 
     // Удаление пользователя
@@ -60,6 +69,15 @@ export const api = createApi({
         method: "PATCH",
         body: updatedData,
       }),
+      invalidatesTags: ["User"],
+      onQueryStarted: async (_userId, { dispatch, queryFulfilled }) => {
+        try {
+          await queryFulfilled;
+          dispatch(api.util.invalidateTags(["User"]));
+        } catch (error) {
+          console.error("Error saving user data:", error);
+        }
+      },
     }),
 
     // Создание аренды
@@ -69,6 +87,15 @@ export const api = createApi({
         method: "POST",
         body: { userId, deviceId, subscriptionOptionsId, deliveryMethod },
       }),
+      invalidatesTags: ["Rental"],
+      onQueryStarted: async (_rentalId, { dispatch, queryFulfilled }) => {
+        try {
+          await queryFulfilled;
+          dispatch(api.util.invalidateTags(["Rental"]));
+        } catch (error) {
+          console.error("Error saving rental data:", error);
+        }
+      },
     }),
 
     // Оплата аренды
@@ -78,6 +105,15 @@ export const api = createApi({
         method: "POST",
         body: paymentDetails,
       }),
+      invalidatesTags: ["Rental"],
+      onQueryStarted: async (_rentalId, { dispatch, queryFulfilled }) => {
+        try {
+          await queryFulfilled;
+          dispatch(api.util.invalidateTags(["Rental"]));
+        } catch (error) {
+          console.error("Error saving rental data:", error);
+        }
+      },
     }),
 
     // Отмена аренды
@@ -86,6 +122,15 @@ export const api = createApi({
         url: `/rentals/${rentalId}/cancel`,
         method: "POST",
       }),
+      invalidatesTags: ["Rental"],
+      onQueryStarted: async (_rentalId, { dispatch, queryFulfilled }) => {
+        try {
+          await queryFulfilled;
+          dispatch(api.util.invalidateTags(["Rental"]));
+        } catch (error) {
+          console.error("Error saving rental data:", error);
+        }
+      },
     }),
 
     // Завершение аренды
@@ -94,6 +139,15 @@ export const api = createApi({
         url: `/rentals/${rentalId}/complete`,
         method: "POST",
       }),
+      invalidatesTags: ["Rental"],
+      onQueryStarted: async (_rentalId, { dispatch, queryFulfilled }) => {
+        try {
+          await queryFulfilled;
+          dispatch(api.util.invalidateTags(["Rental"]));
+        } catch (error) {
+          console.error("Error saving rental data:", error);
+        }
+      },
     }),
 
     // Удаление аренды
@@ -102,15 +156,41 @@ export const api = createApi({
         url: `/rentals/${rentalId}`,
         method: "DELETE",
       }),
+      invalidatesTags: ["Rental"],
+      onQueryStarted: async (_rentalId, { dispatch, queryFulfilled }) => {
+        try {
+          await queryFulfilled;
+          dispatch(api.util.invalidateTags(["Rental"]));
+        } catch (error) {
+          console.error("Error saving rental data:", error);
+        }
+      },
     }),
 
     /// Query
     getUserById: builder.query({
       query: (userId) => ({ url: `/user/${userId}`, method: "GET" }),
+      providesTags: ["User"],
+      onQueryStarted: async (_userId, { queryFulfilled }) => {
+        try {
+          await queryFulfilled;
+        } catch (error) {
+          console.error("Error saving rental data:", error);
+        }
+      },
     }),
 
     getCategories: builder.query({
       query: () => ({ url: "/categories", method: "GET" }),
+      keepUnusedDataFor: 60,
+      providesTags: ["Categories"],
+      onQueryStarted: async (_, { queryFulfilled }) => {
+        try {
+          await queryFulfilled;
+        } catch (error) {
+          console.error("Error saving rental data:", error);
+        }
+      },
     }),
 
     getProducts: builder.query({
@@ -118,6 +198,7 @@ export const api = createApi({
         url: `/devices/category/${categoryId}`,
         method: "GET",
       }),
+      providesTags: ["Products"],
     }),
 
     getRental: builder.query({
@@ -125,6 +206,14 @@ export const api = createApi({
         url: `/rentals/?userId=${userId}`,
         method: "GET",
       }),
+      providesTags: ["Rental"],
+      onQueryStarted: async (_arg, { queryFulfilled }) => {
+        try {
+          await queryFulfilled;
+        } catch (error) {
+          console.error("Error saving rental data:", error);
+        }
+      },
     }),
 
     getPayments: builder.query({
@@ -132,6 +221,7 @@ export const api = createApi({
         url: `/payments/?userId=${userId}`,
         method: "GET",
       }),
+      providesTags: ["Payments"],
     }),
   }),
 });
