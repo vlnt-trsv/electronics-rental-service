@@ -3,13 +3,17 @@
   grid-template-columns: 500px 1fr;
   grid-template-rows: auto auto;
   grid-gap: 16px;
-  max-width: 1920px;
   align-items: stretch;
   margin: 16px;
 }
 
 .header {
   grid-column: 1 / -1;
+}
+
+.aside,
+.main {
+  height: calc(100vh - 112px);
 }
 
 .aside {
