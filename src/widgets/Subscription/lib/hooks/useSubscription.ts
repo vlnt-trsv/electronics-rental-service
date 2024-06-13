@@ -34,8 +34,9 @@ export function useSubscriptions() {
   // }, [rentalData]);
 
   const getButtonVariant = (status: string) => {
-    if (!areSubscriptionsAvailable) return "default disabled";
-    return selectedFilter === status ? "primary" : "";
+    if (!areSubscriptionsAvailable) return "disabled";
+    if (status === "default disabled") return "disabled";
+    return selectedFilter === status ? "primary" : "default";
   };
 
   const handleFilterChange = (status: string) => {

@@ -53,9 +53,9 @@ export default function Enter() {
 
     if (value !== "" && /^[0-9]$/.test(value)) {
       if (index < 3) {
-        document.getElementById(`codeInput${index + 1}`).focus();
+        document.getElementById(`codeInput${index + 1}`)?.focus();
       } else {
-        const enteredCode = newCodeInputs.join("");
+        const enteredCode = parseInt(newCodeInputs.join(""));
         handleVerifyCode(email, enteredCode);
       }
     }
@@ -66,7 +66,7 @@ export default function Enter() {
       const newCodeInputs = [...codeInputs];
       newCodeInputs[index - 1] = "";
       setCodeInputs(newCodeInputs);
-      document.getElementById(`codeInput${index - 1}`).focus();
+      document.getElementById(`codeInput${index - 1}`)?.focus();
     }
   };
 
@@ -102,7 +102,7 @@ export default function Enter() {
                   id={`codeInput${index}`}
                   type="text"
                   value={value}
-                  maxLength="1"
+                  maxLength={1}
                   onChange={(e) => handleInputChange(index, e.target.value)}
                   onKeyDown={(e) =>
                     e.key === "Backspace" && handleBackspace(index)

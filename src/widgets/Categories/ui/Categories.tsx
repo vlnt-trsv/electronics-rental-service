@@ -7,7 +7,7 @@ import Notice from "@/shared/ui/notice/Notice.tsx";
 import _console from "@/shared/assets/imgs/_console.jpg";
 
 export default function Categories() {
-  const { data: categories, isError, isLoading } = useGetCategoriesQuery();
+  const { data: categories, isError, isLoading } = useGetCategoriesQuery({});
 
   const handleCategoryClick = (category: any) => {
     localStorage.setItem("selectedCategory", JSON.stringify({ ...category }));
@@ -50,6 +50,7 @@ export default function Categories() {
                   description={`В наличии`} // TODO: add description
                   imageUrl={getImageUrl(category.categoryImage)}
                   altText={category.altText}
+                  name={""}
                 />
               </Link>
             );

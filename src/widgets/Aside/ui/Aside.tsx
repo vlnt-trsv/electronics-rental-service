@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styles from "./Aside.module.scss";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   ExitIcon,
   SettingIcon,

@@ -1,6 +1,6 @@
 import styles from "./ProductDetailed.module.scss";
 import { Button } from "@/shared/ui/button/button";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useProducts } from "../lib/hooks/useProducts";
 import { v4 as uuidv4 } from "uuid";
@@ -38,7 +38,7 @@ export default function ProductsDetailed() {
         {product.subscriptionOptions?.map((option: any) => (
           <Button
             key={option._id}
-            variant={selectedOption?._id === option?._id ? "primary" : ""}
+            variant={selectedOption?._id === option?._id ? "primary" : "" || null}
             className={styles.productDetails__button}
             onClick={() => handleOptionSelect(option)}
           >
