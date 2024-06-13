@@ -22,7 +22,7 @@ export default function ProductsOrder() {
     localStorage.getItem("selectedSubscriptionOption") || ""
   );
 
-  const getImageUrl = (fileName: string) => {
+  const getImageUrl = (fileName: string): any => {
     return `http://localhost:8000/${fileName}`;
   };
 
@@ -139,14 +139,14 @@ function CardDown({
         <hr className={styles.hr} />
         <div className={styles.cardDown__button}>
           <Button
-            variant={deliveryMethod === "Самовывоз" ? "primary" : ""}
+            variant={deliveryMethod === "Самовывоз" ? "primary" : "" || null}
             onClick={() => onDeliveryMethodChange("Самовывоз")}
             className={styles.cardDown__button}
           >
             Самовывоз
           </Button>
           <Button
-            variant={deliveryMethod === "Доставка" ? "primary" : ""}
+            variant={deliveryMethod === "Доставка" ? "primary" : "" || null}
             onClick={() => onDeliveryMethodChange("Доставка")}
             className={styles.cardDown__button}
           >

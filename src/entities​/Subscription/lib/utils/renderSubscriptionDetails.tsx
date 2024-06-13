@@ -1,4 +1,4 @@
-import { Timer } from "@/shared/lib";
+// import { Timer } from "@/shared/lib";
 import Text from "@/widgets/Aside/ui/Text";
 
 export function renderSubscriptionDetails(

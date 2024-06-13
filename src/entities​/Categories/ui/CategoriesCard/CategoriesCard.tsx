@@ -1,5 +1,5 @@
 import styles from "./CategoriesCard.module.scss";
-import { Categories } from "../../ICategories";
+import { ICategories } from "../../ICategories";
 
 export default function CategoriesCard({
   title,
@@ -7,7 +7,7 @@ export default function CategoriesCard({
   description,
   imageUrl,
   altText,
-}: Categories) {
+}: ICategories) {
   return (
     <div className={styles.card}>
       <div className={styles.card__content}>
