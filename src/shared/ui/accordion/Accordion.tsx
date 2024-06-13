@@ -1,12 +1,16 @@
-import { forwardRef } from "react";
+import { Ref, forwardRef } from "react";
 import * as Accordion from "@radix-ui/react-accordion";
 import classNames from "classnames";
 import { ChevronDownIcon } from "@radix-ui/react-icons";
 import "./Accordion.scss";
-import { cn } from "@/shared/lib/utils";
+// import { cn } from "@/shared/lib/utils";
 
 // Определите пропсы для AccordionDemo
-const AccordionDemo = ({ items }) => (
+const AccordionDemo = ({
+  items,
+}: {
+  items: { question: string; answer: string }[];
+}) => (
   <Accordion.Root
     className="AccordionRoot"
     type="single"
@@ -27,12 +31,19 @@ const AccordionDemo = ({ items }) => (
 );
 
 const AccordionTrigger = forwardRef(
-  ({ children, className, ...props }, forwardedRef) => (
+  (
+    {
+      children,
+      className,
+      ...props
+    }: { children: React.ReactNode; className?: string; [key: string]: any },
+    forwardedRef: React.Ref<HTMLDivElement>
+  ) => (
     <Accordion.Header className="AccordionHeader">
       <Accordion.Trigger
         className={classNames("AccordionTrigger", className)}
         {...props}
-        ref={forwardedRef}
+        ref={forwardedRef as Ref<HTMLButtonElement>}
       >
         {children}
         <ChevronDownIcon className="AccordionChevron" aria-hidden />
@@ -42,7 +53,14 @@ const AccordionTrigger = forwardRef(
 );
 
 const AccordionContent = forwardRef(
-  ({ children, className, ...props }, forwardedRef) => (
+  (
+    {
+      children,
+      className,
+      ...props
+    }: { children: React.ReactNode; className?: string; [key: string]: any },
+    forwardedRef: React.Ref<HTMLDivElement>
+  ) => (
     <Accordion.Content
       className={classNames("AccordionContent", className)}
       {...props}

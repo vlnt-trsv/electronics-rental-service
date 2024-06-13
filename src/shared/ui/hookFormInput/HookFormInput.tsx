@@ -1,6 +1,22 @@
 import { cn } from "@/shared/lib/utils";
 
-const HookFormInput = ({ register, errors, formInput, input, type, ...props }) => {
+type HookFormInputProps = {
+  register: any;
+  errors: any;
+  formInput: string;
+  input: string;
+  type: string;
+  [key: string]: any;
+};
+
+const HookFormInput = ({
+  register,
+  errors,
+  formInput,
+  input,
+  type,
+  ...props
+}: HookFormInputProps) => {
   return (
     <div className={cn(formInput)}>
       <input
