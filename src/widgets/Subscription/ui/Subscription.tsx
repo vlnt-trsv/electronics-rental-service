@@ -33,7 +33,7 @@ export default function Subscription() {
           <div className={styles.subs__filter}>
             <Button
               size={"lg"}
-              variant={getButtonVariant("Все")}
+              variant={getButtonVariant("Все") || null}
               onClick={() => handleFilterChange("Все")}
             >
               Все

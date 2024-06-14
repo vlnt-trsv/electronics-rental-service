@@ -5,7 +5,7 @@ interface NoticeProps {
   data: any[];
   isLoading: boolean;
   isError: boolean;
-  isFetching: boolean;
+  isFetching?: boolean;
   message: string;
 }
 

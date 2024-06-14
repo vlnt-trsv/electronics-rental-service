@@ -5,11 +5,15 @@ import {
   getFormatedDate,
   getImageUrl,
 } from "@/shared/lib/utils";
-import { ISubscription } from "../../ISubcription";
+import { ISubscriptionData } from "../../ISubcription";
 import { renderSubscriptionDetails, renderButtons } from "../../lib/utils";
 import Text from "@/widgets/Aside/ui/Text";
 
-export default function SubscriptionCard({ data }: ISubscription) {
+interface SubscriptionCardProps {
+  data: ISubscriptionData;
+}
+
+export default function SubscriptionCard({ data }: SubscriptionCardProps) {
   const calculateTotalAmount = (deliveryCost: number, price: number) =>
     deliveryCost + price;
 

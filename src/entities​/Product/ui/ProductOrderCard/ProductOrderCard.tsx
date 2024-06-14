@@ -4,6 +4,7 @@ import { useCallback, useState } from "react";
 import styles from "./ProductOrderCard.module.scss";
 import { useCreateRentalMutation } from "@/shared/api/api";
 import { CardUpProps, CardDownProps, IRental } from "./IProductOrderCard";
+import { getImageUrl } from "@/shared/lib";
 
 export default function ProductsOrder() {
   const [deliveryMethod, setDeliveryMethod] = useState("Доставка");
@@ -15,16 +16,15 @@ export default function ProductsOrder() {
   const selectedProduct = JSON.parse(
     localStorage.getItem("selectedProduct") || ""
   );
+
+  const productImage = getImageUrl(selectedProduct.deviceImage);
+
   const selectedCategory = JSON.parse(
     localStorage.getItem("selectedCategory") || ""
   );
   const selectedSubscription = JSON.parse(
     localStorage.getItem("selectedSubscriptionOption") || ""
   );
-
-  const getImageUrl = (fileName: string) => {
-    return `http://localhost:8000/${fileName}`;
-  };
 
   const productPrice = selectedSubscription?.price || 0;
   const deliveryPrice = deliveryMethod === "Доставка" ? 240 : 0;
@@ -35,7 +35,7 @@ export default function ProductsOrder() {
       <CardUp
         visible={deliveryMethod === "Доставка"}
         selectedProduct={selectedProduct}
-        getImage={getImageUrl(selectedProduct.deviceImage)} // Передаем функцию, а не результат ее вызова
+        getImage={productImage} // Передаем функцию, а не результат ее вызова
         selectedCategory={selectedCategory}
         selectedSubscription={selectedSubscription}
         totalPrice={totalPrice}
@@ -139,14 +139,14 @@ function CardDown({
         <hr className={styles.hr} />
         <div className={styles.cardDown__button}>
           <Button
-            variant={deliveryMethod === "Самовывоз" ? "primary" : ""}
+            variant={deliveryMethod === "Самовывоз" ? "primary" : "" || null}
             onClick={() => onDeliveryMethodChange("Самовывоз")}
             className={styles.cardDown__button}
           >
             Самовывоз
           </Button>
           <Button
-            variant={deliveryMethod === "Доставка" ? "primary" : ""}
+            variant={deliveryMethod === "Доставка" ? "primary" : "" || null}
             onClick={() => onDeliveryMethodChange("Доставка")}
             className={styles.cardDown__button}
           >

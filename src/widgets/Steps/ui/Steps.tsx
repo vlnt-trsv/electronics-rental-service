@@ -46,7 +46,7 @@ export default function Steps() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const middleCardIndex = stepsData.findIndex((step, index) => {
+      const middleCardIndex = stepsData.findIndex((_step, index) => {
         const cardElement = document.getElementById(`card-${index}`);
         if (cardElement) {
           const rect = cardElement.getBoundingClientRect();
@@ -62,7 +62,7 @@ export default function Steps() {
         setCardsStatus((prevStatus) =>
           prevStatus.map((status, index) => {
             if (index === middleCardIndex) {
-              return "Пройдено";
+              return "Пройдено" as "В процессе" | "Насладиться";
             }
             return status;
           })
@@ -88,7 +88,8 @@ export default function Steps() {
             key={index}
             id={`card-${index}`}
             className={`${styles.steps__card} ${
-              cardsStatus[index] === "Пройдено" ? styles.completed : ""
+              cardsStatus[index] === "В процессе" ||
+              cardsStatus[index] === "Насладиться"
             }`}
           >
             <LineItemMain status={cardsStatus[index]} />

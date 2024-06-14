@@ -8,14 +8,16 @@ export interface CardUpProps {
   selectedCategory: ICategories;
   selectedSubscription: ISubscription;
   totalPrice: number;
-  getImage: (fileName: string) => void;
+  getImage: any;
 }
 
 export interface CardDownProps {
   deliveryMethod: string;
   onDeliveryMethodChange: (method: string) => void;
+  selectedCategory: ICategories;
   selectedProduct: IProduct;
   selectedSubscription: ISubscription;
+  totalPrice: number;
 }
 
 export interface IRental {

@@ -6,35 +6,32 @@ import { cn } from "@/shared/lib/utils";
 
 import styles from "./button.module.scss";
 
-const buttonVariants = cva(
-  styles.button,
-  {
-    variants: {
-      variant: {
-        default: styles.variant__default,
-        primary: styles.variant__primary,
-        secondary: styles.variant__secondary,
-        outline: styles.variant__outline,
-        ghost: styles.variant__ghost,
-        link: styles.variant__link,
-        disabled: styles.variant__disabled,
-        danger: styles.variant__danger,
-        success: styles.variant__success,
-      },
-      size: {
-        default: styles.size__default,
-        sm: styles.size__sm,
-        lg: styles.size__lg,
-        s48: styles.size__s48,
-        icon: styles.size__icon,
-      },
+const buttonVariants = cva(styles.button, {
+  variants: {
+    variant: {
+      default: styles.variant__default,
+      primary: styles.variant__primary,
+      secondary: styles.variant__secondary,
+      outline: styles.variant__outline,
+      ghost: styles.variant__ghost,
+      link: styles.variant__link,
+      disabled: styles.variant__disabled,
+      danger: styles.variant__danger,
+      success: styles.variant__success,
     },
-    defaultVariants: {
-      variant: "default",
-      size: "default",
+    size: {
+      default: styles.size__default,
+      sm: styles.size__sm,
+      lg: styles.size__lg,
+      s48: styles.size__s48,
+      icon: styles.size__icon,
     },
-  }
-);
+  },
+  defaultVariants: {
+    variant: "default",
+    size: "default",
+  },
+});
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
@@ -51,7 +48,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         {...props}
       />
-    ); 
+    );
   }
 );
 Button.displayName = "Button";

@@ -10,7 +10,7 @@ const Breadcrumbs = () => {
     <div className={styles.breadcrumbs}>
       {showBreadcrumbs ? (
         <>
-          {pathnames.map((name, index) => {
+          {pathnames.map((_name, index) => {
             const decodedName = decodeURIComponent(pathnames[index]); // Декодируем имя
             const breadcrumbPath = `/${pathnames
               .slice(0, index + 1)
