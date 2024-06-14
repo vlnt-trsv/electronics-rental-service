@@ -7,7 +7,7 @@ import "@/app/App.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   // <React.StrictMode>
-    <BrowserRouter basename="/electronics-rental-service/">
+    <BrowserRouter basename="/electronics-rental-service">
       <Suspense fallback="Loading...">
         <App />
       </Suspense>
