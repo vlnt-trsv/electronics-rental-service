@@ -58,19 +58,7 @@ export default function Subscription() {
                   : subscription.status === selectedFilter
               )
               .map((subscription: ISubscription) => (
-                <SubscriptionCard key={subscription._id} data={subscription} _id={""} status={""} rentalDate={""} startDate={""} endDate={""} deliveryCost={0} deliveryMethod={""} subscriptionOptions={{
-                  _id: "",
-                  name: "",
-                  price: 0,
-                  duration: 0
-                }} device={{
-                  _id: "",
-                  name: "",
-                  deviceImage: ""
-                }} category={{
-                  _id: "",
-                  name: ""
-                }} />
+                <SubscriptionCard key={subscription._id} data={subscription} />
               ))}
           </div>
         </>
