@@ -1,4 +1,4 @@
-import styles from "./Checkbox.module.scss";
+import styles from "./checkbox.module.scss";
 
 interface CheckboxProps {
   label: string;
