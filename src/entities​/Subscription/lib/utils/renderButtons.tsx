@@ -1,5 +1,5 @@
 import { Button } from "@/shared/ui/button/button";
-// import styles from "./SubsCard.module.scss";
+import styles from "../../ui/SubscriptionCard/SubscriptionCard.module.scss";
 // import { useDispatch } from "react-redux";
 // import { BsQrCodeScan } from "react-icons/bs";
 import { toast } from "react-toastify";
@@ -11,16 +11,16 @@ import {
   usePayRentalMutation,
 } from "@/shared/api/api";
 
-const styles = {
-  subsCard__buttons: {
-    display: "flex",
-    gap: "8px",
-  },
-  subsCard__button: {
-    borderRadius: "4px",
-    width: "100%",
-  },
-};
+// const styles = {
+//   subsCard__buttons: {
+//     display: "flex",
+//     gap: "8px",
+//   },
+//   subsCard__button: {
+//     borderRadius: "4px",
+//     width: "100%",
+//   },
+// };
 
 export const renderButtons = (status: any, rentalId: any) => {
   // const dispatch = useDispatch();
@@ -75,9 +75,9 @@ export const renderButtons = (status: any, rentalId: any) => {
   switch (status) {
     case "Не оплачено":
       return (
-        <div style={styles.subsCard__buttons}>
+        <div className={styles.subsCard__buttons}>
           <Button
-            style={styles.subsCard__button}
+            className={styles.subsCard__button}
             variant="primary"
             size="lg"
             onClick={handlePaymentClick}
@@ -85,7 +85,7 @@ export const renderButtons = (status: any, rentalId: any) => {
             Оплатить подписку
           </Button>
           <Button
-            style={styles.subsCard__button}
+            className={styles.subsCard__button}
             variant="danger"
             size="lg"
             onClick={handleCancelClick}
@@ -96,12 +96,16 @@ export const renderButtons = (status: any, rentalId: any) => {
       );
     case "В аренде":
       return (
-        <div style={styles.subsCard__buttons}>
-          <Button style={styles.subsCard__button} variant="primary" size="lg">
+        <div className={styles.subsCard__buttons}>
+          <Button
+            className={styles.subsCard__button}
+            variant="primary"
+            size="lg"
+          >
             Продлить подписку
           </Button>
           <Button
-            style={styles.subsCard__button}
+            className={styles.subsCard__button}
             variant="danger"
             size="lg"
             onClick={handleCancelClick}
@@ -112,12 +116,16 @@ export const renderButtons = (status: any, rentalId: any) => {
       );
     case "Завершено":
       return (
-        <div style={styles.subsCard__buttons}>
-          <Button style={styles.subsCard__button} variant="primary" size="lg">
+        <div className={styles.subsCard__buttons}>
+          <Button
+            className={styles.subsCard__button}
+            variant="primary"
+            size="lg"
+          >
             Повторить подписку
           </Button>
           <Button
-            style={styles.subsCard__button}
+            className={styles.subsCard__button}
             variant="danger"
             size="lg"
             onClick={handleDeleteClick}
@@ -128,7 +136,7 @@ export const renderButtons = (status: any, rentalId: any) => {
       );
     case "Оплачено":
       return (
-        <div style={styles.subsCard__buttons}>
+        <div className={styles.subsCard__buttons}>
           {/* <Button
             className={`${styles.subsCard__button} ${styles.subsCard__button__qr}`}
             variant="primary"
@@ -136,11 +144,15 @@ export const renderButtons = (status: any, rentalId: any) => {
           >
             <BsQrCodeScan />
           </Button> */}
-          <Button style={styles.subsCard__button} variant="primary" size="lg">
+          <Button
+            className={styles.subsCard__button}
+            variant="primary"
+            size="lg"
+          >
             Продлить подписку
           </Button>
           <Button
-            style={styles.subsCard__button}
+            className={styles.subsCard__button}
             variant="danger"
             size="lg"
             onClick={handleCancelClick}
@@ -151,9 +163,9 @@ export const renderButtons = (status: any, rentalId: any) => {
       );
     case "Отменено":
       return (
-        <div style={styles.subsCard__buttons}>
+        <div className={styles.subsCard__buttons}>
           <Button
-            style={styles.subsCard__button}
+            className={styles.subsCard__button}
             variant="default"
             size="lg"
             onClick={handleDeleteClick}
