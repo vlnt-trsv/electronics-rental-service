@@ -4,22 +4,23 @@ import { Button } from "@/shared/ui/button/button";
 import Cookies from "js-cookie";
 
 export default function HeaderMain() {
+  const width = window.innerWidth;
+
   return (
     <div className={styles.header}>
-      <div className={styles.header__logo}>
-        <span className={styles.header__logo__text}>T2B</span>
-      </div>
-      <div className={styles.header__nav}>
-        <a className={styles.header__nav__link} href="#aboutUs">
-          О нас
-        </a>
-        <a className={styles.header__nav__link} href="#contact">
-          Контакты
-        </a>
-        <a className={styles.header__nav__link} href="#faq">
-          Вопрос & Ответы
-        </a>
-      </div>
+      {width < 430 && (
+        <nav className={styles.header__nav}>
+          <a className={styles.header__nav__link} href="#aboutUs">
+            О нас
+          </a>
+          <a className={styles.header__nav__link} href="#contact">
+            Контакты
+          </a>
+          <a className={styles.header__nav__link} href="#faq">
+            Вопрос & Ответы
+          </a>
+        </nav>
+      )}
       {Cookies.get("connect.user") ? (
         <Link to={"/accountPage"}>
           <Button size={"s48"} variant={"primary"}>
@@ -27,8 +28,8 @@ export default function HeaderMain() {
           </Button>
         </Link>
       ) : (
-        <Link to={"/enterPage"}>
-          <Button size={"s48"} variant={"primary"}>
+        <Link to={"/enterPage"} style={{ width: "100%" }}>
+          <Button style={{ width: "100%" }} size={"s48"} variant={"primary"}>
             Войти
           </Button>
         </Link>

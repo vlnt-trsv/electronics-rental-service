@@ -15,15 +15,10 @@
 
 .header {
   margin: 16px;
-  // position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
   display: flex;
   padding: 8px;
   justify-content: space-between;
   align-items: center;
-  z-index: 1;
 
   border-radius: var(--r_16);
   background: var(--bg);
@@ -39,8 +34,6 @@
     &__text {
       font-size: 24px;
       font-weight: 700;
-    }
-    &__img {
     }
   }
 
@@ -73,7 +66,6 @@
         color: var(--c-button-text-hover);
         border-radius: var(--r_8);
         background: var(--c-link-text-active);
-
       }
 
       // &.active {

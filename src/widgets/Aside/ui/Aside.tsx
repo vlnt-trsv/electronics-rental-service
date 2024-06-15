@@ -33,6 +33,7 @@ export default function Aside() {
     Cookies.remove("connect.user");
     Cookies.remove("connect.sid");
     localStorage.clear();
+    window.location.reload();
   };
 
   const primary: any = [
