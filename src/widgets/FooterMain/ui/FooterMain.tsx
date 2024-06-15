@@ -1,5 +1,5 @@
 import styles from "./FooterMain.module.scss";
-import { TelegramIcon, EmailIcon } from "@/shared/ui";
+import { TelegramIcon, EmailIcon } from "@/shared/assets";
 
 export default function FooterMain() {
   return (

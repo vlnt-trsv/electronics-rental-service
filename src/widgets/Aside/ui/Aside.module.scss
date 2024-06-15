@@ -1,5 +1,5 @@
 $aside-border-radius: 16px;
-$aside-background: var(--foreground, rgba(255, 255, 255, 0.05));
+$aside-background: #1c1c1c;
 $aside-secondary-background: var(--secondary-15, rgba(51, 213, 223, 0.15));
 
 .aside {
@@ -64,10 +64,6 @@ $aside-secondary-background: var(--secondary-15, rgba(51, 213, 223, 0.15));
       gap: 4px;
     }
 
-    // .name,
-    // .nickname,
-    // .status {
-    // }
     .nickname {
       opacity: 0.5;
     }
@@ -103,19 +99,17 @@ $aside-secondary-background: var(--secondary-15, rgba(51, 213, 223, 0.15));
     transition: opacity 0.2s ease-out;
   }
 
-  &__dropdown--flipped180 {
-    transform: rotate(90deg);
+  &__dropdown--flipped90 {
+    transform: rotate(0deg);
     transition: opacity 0.2s ease, transform 0.5s ease;
     &:hover {
-      transform: rotate(75deg);
       opacity: 1;
     }
   }
   &__dropdown--flipped0 {
-    transform: rotate(0deg);
+    transform: rotate(90deg);
     transition: opacity 0.2s ease, transform 0.5s ease;
     &:hover {
-      transform: rotate(15deg);
       opacity: 1;
     }
   }
@@ -168,4 +162,13 @@ $aside-secondary-background: var(--secondary-15, rgba(51, 213, 223, 0.15));
 
 ::-webkit-scrollbar {
   width: 0;
+}
+
+@media (max-width: 430px) {
+  .aside {
+    &__user {
+      display: flex;
+      align-items: center;
+    }
+  }
 }

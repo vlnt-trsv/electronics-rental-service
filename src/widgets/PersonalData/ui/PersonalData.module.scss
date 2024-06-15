@@ -93,3 +93,20 @@
     }
   }
 }
+
+@media (max-width: 430px) {
+  .personal {
+    width: auto;
+    &__form {
+      &__fullName {
+        flex-direction: column;
+      }
+    }
+    &__action {
+      flex-direction: column;
+      &__button {
+        width: 100%;
+      }
+    }
+  }
+}

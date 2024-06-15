@@ -6,7 +6,7 @@ import {
   SettingIcon,
   AccountIcon,
   ArrowDownLeftIcon,
-} from "@/shared/ui";
+} from "@/shared/assets";
 import {
   useGetRentalQuery,
   useGetUserByIdQuery,
@@ -28,8 +28,8 @@ export default function Aside() {
   const { data: userData } = useGetUserByIdQuery(userId._id);
 
   const handleLogout = async () => {
-    await logout({});
     navigate("/enterPage");
+    await logout({});
     Cookies.remove("connect.user");
     Cookies.remove("connect.sid");
     localStorage.clear();
@@ -105,13 +105,13 @@ export default function Aside() {
                   @{userData?.user?.nickname || "null"}
                 </Text>
               </div>
-              <Text>Ваш статус: {userData?.user?.status || "null"}</Text>
+              {/* <Text>Ваш статус: {userData?.user?.status || "null"}</Text> */}
             </div>
             <ArrowDownLeftIcon
               onClick={() => setMoreInfo((prevMoreInfo) => !prevMoreInfo)}
               className={`${styles.aside__dropdown} ${
                 moreInfo
-                  ? styles["aside__dropdown--flipped180"]
+                  ? styles["aside__dropdown--flipped90"]
                   : styles["aside__dropdown--flipped0"]
               }`}
             />

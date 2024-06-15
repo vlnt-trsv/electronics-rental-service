@@ -34,7 +34,7 @@ export default function Notification() {
       {checkboxes.map((checkbox, index) => (
         <Checkbox
           key={checkbox.label}
-          label={`${checkbox.label} ${checkbox.checked}`}
+          label={checkbox.label}
           checked={checkbox.checked}
           onChange={() => toggleCheckbox(index)}
         />

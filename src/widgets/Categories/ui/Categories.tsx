@@ -5,6 +5,7 @@ import { CategoriesCard } from "@/entities​";
 import { useGetCategoriesQuery } from "@/shared/api/api.tsx";
 import Notice from "@/shared/ui/notice/Notice.tsx";
 import _console from "@/shared/assets/imgs/_console.jpg";
+import { getImageUrl } from "@/shared/lib";
 
 export default function Categories() {
   const { data: categories, isError, isLoading } = useGetCategoriesQuery({});
@@ -15,10 +16,6 @@ export default function Categories() {
 
   // Проверяем, есть ли категории в данных
   const hasCategories = categories && categories.length > 0;
-
-  const getImageUrl = (fileName: string) => {
-    return `http://localhost:8000/${fileName}`;
-  };
 
   return (
     <div className={styles.categories}>
