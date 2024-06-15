@@ -1,4 +1,4 @@
-import React from "react"; // Не забудьте импортировать React
+import React, { useEffect, useState } from "react";
 import {
   Table,
   TableBody,
@@ -8,6 +8,7 @@ import {
   TableFooter,
   TableRow,
 } from "@/shared/ui/table/table";
+import { getShortenId } from "@/shared/lib";
 
 interface Invoice {
   _id: string;
@@ -28,15 +29,22 @@ type TableProps = {
 
 // Правильное объявление компонента с использованием стрелочной функции
 const TableItem: React.FC<TableProps> = ({ data }) => {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
   const totalAmount = data.reduce(
-    (total, payment) => total + payment.amount, // Используйте payment вместо payments для единообразия
+    (total, payment) => total + payment.amount,
     0
   );
 
-  // Функция для усечения _id от 18 до 24 символов
-  const shortenId = (id: string) => {
-    return id.substring(18, 24).toUpperCase();
-  };
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   return (
     <Table>
@@ -44,23 +52,27 @@ const TableItem: React.FC<TableProps> = ({ data }) => {
         <TableRow>
           <TableHead>Номер заказа</TableHead>
           <TableHead>Статус</TableHead>
-          <TableHead>Способ оплаты</TableHead>
+          {windowWidth >= 450 && <TableHead>Способ доставки</TableHead>}
           <TableHead>Сумма</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
         {data.map((payment) => (
           <TableRow key={payment._id}>
-            <TableCell>{shortenId(payment._id)}</TableCell>
+            <TableCell>№{getShortenId(payment._id)}</TableCell>
             <TableCell>{payment.status || "null"}</TableCell>
-            <TableCell>{payment.rental?.deliveryMethod || "null"}</TableCell>
+            {windowWidth >= 450 && (
+              <TableCell>{payment.rental?.deliveryMethod || "null"}</TableCell>
+            )}
             <TableCell>{payment.amount.toFixed(2)} ₽</TableCell>
           </TableRow>
         ))}
       </TableBody>
       <TableFooter>
         <TableRow>
-          <TableCell colSpan={3}>Общая сумма</TableCell>
+          <TableCell colSpan={windowWidth >= 450 ? 3 : 2}>
+            Общая сумма
+          </TableCell>
           <TableCell>{totalAmount.toFixed(2)} ₽</TableCell>
         </TableRow>
       </TableFooter>

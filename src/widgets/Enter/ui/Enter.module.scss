@@ -28,12 +28,14 @@
     width: 100%; // Для второго сниппета input имеет ширину 100%
     border: 1px solid rgba($color: white, $alpha: 0.5);
     border-radius: 8px;
+    background: #3b3b3b;
   }
 
   &__number {
     padding: 16px;
     align-self: stretch;
     border-radius: 8px;
+    background: #3b3b3b4d;
     border: 1px solid rgba($color: white, $alpha: 0.5);
   }
 
@@ -74,5 +76,6 @@
   }
 
   &__back {
+    color: white;
   }
 }

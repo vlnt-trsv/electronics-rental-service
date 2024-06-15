@@ -204,10 +204,16 @@ export default function PersonalData() {
           ))}
         </div>
         <div className={styles.personal__action}>
-          <Button size={"lg"} variant={"success"} type="submit">
+          <Button
+            className={styles.personal__action__button}
+            size={"lg"}
+            variant={"success"}
+            type="submit"
+          >
             Сохранить изменения
           </Button>
           <Button
+            className={styles.personal__action__button}
             size={"lg"}
             variant={"danger"}
             type="button"

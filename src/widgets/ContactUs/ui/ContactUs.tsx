@@ -1,5 +1,5 @@
 import styles from "./ContactUs.module.scss";
-import { TelegramIcon } from "@/shared/ui";
+import { TelegramIcon } from "@/shared/assets";
 
 export default function ContactUs() {
   return (

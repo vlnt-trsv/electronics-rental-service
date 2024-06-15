@@ -5,14 +5,14 @@ import Notice from "@/shared/ui/notice/Notice";
 export default function FAQ() {
   // TODO: Подключить запрос на получение информации по FAQ
   const items: any = [
-    // {
-    //   question: "Вопросы 1",
-    //   answer: "Ответ 1",
-    // },
-    // {
-    //   question: "Вопросы 2",
-    //   answer: "Ответ 2",
-    // },
+    {
+      question: "Вопросы 1",
+      answer: "Ответ 1",
+    },
+    {
+      question: "Вопросы 2",
+      answer: "Ответ 2",
+    },
   ];
 
   return (

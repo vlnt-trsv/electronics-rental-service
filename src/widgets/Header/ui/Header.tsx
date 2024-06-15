@@ -1,21 +1,21 @@
-// import { Link } from "react-router-dom";
 import styles from "./Header.module.scss";
-import { IoNotifications } from "react-icons/io5";
+import { BurgerOpen, BurgerClose, LOGO } from "@/shared/assets";
 
-export default function Header() {
+export default function Header({ toggleAside, isMenuOpen }: any) {
   return (
     <div className={`${styles.header}`}>
       <div className={styles.header__logo}>
-        <span className={styles.header__logo__span}>T2B</span>
+        <img className={styles.header__logo__img} src={LOGO} alt="T2B Logo" />
       </div>
-      <div className={styles.header__nav}>
-        {/* <Link className={styles.header__account} to={"/accountPage"}>
-          acc
-        </Link> */}
-        <div className={styles.header__notify}>
-          <IoNotifications className={styles.header__icon} />
+      <nav className={styles.header__nav}>
+        <div className={styles.header__nav__burger} onClick={toggleAside}>
+          {isMenuOpen ? (
+            <BurgerClose className={styles.header__icon} />
+          ) : (
+            <BurgerOpen className={styles.header__icon} />
+          )}
         </div>
-      </div>
+      </nav>
     </div>
   );
 }

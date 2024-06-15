@@ -1,7 +1,5 @@
 import styles from "./Contacts.module.scss";
-import { FaTelegram } from "react-icons/fa";
-import { IoLogoWhatsapp } from "react-icons/io";
-import { AiFillInstagram } from "react-icons/ai";
+import { TelegramIconCirle, WhatsappIcon, InstagramIcon } from "@/shared/assets";
 
 export default function Contacts() {
   return (
@@ -9,7 +7,9 @@ export default function Contacts() {
       <div className={styles.contact__wrapper}>
         <div className={styles.contact__link}>
           <span className={styles.contact__subtitle}>Связаться</span>
-          <span className={styles.contact__description}>+7 (924) 883-12-43</span>
+          <span className={styles.contact__description}>
+            +7 (924) 883-12-43
+          </span>
           <span className={styles.contact__description}>two2buddy@mail.ru</span>
         </div>
         <div className={styles.contact__address}>
@@ -25,21 +25,21 @@ export default function Contacts() {
             href="https://t.me/two2buddy"
             target="_blank"
           >
-            <FaTelegram /> Telegram
+            <TelegramIconCirle /> Telegram
           </a>
           <a
             className={styles.contact__description__social}
             href="https://t.me/two2buddy"
             target="_blank"
           >
-            <IoLogoWhatsapp /> Whats'app
+            <WhatsappIcon /> Whats'app
           </a>
           <a
             className={styles.contact__description__social}
             href="https://t.me/two2buddy"
             target="_blank"
           >
-            <AiFillInstagram /> Instagram
+            <InstagramIcon /> Instagram
           </a>
         </div>
         <div className={styles.contact__info}>

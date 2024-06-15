@@ -4,6 +4,7 @@ $aside-background: var(--foreground, rgba(255, 255, 255, 0.05));
   margin: 0 auto;
   display: flex;
   max-width: 1920px;
+  min-height: 46px;
   padding: var(--p_8);
   justify-content: space-between;
   align-items: center;
@@ -13,28 +14,42 @@ $aside-background: var(--foreground, rgba(255, 255, 255, 0.05));
   background: $aside-background;
 
   &__logo {
-    &__span {
-      font-size: 24px;
-      font-weight: 700;
+    &__img {
+      width: 160px;
     }
   }
   &__nav {
+    cursor: pointer;
     display: flex;
     gap: 16px;
-  }
-  &__notify,
-  &__account {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    &__burger {
+      display: none;
+    }
 
-    width: 46px;
-    height: 46px;
-    background: var(--secondary-15, rgba(51, 213, 223, 0.15));
-    border-radius: 8px;
+    &__open {
+      display: block;
+    }
   }
+
   &__icon {
     width: 24px;
     height: 24px;
+  }
+}
+
+@media (max-width: 1280px) {
+  .header {
+    &__nav {
+      &__burger {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 46px;
+        height: 46px;
+        background: var(--secondary-15, rgba(51, 213, 223, 0.15));
+        border-radius: 8px;
+      }
+    }
   }
 }
