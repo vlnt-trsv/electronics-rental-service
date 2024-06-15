@@ -6,7 +6,8 @@
 :root {
   color-scheme: light dark;
   background-color: #101010;
-  color: rgba(255, 255, 255, 0.87);
+  /* color: rgba(255, 255, 255, 0.87); */
+  color: #ffffff;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -32,6 +33,13 @@
   padding-left: 48px;
   padding-right: 48px;
   justify-content: space-between;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
 
 .container2 {
@@ -71,4 +79,3 @@ button {
 button:hover {
   border-color: #646cff;
 }
-
