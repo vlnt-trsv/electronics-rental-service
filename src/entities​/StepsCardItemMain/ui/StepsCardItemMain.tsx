@@ -1,5 +1,5 @@
 import styles from "./StepsCardItemMain.module.scss";
-import { CheckIcon } from "@/shared/ui";
+import { CheckIcon } from "@/shared/assets";
 
 export default function StepsCardItemMain({ title, status, description }: any) {
   let statusText = "";

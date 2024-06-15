@@ -1,4 +1,4 @@
-import { FaUser } from "@/shared/ui";
+import { User } from "@/shared/assets";
 
 interface IAvatar {
   src?: string;
@@ -31,11 +31,11 @@ const Avatar = ({
   return (
     <div className={className} style={avatarStyle}>
       {src ? (
-        <img src={src} alt={alt} style={{ width: "100%", height: "100%" }} />
+        <img src={src} alt={alt} style={{ width: "100px", height: "100px" }} />
       ) : initials ? (
         <span>{initials}</span>
       ) : (
-        <FaUser style={{ fontSize: size / 2 }} />
+        <User style={{ fontSize: size / 2 }} />
       )}
     </div>
   );

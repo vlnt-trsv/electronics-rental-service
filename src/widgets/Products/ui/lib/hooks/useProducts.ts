@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useGetProductsQuery } from "@/shared/api/api";
+import { getImageUrl } from "@/shared/lib";
 
 export function useProducts() {
   const navigate = useNavigate();
@@ -28,8 +29,6 @@ export function useProducts() {
       JSON.stringify({ ...option })
     );
   };
-
-  const getImageUrl = (fileName: string) => `http://localhost:8000/${fileName}`;
 
   return {
     products,
