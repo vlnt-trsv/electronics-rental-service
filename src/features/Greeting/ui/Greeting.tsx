@@ -11,14 +11,17 @@ export default function Greeting() {
   return (
     <div className={styles.greeting}>
       <span className={styles.greeting__title}>
-        Привет, {userData?.user?.firstName}!
+        Привет, {userData?.user?.firstName || "гость"}!
       </span>
       <span className={styles.greeting__description}>
         Теперь вы можете управлять своей арендой через личный кабинет
       </span>
-      <Link to={"/accountPage/devices"}>
+      <span className={styles.greeting__description}>
+        Для начала заполните личный данные
+      </span>
+      <Link to={"/accountPage/personalDataInfo"}>
         <Button variant="primary" size={"lg"}>
-          Перейти к девайсам
+          Персональные данные
         </Button>
       </Link>
     </div>
