@@ -13,9 +13,17 @@ type ButtonType = {
     | "space-around";
   type: "primary" | "secondary" | "tertiary";
   icon?: string;
+  onClick?: () => void;
 };
 
-const Button = ({ children, location, justify, type, icon }: ButtonType) => {
+const Button = ({
+  children,
+  location,
+  justify,
+  type,
+  icon,
+  onClick,
+}: ButtonType) => {
   const justifyClass = justify ? styles[justify] : "";
   const typeClass = type ? styles[type] : "";
 
@@ -35,6 +43,7 @@ const Button = ({ children, location, justify, type, icon }: ButtonType) => {
 
   return (
     <NavLink
+      onClick={onClick}
       to={location}
       className={({ isActive }) =>
         `${styles.button} ${typeClass} ${justifyClass} ${getActiveClassName(

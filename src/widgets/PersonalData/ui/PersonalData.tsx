@@ -149,7 +149,7 @@ export default function PersonalData() {
     <>
       <form onSubmit={handleSubmit} className={styles.personal}>
         <div className={styles.personal__extra}>
-          <span className={styles.personal__subtitle}>
+          <span className={styles.personal__title}>
             Указывай реальные данные
           </span>
           <span className={styles.personal__description}>

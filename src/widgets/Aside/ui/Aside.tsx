@@ -17,7 +17,7 @@ import Avatar from "./Avatar/Avatar";
 import Text from "./Text";
 import Button from "./Button/Button";
 
-export default function Aside() {
+export default function Aside({ hideAside }: any) {
   const navigate = useNavigate();
   const [moreInfo, setMoreInfo] = useState(false);
   const userId = JSON.parse(Cookies.get("connect.user") || "{}");
@@ -139,6 +139,7 @@ export default function Aside() {
                   type="secondary"
                   justify="left"
                   icon={s.icon}
+                  onClick={() => hideAside()}
                 />
               );
             })}
@@ -150,6 +151,7 @@ export default function Aside() {
                   location={t.location}
                   type="tertiary"
                   justify="left"
+                  onClick={() => hideAside()}
                 />
               );
             })}
@@ -164,6 +166,7 @@ export default function Aside() {
                 location={p.location}
                 type="primary"
                 justify="center"
+                onClick={() => hideAside()}
               />
             );
           })}
