@@ -38,7 +38,9 @@ export default function ProductsDetailed() {
         {product.subscriptionOptions?.map((option: any) => (
           <Button
             key={option._id}
-            variant={selectedOption?._id === option?._id ? "primary" : "" || null}
+            variant={
+              selectedOption?._id === option?._id ? "primary" : "" || null
+            }
             className={styles.productDetails__button}
             onClick={() => handleOptionSelect(option)}
           >
@@ -49,18 +51,9 @@ export default function ProductsDetailed() {
         <span className={styles.productDetails__description}>
           Оплата проходит в начале периода
         </span>
-        {/* {selectedOption?._id ? ( */}
         <Button className={styles.productDetails__button} onClick={handleOrder}>
           Оформить подписку
         </Button>
-        {/* // ) : (
-        //   <Button
-        //     onClick={() => toast.warn("Сначала выберите подписку!")}
-        //     className={styles.productDetails__button}
-        //   >
-        //     Оформить подписку
-        //   </Button>
-        // )} */}
       </div>
     </div>
   );

@@ -15,7 +15,6 @@ export default function Payments() {
     isLoading,
     isError,
   } = useGetPaymentsQuery(userId._id);
-  console.log("PAYMENTS", payments?.payments);
 
   const handlePageChange = (newPage: any) => {
     setCurrentPage(newPage);

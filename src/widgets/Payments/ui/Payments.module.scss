@@ -1,19 +1,17 @@
 .payments {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: 100%;
+
+  &__table {
     height: 100%;
-  
-    &__table {
-      height: 100%;
-    }
-  
-    &__pagination {
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: flex-end;
-  
-    }
   }
-  
+
+  &__pagination {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+  }
+}

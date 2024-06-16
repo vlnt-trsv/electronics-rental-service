@@ -6,6 +6,7 @@ import { useGetUserByIdQuery } from "@/shared/api/api";
 import Cookies from "js-cookie";
 import ViewGrid from "./ViewGrid/ViewGrid";
 import { useEffect, useState } from "react";
+import { useWindowResize } from "@/shared/lib";
 
 export default function Account() {
   const userId = JSON.parse(Cookies.get("connect.user") || "");
@@ -21,29 +22,27 @@ export default function Account() {
     return savedState ? JSON.parse(savedState) : false;
   });
 
+  console.log(asideVisible)
+
+  const windowWidth = useWindowResize();
+
   // Сохранение состояния asideVisible в localStorage
   useEffect(() => {
     localStorage.setItem("aside_visible", JSON.stringify(asideVisible));
   }, [asideVisible]);
 
   useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth > 1280) {
-        setAsideVisible(true);
-      } else {
-        setAsideVisible(false);
-      }
-    };
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+    if (windowWidth > 1280) {
+      setAsideVisible(true);
+    } else {
+      setAsideVisible(false);
+    }
+  }, [windowWidth]);
 
-  // Функция для переключения видимости aside
-  const toggleAside = () => {
-    setAsideVisible((prev: any) => !prev);
+  const hideAfterClick = () => {
+    if (windowWidth <= 1280) {
+      setAsideVisible(false);
+    }
   };
 
   // Определяем, загрузились ли данные
@@ -70,9 +69,12 @@ export default function Account() {
           )}
           <ViewGrid type="container">
             <ViewGrid type="header">
-              <Header toggleAside={toggleAside} isMenuOpen={asideVisible} />
+              <Header
+                toggleAside={() => setAsideVisible((prev: any) => !prev)}
+                isMenuOpen={asideVisible}
+              />
             </ViewGrid>
-            <ViewGrid type="aside">{asideVisible && <Aside />}</ViewGrid>
+            <ViewGrid type="aside">{asideVisible && <Aside hideAside={hideAfterClick}/>}</ViewGrid>
             <ViewGrid type="main">
               <Main />
             </ViewGrid>

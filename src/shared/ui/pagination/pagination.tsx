@@ -1,19 +1,20 @@
 import * as React from "react";
 import { ChevronLeft, ChevronRight, MoreHorizontal } from "lucide-react";
-
 import styles from "./pagination.module.scss";
-
 import { cn } from "@/shared/lib/utils";
 import { ButtonProps, buttonVariants } from "@/shared/ui/button/button";
+import { useWindowResize } from "@/shared/lib";
 
-const Pagination = ({ className, ...props }: React.ComponentProps<"nav">) => (
-  <nav
-    role="navigation"
-    aria-label="pagination"
-    className={cn(styles.pagination, className)}
-    {...props}
-  />
-);
+const Pagination = ({ className, ...props }: React.ComponentProps<"nav">) => {
+  return (
+    <nav
+      role="navigation"
+      aria-label="pagination"
+      className={cn(styles.pagination, className)}
+      {...props}
+    ></nav>
+  );
+};
 Pagination.displayName = "Pagination";
 
 const PaginationContent = React.forwardRef<
@@ -58,7 +59,7 @@ const PaginationLink = ({
         size,
       }),
       className,
-      { [styles.pagination__link_disabled]: disabled } // Добавляем класс для отключенных ссылок
+      { [styles.pagination__link_disabled]: disabled }
     )}
     {...props}
   />
@@ -69,33 +70,43 @@ PaginationLink.displayName = "PaginationLink";
 const PaginationPrevious = ({
   className,
   ...props
-}: React.ComponentProps<typeof PaginationLink>) => (
-  <PaginationLink
-    aria-label="Go to previous page"
-    size="default"
-    className={cn(styles.pagination__previous, className)}
-    {...props}
-  >
-    <ChevronLeft className="h-4 w-4" />
-    <span>Предыдущая</span>
-  </PaginationLink>
-);
+}: React.ComponentProps<typeof PaginationLink>) => {
+  const windowWidth = useWindowResize();
+
+  return (
+    <PaginationLink
+      aria-label="Go to previous page"
+      size="default"
+      className={cn(styles.pagination__previous, className)}
+      {...props}
+    >
+      <ChevronLeft className="h-4 w-4" style={{ color: "#ffffff" }} />
+      {windowWidth > 768 && (
+        <span style={{ color: "#ffffff" }}>Предыдущая</span>
+      )}
+    </PaginationLink>
+  );
+};
 PaginationPrevious.displayName = "PaginationPrevious";
 
 const PaginationNext = ({
   className,
   ...props
-}: React.ComponentProps<typeof PaginationLink>) => (
-  <PaginationLink
-    aria-label="Go to next page"
-    size="default"
-    className={cn(styles.pagination__next, className)}
-    {...props}
-  >
-    <span>Следующая</span>
-    <ChevronRight className="h-4 w-4" />
-  </PaginationLink>
-);
+}: React.ComponentProps<typeof PaginationLink>) => {
+  const windowWidth = useWindowResize();
+
+  return (
+    <PaginationLink
+      aria-label="Go to next page"
+      size="default"
+      className={cn(styles.pagination__next, className)}
+      {...props}
+    >
+      {windowWidth > 768 && <span style={{ color: "#ffffff" }}>Следующая</span>}
+      <ChevronRight className="h-4 w-4" style={{ color: "#ffffff" }} />
+    </PaginationLink>
+  );
+};
 PaginationNext.displayName = "PaginationNext";
 
 const PaginationEllipsis = ({

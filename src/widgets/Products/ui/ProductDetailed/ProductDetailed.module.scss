@@ -3,8 +3,8 @@
   flex-direction: row;
   gap: 16px;
   &__image {
-    min-width: 450px;
-    min-height: 450px;
+    max-width: 450px;
+    max-height: 450px;
     border: 1px solid rgba($color: #fff, $alpha: 0.16);
     border-radius: 8px;
 
@@ -14,7 +14,7 @@
     overflow: hidden;
     .img {
       object-fit: cover;
-      height: 100%;
+      width: 100%;
     }
   }
   &__payments {
@@ -32,8 +32,11 @@
   }
 
   &__button {
+    color: #ffffff;
+    border: 2px dashed #222222;
     justify-content: space-between;
     width: 100%;
+
     &:last-child {
       justify-content: center;
     }
@@ -51,7 +54,6 @@
     flex-direction: column;
 
     &__image {
-      min-width: 425px;
       min-height: auto;
     }
   }
