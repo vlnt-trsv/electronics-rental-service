@@ -6,3 +6,5 @@ export {
   getImageUrl,
   Timer,
 } from "./utils";
+
+export { useWindowResize } from "./hooks";
