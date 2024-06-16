@@ -29,15 +29,13 @@
     opacity: 0.5;
   }
   &__image {
-    min-width: 250px;
-    min-height: 250px;
+    width: 50%;
     border: 1px solid rgba(255, 255, 255, 0.16);
     border-radius: 8px;
     overflow: hidden;
     .img {
       object-fit: cover;
       width: 100%;
-      height: 100%;
     }
   }
   &__text {
@@ -76,6 +74,11 @@
     gap: 16px;
     width: 100%;
   }
+
+  &__button > button {
+    color: #ffffff;
+    border: 2px dashed #222222;
+  }
 }
 
 .cardItem {
@@ -98,7 +101,7 @@
     width: auto;
 
     &__image {
-      min-height: fit-content;
+      width: 100%;
     }
   }
 

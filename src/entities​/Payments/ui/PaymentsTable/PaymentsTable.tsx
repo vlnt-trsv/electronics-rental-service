@@ -64,7 +64,7 @@ const TableItem: React.FC<TableProps> = ({ data }) => {
             {windowWidth >= 450 && (
               <TableCell>{payment.rental?.deliveryMethod || "null"}</TableCell>
             )}
-            <TableCell>{payment.amount.toFixed(2)} ₽</TableCell>
+            <TableCell>{payment.amount} ₽</TableCell>
           </TableRow>
         ))}
       </TableBody>
@@ -73,7 +73,7 @@ const TableItem: React.FC<TableProps> = ({ data }) => {
           <TableCell colSpan={windowWidth >= 450 ? 3 : 2}>
             Общая сумма
           </TableCell>
-          <TableCell>{totalAmount.toFixed(2)} ₽</TableCell>
+          <TableCell>{totalAmount} ₽</TableCell>
         </TableRow>
       </TableFooter>
     </Table>
