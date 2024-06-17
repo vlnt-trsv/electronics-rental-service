@@ -106,10 +106,12 @@ export default function PersonalData() {
 
   const confirmDelete = async () => {
     try {
+      navigate("/enterPage");
       await deleteUser(userData?.user?._id).unwrap();
       Cookies.remove("connect.user");
       Cookies.remove("connect.sid");
-      navigate("/enterPage");
+      localStorage.clear();
+      window.location.reload();
     } catch (error) {
       console.error("Error:", error);
       toast.error("Ошибка при удалении аккаунта.");

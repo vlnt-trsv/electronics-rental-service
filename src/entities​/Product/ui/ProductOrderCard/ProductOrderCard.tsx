@@ -5,6 +5,7 @@ import styles from "./ProductOrderCard.module.scss";
 import { useCreateRentalMutation } from "@/shared/api/api";
 import { CardUpProps, CardDownProps, IRental } from "./IProductOrderCard";
 import { getImageUrl } from "@/shared/lib";
+import { toast } from "react-toastify";
 
 export default function ProductsOrder() {
   const [deliveryMethod, setDeliveryMethod] = useState("Доставка");
@@ -127,9 +128,10 @@ function CardDown({
       };
       await createRental(rentalData).unwrap();
       navigate("/accountPage/subs");
-    } catch (error) {
+    } catch (error: any) {
       console.error("Ошибка при отправке аренды:", error);
-    }
+      toast.error(error?.data?.message || "Неизвестная ошибка");
+    } 
   };
 
   return (

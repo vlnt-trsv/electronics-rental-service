@@ -99,11 +99,11 @@ export default function Aside({ hideAside }: any) {
             <Avatar size={100} />
             <div className={styles["aside__user-info"]}>
               <div className={styles["username"]}>
-                <Text>{`${userData?.user?.firstName || "null"} ${
-                  userData?.user?.lastName || "null"
+                <Text>{`${userData?.user?.firstName || "Имя"} ${
+                  userData?.user?.lastName || "Фамилия"
                 }`}</Text>
                 <Text style={{ opacity: "0.5" }}>
-                  @{userData?.user?.nickname || "null"}
+                  @{userData?.user?.nickname || "nickname"}
                 </Text>
               </div>
               {/* <Text>Ваш статус: {userData?.user?.status || "null"}</Text> */}
@@ -127,7 +127,7 @@ export default function Aside({ hideAside }: any) {
                 Подписки: {rental?.count || "0"}
               </div>
               <div className={styles["aside__info-item"]}>
-                Бонусный счёт: {userData?.user?.bonus || "null"} ₽
+                Бонусный счёт: {userData?.user?.bonus || "0"} ₽
               </div>
             </div>
             {secondary?.map((s: any) => {
@@ -175,6 +175,7 @@ export default function Aside({ hideAside }: any) {
       <div className={styles.aside__footer}>
         <div onClick={handleLogout} className={styles["aside__exit"]}>
           <ExitIcon className={styles["aside__exit-icon"]} />
+          <span>Выход</span>
         </div>
       </div>
     </aside>
