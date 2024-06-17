@@ -10,7 +10,7 @@ export default function Contacts() {
           <span className={styles.contact__description}>
             +7 (924) 883-12-43
           </span>
-          <span className={styles.contact__description}>two2buddy@mail.ru</span>
+          <span className={styles.contact__description}>two-2-buddy@mail.ru</span>
         </div>
         <div className={styles.contact__address}>
           <span className={styles.contact__subtitle}>Адрес</span>
