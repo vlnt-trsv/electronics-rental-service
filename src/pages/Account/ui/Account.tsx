@@ -22,8 +22,6 @@ export default function Account() {
     return savedState ? JSON.parse(savedState) : false;
   });
 
-  console.log(asideVisible)
-
   const windowWidth = useWindowResize();
 
   // Сохранение состояния asideVisible в localStorage
@@ -74,7 +72,9 @@ export default function Account() {
                 isMenuOpen={asideVisible}
               />
             </ViewGrid>
-            <ViewGrid type="aside">{asideVisible && <Aside hideAside={hideAfterClick}/>}</ViewGrid>
+            <ViewGrid type="aside">
+              {asideVisible && <Aside hideAside={hideAfterClick} />}
+            </ViewGrid>
             <ViewGrid type="main">
               <Main />
             </ViewGrid>
